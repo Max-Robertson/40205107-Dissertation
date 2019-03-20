@@ -1,0 +1,343 @@
+%You can delete all the comments after you have finished your document
+%this sets up the defaults for the documents, 12pt font and A4 size. The article type sets this up as such as opposed to letter or memo.
+
+%for the finer points LaTeX see https://en.wikibooks.org/wiki/LaTeX or http://tex.stackexchange.com/
+
+\documentclass[12pt,a4paper]{article}
+\usepackage{titlesec} %these are how we import packages, one helps set up footers and title layout
+\usepackage{fancyhdr}
+
+% !TEX TS-program = pdflatex
+% !TEX encoding = UTF-8 Unicode
+\usepackage[utf8]{inputenc} % set input encoding (not needed with XeLaTeX)
+
+\usepackage{graphicx} % support the \includegraphics command and options
+
+% \usepackage[parfill]{parskip} % Activate to begin paragraphs with an empty line rather than an indent
+
+%%% PACKAGES
+\usepackage{booktabs} % for much better looking tables
+\usepackage{array} % for better arrays (eg matrices) in maths
+\usepackage{paralist} % very flexible & customisable lists (eg. enumerate/itemize, etc.)
+\usepackage{verbatim} % adds environment for commenting out blocks of text & for better verbatim
+\usepackage{subfig} % make it possible to include more than one captioned figure/table in a single float
+\usepackage[toc,page]{appendix}
+% These packages are all incorporated in the memoir class to one degree or another...
+
+%header and footer settings
+\pagestyle{fancyplain}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0.5pt}
+\setlength{\headheight}{15pt}
+\fancyhead[L]{Max Robertson - 40205107}
+\fancyhead[R]{ SOC10101 Honours Project}
+\fancyfoot[L]{}
+\fancyfoot[C]{\thepage}
+
+%set better section layout
+\makeatletter
+\renewcommand\subsection{\@startsection {subsection}{1}{2mm} % name, level, indent
+                               {3pt plus 2pt minus 1pt} % before skip
+                               {3pt plus 0pt} % after skip
+                               {\normalfont\bfseries}}
+\makeatother
+\makeatletter
+\renewcommand\section{\@startsection {section}{1}{0mm} % name, level, indent
+                               {4pt plus 2pt minus 1pt} % before skip
+                               {4pt plus 0pt} % after skip
+                               {\bfseries}}
+\makeatother
+
+
+%this starts the document
+\begin{document}
+
+%you can import other documents into your main one, these layout the Title and Declarations on its own page.
+%you might need to change these to \ if your on Microsoft Windows.
+\input{./Dissertation-Title.tex}
+\input{./Dissertation-Dec.tex}
+\pagebreak
+\input{./Dissertation-DP.tex}
+\pagebreak
+
+%LaTeX let you define the abstract separately so it wont get sucked into the main document.
+\begin{abstract}
+% fill the abstract in here
+\end{abstract}
+\pagebreak
+
+\tableofcontents % is generated for you
+\newpage
+
+\listoftables
+%generated in same way as figures
+\newpage
+
+\listoffigures
+%you may have captions such as equations, listings etc they should all appear as required
+%these are done for you as long as you use \begin{figure}[placement settings] .. bla bla ... \end{figure}
+\newpage
+
+\section*{Acknowledgements}
+Insert acknowledgements here
+\subsection*{}
+	I would like to thank my cat, dog and family.
+\newpage
+
+
+\section{Introduction} 
+\subsection{Background}  
+In recent years a shortage of IT skills has been seen, however a more severe shortage has been prevalent with Cyber security skills. With statistics like 45 percent of organizations claiming to be lacking in cyber security skills and (found by research done by the Information Systems Security Association) 70 percent of IT workers believe the lack of cyber security professionals is negatively impacting their existing work \cite{smith2018intelligent}. This has been a widely discussed issue in recent years and there has been a number of proposals for how to fix this 'cyber security skills gap' from developing the companies HR department so that an individual interested in gaining the relevant skills is given the appropriate training by the company to advancing security technology and crime deterrence so that less personnel are needed to close the gap \cite{cobb2016mind}. I however believe that an emphasis should be put on cyber security at an earlier age and high school students should be introduced to cyber security elements. If students are introduced to these elements at an there is more of a chance of capturing an interest in the subject and for  students to pursue a career in cyber security. Further more I believe if research is done in how to cater this material to the students and how to peak their interests the effect could be greater. This could be done through the use of gamification which has been proposed as a solution for engaging people in individually and socially sustainable behaviours, such as education \cite{su2015mobile}. CTF (Capture The Flag) competitions are held in cyber security communities which are essentially a gamfied environment where teams compete by completing different cyber security related challenges to ascertain 'flags' which will score them points. This project proposed to take the structure of a CTF competition and gamify it further for use in the education of cyber security.  
+\subsection{Aims} 
+As the area of 'the gamification of cyber security education' has been establishes as the area of research I shall establish some aims and objectives that I hope to achieve throughout the process of this project:  
+
+
+My first aim is to gain an understanding of different learning techniques that can I could apply when implementing my project as well as have an in depth understanding of the concepts that I propose to utilize during the implementation. I will achieve this by doing extensive research and produce a literature review, breaking down different learning techniques. I will also further look into CTFs and the associated available technologies to give a better understanding of how they work and how I could utilize aspects of them in implementation as well as a look into gamification, how to make use of the positives and avoid any pitfalls.  
+
+The second aim of this Honours project will be take the research done in the literature review and produce a tool that will help educate users in cyber security as well as engaging them in the subject as a whole all while making it easy to understand. To achieve this aim I will complete the following objectives. 
+\begin{itemize}\itemsep0pt
+	\item Develop the application with reference to research.
+	\item Develop learning materials to be used in conjunction with the application.
+	\item Develop a web page to be used in conjunction with the application.
+\end{itemize}
+
+
+\subsection{Dissertation Structure}
+
+
+
+
+\section{Literature Review}
+insert my lit here  
+\subsection{summary}
+% summarise my literature review here 
+
+\section{Requirements analysis} 
+% possibly talk about and explain randomness, random number generator ? how am i generating randomness ? 
+
+\section{Design}
+\subsection{Introduction}  
+The literature has backed up the need for such an application, now I will look at how the areas covered can be implemented in the design of the application and go on to discuss how the applications infrastructure could be set up in an ideal scenario so that over 10,000 users can have access to the application at once.
+\subsection{Front end}  
+\subsubsection{Front end Framework}  
+Front end  Frameworks are  
+%find reference for description% 
+There are 3 main contenders when it comes to front end frameworks: Angular, react and vue.  
+%find reference for each one then justify use of angular% 
+\subsubsection{Input}
+\subsubsection{User interface}  
+The user interface will take into account the literature and represent the application in the most effective way possible. Some drafted screens are shown below.   
+
+\begin{figure*}[h]
+    \centering
+    \includegraphics[width=1.0\textwidth]{Ui_main_screen.PNG} 
+    \caption{Main Screen UI mock up}
+\end{figure*}   
+
+The main screen has quite a lot going on. In a typical room, the player will have a choice to navigate both to the next room and the previous room to their left and right. If they go up they will reach the challenge terminal which when interacted with brings up the challenge. If they enter the correct answer the reward room will open up and they can collect their challenge token. If they get it incorrect the hint room below opens up. How many Challenge tokens they have is displayed and also the score they have accumulated so far. The user can quit or alter their settings with the drop down menu in the top left hand corner of the screen.
+
+\begin{figure*}[h]
+    \centering
+    \includegraphics[width=1.0\textwidth]{Ui_main_menu.PNG} 
+    \caption{Main Menu UI mock up}
+\end{figure*}   
+
+\begin{figure}
+\centering
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[width=1\linewidth]{Ui_hint_room.PNG}
+  \captionof{figure}{Hint room}
+  \label{fig:test1}
+\end{minipage}%
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[width=1\linewidth]{Ui_reward_room.PNG}
+  \captionof{figure}{Reward room}
+  \label{fig:test2}
+\end{minipage}
+\end{figure}   
+
+When the user enters the hint room they are presented with a question and a choice of three answers. They will get the hint regardless but is meant to build their knowledge and whats been covered. The reward room is simple and just contains the challenge token.
+
+\begin{figure}
+\centering
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[width=1\linewidth]{Ui_correct_response.PNG}
+  \captionof{figure}{correct response screen}
+  \label{fig:test3}
+\end{minipage}%
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[width=1\linewidth]{Ui_incorrect_response.PNG}
+  \captionof{figure}{incorrect response screen}
+  \label{fig:test4}
+\end{minipage}
+\end{figure}  
+
+The feedback received at this level is basic but dependent on what the answer is different doors unlock.
+
+%insert annotated mockflow screens%
+{Register/Home screen} 
+{Room screen} 
+{Reward screen} 
+{Hint screen}
+\subsection{Middle end}  
+\subsubsection{Challenge Generator}  
+One fundamental part of this application will be the challenge generator. Dynamic challenge generation is an important element of this application, it will ensure that if the user comes back and does it again they will have a different experience and also that users will be having a different experience than the users around them. I will look at three possible methods of dynamic challenge generation. \emph{Random challenge selection, API request} and \emph{Web scraping}.  
+
+\emph{Random Challenge selection} 
+
+This will involve setting up a list of possible questions with corresponding answers, then selecting one of those questions at random. I will ask a multiple choice question populated with the correct answer and the answers to the other questions. The script would them check for the user input and check if the answer matches the correct answer giving simple feedback accordingly. This will be the simplest method and the easiest to implement.  
+
+\begin{figure*}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{random_selection (1).png}
+    \caption{random selection flow chart}
+\end{figure*}   
+
+
+\emph{API request} 
+I will set up an API using a python script so I can make a request to it with another script. The script will select a random word from a list, the world will correspond with a question that the API will send back when it receives this word. The user will then send back the answer which will be sent to the API and checked.   
+
+\begin{figure*}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{API_request.png} 
+    \caption{API request flow chart}
+\end{figure*}   
+
+
+\emph{Web Scarping} 
+I will develop two web scraping applications to test the effectiveness of it as a method of dynamic challenge generation, one simpler one and one more complex. for the more simple one I will scrape the names of influential computer scientists from sites like either 'https://www.computerscie
+ncedegreehub.com/30-most-influential-computer-scientists-alive-today/' this or a Wikipedia entry on something similar. Then will read those names into a list. The challenge would be generated by grabbing a random name from that list and running it through an online hash generator, providing all the information you need for the challenge.   
+
+\begin{figure*}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{Web_scraper.png} 
+    \caption{Web scraper flow chart}
+\end{figure*}   
+
+
+The more complex use of web scraping would involve using the Bing API and the Microsoft cognitive engine. The script would ask the Bing API for 100 cryptographers, it would then store images of them in a list, returns one at random and sends it to the Microsoft cognitive engine to see if it recognised it. This script would be used to ask the users if they recognise the famous cryptographers and check their answer against the answer returned from the Microsoft cognitive engine. (Figure \ref{FaceQuiz})   
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{Figs/Face_Quiz (1).png}
+    \caption{Face Quiz flow chart} 
+    \label{FaceQuiz}
+\end{figure}    
+
+\emph{Docker} 
+%talk about use of docker 
+
+\begin{figure*}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{Docker_face_pop.png} 
+    \caption{Docker face pop flow chart}
+\end{figure*}   
+
+
+
+
+%literature to back up dynamic challenege generation%
+\subsubsection{Feedback} 
+As discussed in the literature, Feedback is fundamental to an educational application.  
+\subsection{Back end} 
+\subsubsection{SQL vs NoSQL}   
+First off when designing the back end of an application what Database would be most efficient to use for the applications specific needs and potential uses. 
+%reference and and back up use of NOSQL and mongo DB (also discuss that managing the database part of the application when it comes to scaling because a lot of the load comes from complex queries making requests take longer, so techniques such as cacheing complex query results and effective organising of db tables with keys and index can be effective in reducing load. %
+\subsubsection{User Database}  
+
+\begin{figure*}[h]
+    \centering
+    \includegraphics[width=1.0\textwidth]{User_Db.PNG} 
+    \caption{User Database}
+\end{figure*}   
+
+\subsubsection{Challenges Database}  
+
+\begin{figure*}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{Challenge_Db.PNG} 
+    \caption{Challenge Database}
+\end{figure*} 
+
+\subsubsection{Results Database}  
+
+\begin{figure*}[h]
+    \centering
+    \includegraphics[width=1.0\textwidth]{Result_Db.PNG} 
+    \caption{Result Database}
+\end{figure*} 
+
+\subsubsection{Back end Framework} 
+With angular being chosen as the front end framework a similar evaluation needs to be done when choosing a back end framework that can work in conjunction with it.
+\subsection{Other utelized services} 
+\subsubsection{Github}  
+Github is an online code repository which can be used to keep track of software development updates and allow your code to be open source. 
+%more on githb ad how I could use in cpnjunction with docker% 
+\subsubsection{Docker}  
+Docker is a way of taking an forxen state of an application or "image" and running it as multiple "containers" which are similar to virtual machine instances except  
+%insert difference here and more about docker and how it could be used for my application% 
+\subsubsection{Load Balancing} 
+Load balancing is a way of handling a server traffic so that multiple requests get distributed between multiple servers, therefore reducing the load on each server and has been researched and used as way of scaling web applications \cite{chieu2009dynamic}.
+
+%bit of research on load balancing e.g different algorithms such as random, round robin, and load based. 
+
+\section{Implementation}
+After the research had been done and I had designed in theory what my application would look like and how it would work I could start to look at the implementation. I decided for my implementation to prototype certain parts of my theoretical design. I chose to prototype the dynamic challenge generation part of the project as I felt that it was an important part of the learning experience to make sure that a different challenge could be given to a user each time they used the application, or if it was used in a class to ensure that all the users had different experience's using the application and couldn't copy other users answers out of laziness. Dynamic challenge generation was also an interesting area to look at I thought it would be interesting to evaluate the effectiveness of the different approaches in creating a different challenge each time. Another part I decided to prototype was the docker element of the project as docker is an incredibly useful service which would benefit the project greatly if made and prototyping an element such as database population would help illustrate that as well as gauge how efficient it would be.  
+
+For the implementation stage I decided to use Python for the programming language and Eclipse as the IDE. I chose python out of a mix of personal preference as I has used in in the years leading up to this project and had more experience than any of the other programming languages and the practicality of using it for this project as python has extensive support libraries, useful for completing the variety of tasks that I wanted to do, combined with the fact that it is a widely used language and recognised in the industry it seemed like a sensible choice. Eclipse I chose to use as I have has exposure with it in my uni career and thought it better to use something I am experiences with and know than learn the specifics of a new IDE.
+
+I will use the Eclipse IDE to develop python scripts for the different methods of dynamic challenge generation, at least a script for each. I will then use a combination of docker and python to create a service which populates a database with challenges in an efficient matter. The aim of this implementation stage is to develop something that in a later stage will give an understanding into which method of dynamic challenge generation is the most effective and how to best distribute this method.  
+
+%need to talk about testing strategy, how am I going to test it ? 
+\subsection{From selection} 
+\subsection{Using API request} 
+\subsection{Web scraping} 
+\subsubsection{Basic web scraping} 
+\subsubsection{Web scraping with facial recognition} 
+\subsection{Challenge distribution with Docker} 
+\subsubsection{Python} 
+\subsubsection{Docker} 
+
+\section{Results}
+
+\section{Evaluation}
+Evaluate my literature and implementation as a whole. 
+
+\section{conclusion} 
+\subsection{Aims and Objectives} 
+\subsection{Self Evaluation} 
+\subsection{Future Work}
+
+\newpage
+\bibliographystyle{IEEEtran}
+\bibliography{Diss_papers}
+%example of References. See https://en.wikibooks.org/wiki/LaTeX/Bibliography_Management
+%might be good to use a separate document for these so your main work is not one really long text file. 
+
+%you can crate this on a extra tex document just like the title or any other part of the document.
+\newpage
+\begin{appendices}
+\section{Project Overview}
+%insert IPO
+
+\begin{subappendices}
+\subsection{Example sub appendices}
+...
+\end{subappendices}
+
+\section{Second Formal Review Output}
+Insert a copy of the project review form you were given at the end of the review by the second marker
+
+\section{Diary Sheets (or other project management evidence)}
+Insert diary sheets here together with any project management plan you have
+
+\section{Appendix 4 and following}
+insert content here and for each of the other appendices, the title may be just on a page by itself, the pages of the appendices are not numbered, unless an included document such as a user manual or design document is itself pager numbered.
+\end{appendices}
+
+\end{document}

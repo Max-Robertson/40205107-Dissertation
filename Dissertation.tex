@@ -113,13 +113,21 @@ insert my lit here
 \subsection{summary}
 % summarise my literature review here 
 
-\section{Requirements analysis} 
+ 
 % possibly talk about and explain randomness, random number generator ? how am i generating randomness ? 
 
 \section{Design}
 \subsection{Introduction}  
-The literature has backed up the need for such an application, now I will look at how the areas covered can be implemented in the design of the application and go on to discuss how the applications infrastructure could be set up in an ideal scenario so that over 10,000 users can have access to the application at once.
-\subsection{Front end}  
+The literature has backed up the need for such an application, now I will look at how the areas covered can be implemented in the design of the application and go on to discuss how the applications infrastructure could be set up in an ideal scenario so that over 10,000 users can have access to the application at once. 
+\subsection{Requirements analysis} 
+%Discuss different methodologies for evaluation 
+\subsection{Design Methodology} 
+%discuss what i am going to do pick 100 computer scientists of 3 levels of fame etc etc  
+\subsection{Architecture Design} 
+%discuss how my prgram is structures, commuicating with api and DB etc 
+\subsection{Visual Design} 
+%how this would look in the application etc mock up design
+\subsection{Front end}   
 \subsubsection{Front end Framework}  
 Front end  Frameworks are  
 %find reference for description% 
@@ -131,7 +139,7 @@ The user interface will take into account the literature and represent the appli
 
 \begin{figure*}[h]
     \centering
-    \includegraphics[width=1.0\textwidth]{Ui_main_screen.PNG} 
+    \includegraphics[width=1.0\textwidth]{Figs/Ui_main_screen.PNG} 
     \caption{Main Screen UI mock up}
 \end{figure*}   
 
@@ -139,7 +147,7 @@ The main screen has quite a lot going on. In a typical room, the player will hav
 
 \begin{figure*}[h]
     \centering
-    \includegraphics[width=1.0\textwidth]{Ui_main_menu.PNG} 
+    \includegraphics[width=1.0\textwidth]{Figs/Ui_main_menu.PNG} 
     \caption{Main Menu UI mock up}
 \end{figure*}   
 
@@ -147,13 +155,13 @@ The main screen has quite a lot going on. In a typical room, the player will hav
 \centering
 \begin{minipage}{.5\textwidth}
   \centering
-  \includegraphics[width=1\linewidth]{Ui_hint_room.PNG}
+  \includegraphics[width=1\linewidth]{Figs/Ui_hint_room.PNG}
   \captionof{figure}{Hint room}
   \label{fig:test1}
 \end{minipage}%
 \begin{minipage}{.5\textwidth}
   \centering
-  \includegraphics[width=1\linewidth]{Ui_reward_room.PNG}
+  \includegraphics[width=1\linewidth]{Figs/Ui_reward_room.PNG}
   \captionof{figure}{Reward room}
   \label{fig:test2}
 \end{minipage}
@@ -165,13 +173,13 @@ When the user enters the hint room they are presented with a question and a choi
 \centering
 \begin{minipage}{.5\textwidth}
   \centering
-  \includegraphics[width=1\linewidth]{Ui_correct_response.PNG}
+  \includegraphics[width=1\linewidth]{Figs/Ui_correct_response.PNG}
   \captionof{figure}{correct response screen}
   \label{fig:test3}
 \end{minipage}%
 \begin{minipage}{.5\textwidth}
   \centering
-  \includegraphics[width=1\linewidth]{Ui_incorrect_response.PNG}
+  \includegraphics[width=1\linewidth]{Figs/Ui_incorrect_response.PNG}
   \captionof{figure}{incorrect response screen}
   \label{fig:test4}
 \end{minipage}
@@ -190,34 +198,37 @@ One fundamental part of this application will be the challenge generator. Dynami
 
 \emph{Random Challenge selection} 
 
-This will involve setting up a list of possible questions with corresponding answers, then selecting one of those questions at random. I will ask a multiple choice question populated with the correct answer and the answers to the other questions. The script would them check for the user input and check if the answer matches the correct answer giving simple feedback accordingly. This will be the simplest method and the easiest to implement.  
+This will involve setting up a list of possible questions with corresponding answers, then selecting one of those questions at random. I will ask a multiple choice question populated with the correct answer and the answers to the other questions. The script would them check for the user input and check if the answer matches the correct answer giving simple feedback accordingly. This will be the simplest method and the easiest to implement (Figure \ref{RandomSelection}).  
 
-\begin{figure*}[h]
+\begin{figure}[h]
     \centering
-    \includegraphics[width=0.5\textwidth]{random_selection (1).png}
-    \caption{random selection flow chart}
-\end{figure*}   
+    \includegraphics[width=0.5\textwidth]{Figs/random_selection (1).png}
+    \caption{random selection flow chart} 
+    \label{RandomSelection}
+\end{figure}   
 
 
 \emph{API request} 
-I will set up an API using a python script so I can make a request to it with another script. The script will select a random word from a list, the world will correspond with a question that the API will send back when it receives this word. The user will then send back the answer which will be sent to the API and checked.   
+I will set up an API using a python script so I can make a request to it with another script. The script will select a random word from a list, the world will correspond with a question that the API will send back when it receives this word. The user will then send back the answer which will be sent to the API and checked (Figure \ref{APIRequest}).   
 
-\begin{figure*}[h]
+\begin{figure}[h]
     \centering
-    \includegraphics[width=0.5\textwidth]{API_request.png} 
-    \caption{API request flow chart}
-\end{figure*}   
+    \includegraphics[width=0.5\textwidth]{Figs/API_request.png} 
+    \caption{API request flow chart} 
+    \label{APIRequest}
+\end{figure}   
 
 
 \emph{Web Scarping} 
 I will develop two web scraping applications to test the effectiveness of it as a method of dynamic challenge generation, one simpler one and one more complex. for the more simple one I will scrape the names of influential computer scientists from sites like either 'https://www.computerscie
-ncedegreehub.com/30-most-influential-computer-scientists-alive-today/' this or a Wikipedia entry on something similar. Then will read those names into a list. The challenge would be generated by grabbing a random name from that list and running it through an online hash generator, providing all the information you need for the challenge.   
+ncedegreehub.com/30-most-influential-computer-scientists-alive-today/' this or a Wikipedia entry on something similar. Then will read those names into a list. The challenge would be generated by grabbing a random name from that list and running it through an online hash generator, providing all the information you need for the challenge (Figure \ref{WebScraper}).   
 
-\begin{figure*}[h]
+\begin{figure}[h]
     \centering
-    \includegraphics[width=0.5\textwidth]{Web_scraper.png} 
-    \caption{Web scraper flow chart}
-\end{figure*}   
+    \includegraphics[width=0.5\textwidth]{Figs/Web_scraper.png} 
+    \caption{Web scraper flow chart} 
+    \label{WebScraper}
+\end{figure}   
 
 
 The more complex use of web scraping would involve using the Bing API and the Microsoft cognitive engine. The script would ask the Bing API for 100 cryptographers, it would then store images of them in a list, returns one at random and sends it to the Microsoft cognitive engine to see if it recognised it. This script would be used to ask the users if they recognise the famous cryptographers and check their answer against the answer returned from the Microsoft cognitive engine. (Figure \ref{FaceQuiz})   
@@ -230,13 +241,15 @@ The more complex use of web scraping would involve using the Bing API and the Mi
 \end{figure}    
 
 \emph{Docker} 
-%talk about use of docker 
+%talk about use of docker  
+(Figure \ref{DockerFace})
 
-\begin{figure*}[h]
+\begin{figure}[h]
     \centering
-    \includegraphics[width=0.5\textwidth]{Docker_face_pop.png} 
-    \caption{Docker face pop flow chart}
-\end{figure*}   
+    \includegraphics[width=0.5\textwidth]{Figs/Docker_face_pop.png} 
+    \caption{Docker face pop flow chart} 
+    \label{DockerFace}
+\end{figure}   
 
 
 
@@ -250,27 +263,30 @@ First off when designing the back end of an application what Database would be m
 %reference and and back up use of NOSQL and mongo DB (also discuss that managing the database part of the application when it comes to scaling because a lot of the load comes from complex queries making requests take longer, so techniques such as cacheing complex query results and effective organising of db tables with keys and index can be effective in reducing load. %
 \subsubsection{User Database}  
 
-\begin{figure*}[h]
+\begin{figure}[h]
     \centering
-    \includegraphics[width=1.0\textwidth]{User_Db.PNG} 
-    \caption{User Database}
-\end{figure*}   
+    \includegraphics[width=1.0\textwidth]{Figs/User_Db.PNG} 
+    \caption{User Database} 
+    \label{UserDB}
+\end{figure}   
 
 \subsubsection{Challenges Database}  
 
-\begin{figure*}[h]
+\begin{figure}[h]
     \centering
-    \includegraphics[width=0.5\textwidth]{Challenge_Db.PNG} 
-    \caption{Challenge Database}
-\end{figure*} 
+    \includegraphics[width=0.5\textwidth]{Figs/Challenge_Db.PNG} 
+    \caption{Challenge Database} 
+    \label{ChallengeDB}
+\end{figure} 
 
 \subsubsection{Results Database}  
 
-\begin{figure*}[h]
+\begin{figure}[h]
     \centering
-    \includegraphics[width=1.0\textwidth]{Result_Db.PNG} 
-    \caption{Result Database}
-\end{figure*} 
+    \includegraphics[width=1.0\textwidth]{Figs/Result_Db.PNG} 
+    \caption{Result Database} 
+    \label{ResultsDB}
+\end{figure} 
 
 \subsubsection{Back end Framework} 
 With angular being chosen as the front end framework a similar evaluation needs to be done when choosing a back end framework that can work in conjunction with it.
@@ -291,7 +307,9 @@ After the research had been done and I had designed in theory what my applicatio
 
 For the implementation stage I decided to use Python for the programming language and Eclipse as the IDE. I chose python out of a mix of personal preference as I has used in in the years leading up to this project and had more experience than any of the other programming languages and the practicality of using it for this project as python has extensive support libraries, useful for completing the variety of tasks that I wanted to do, combined with the fact that it is a widely used language and recognised in the industry it seemed like a sensible choice. Eclipse I chose to use as I have has exposure with it in my uni career and thought it better to use something I am experiences with and know than learn the specifics of a new IDE.
 
-I will use the Eclipse IDE to develop python scripts for the different methods of dynamic challenge generation, at least a script for each. I will then use a combination of docker and python to create a service which populates a database with challenges in an efficient matter. The aim of this implementation stage is to develop something that in a later stage will give an understanding into which method of dynamic challenge generation is the most effective and how to best distribute this method.  
+I will use the Eclipse IDE to develop python scripts for the different methods of dynamic challenge generation, at least a script for each. I will then use a combination of docker and python to create a service which populates a database with challenges in an efficient matter. The aim of this implementation stage is to develop something that in a later stage will give an understanding into which method of dynamic challenge generation is the most effective and how to best distribute this method.   
+
+%include code snippets here, explain what they do etc. all scripts and docker files
 
 %need to talk about testing strategy, how am I going to test it ? 
 \subsection{From selection} 
@@ -303,7 +321,8 @@ I will use the Eclipse IDE to develop python scripts for the different methods o
 \subsubsection{Python} 
 \subsubsection{Docker} 
 
-\section{Results}
+\section{Results} 
+%Results for for tests:out of X runs how many times did the same question show up ? to evaluate the three dynamic challenge generation method. test how many faces show up in search out of 100 ? to evaluate bing API effectiveness for different topics such as computer scientists and cryptographers. Out of 100 faces how many correct ? to evaluate facial recognition. Then evaluate further effectiveness of facial recognition by taking 100 famous computer scientists, cryptographers etc of varying fame level, very famous to kind of famous to not very famous and test success rate. feed it some duds, Bill Gates look a like etc. 
 
 \section{Evaluation}
 Evaluate my literature and implementation as a whole. 

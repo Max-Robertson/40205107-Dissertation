@@ -125,8 +125,37 @@ The literature has backed up the need for such an application, now I will look a
 %discuss what i am going to do pick 100 computer scientists of 3 levels of fame etc etc  
 \subsection{Architecture Design} 
 %discuss how my prgram is structures, commuicating with api and DB etc 
-\subsection{Visual Design} 
-%how this would look in the application etc mock up design
+\subsection{Application Design}  
+To design the structure of the the application, and how the rooms/levels would be spaced out I used the literature to design an application that would effectively teach cyber security skills and knowledge. 
+
+Firstly I would separate each “lesson” into a room in the game. A series of these rooms or “lessons” would make up a floor. These rooms would cover and teach different topics of cyber security. Instead of having floors cover different topics, which is how I had originally envisioned the application, the literature suggests that blooms taxonomy Is an effective teaching model to apply to cyber security education so each floor could represent a different level on the blooms taxonomy level of understanding. So as the user would progress up the floors the questions would get more complex and require deeper thought. This structure is illustrated in figure *.  This would allow the application to impart skills in an organised manor so that the user would get the most out of it and by the end of the application would be at the end of the blooms taxonomy understanding scale (change so makes more sense)
+
+%insert figure here 
+
+Another aspect to consider in regards to the structure is that putting “lessons” / rooms back to back requiring the user to complete the lesson in order to progress to the next would be a bad idea. This has been shown to stunt the learning of younger audiences and discourage them from continuing if they can’t get the answer. The literature backed this up implying that freedom of choice is an important factor in gamification and that it encourages the user to explore more and be more engaged with the learning process. To get around this the application feature something called “reward tokens” which the user would get every time they complete a room/lesson. Say there are 5 rooms on a floor, the user would need to obtain 3 reward tokens to proceed to the next floor. Therefore giving the user the freedom to choose which 3 lessons to complete. The user would also need to be stopped from just all 5 lessons on the first floor then only 1 in the second to progress, a solution to this would be to double the reward tokens the user gets for completing a lesson as the floors ascend and adjust the reward tokens needed to go up a floor according, this is illustrated in figure *. 
+
+%insert figure here 
+
+The user would also need to not be discouraged if they for example could only complete two the lessons and is stuck on completing a third on a floor. Having looked over extensive literature on feedback it suggests that just telling the user that they are wrong isn’t very effective but that giving the user some form of hint is beneficial for the user allowing them to not give up if they don’t know the answer but be pointed in the right direction. For this reason a hint system is included in the theoretical design of the application.  If the user unsuccessfully attempts a lesson 3 times then a hint room could unlock. 
+
+The rooms could be designed to incorporate all of these features. In a typical room there would be an opening in every direction. One to the left taking the user to the previous room, one to the right taking the user to the next room, one above which will unlock when the user gets the question right and takes them to the reward room where they can collect the reward tokens and finally one below which would unlock on the third incorrect attempt taking the user to the hint room. This has been visualised in figure * 
+
+insert figure here  
+
+The user would play as “anonybot” a robot working for moral Corp who when doing his job discovered they were unlawfully harvesting and processing the personal data of customers. When he confronted his superior about it he was locked down on the bottom floor of the headquarters. The user must play as anonybot as he ascends the floors so he can escape the HQ and out the company for what they are doing.  
+
+The inclusion of a character, story and an end goal to reach it all factors which have been cited as useful in engaging a younger audience with learning material, investing them and making them want to reach the end goal by the literature. As this application is aimed at the younger high school audience, with the aim of engaging them in cyber security this is also included in the theoretical design.
+%discuss how the game would be structured levels, floors etc
+\subsection{Lesson Design}  
+As discussed the level design would be rooms bundled into floors, each floor representing a different level of complexity on Blooms Taxonomy. For this design chapter I will briefly discuss what some of the lessons in the rooms on the first floor would look like, what their content will be, their learning outcomes and then go on to discuss how I would achieve this. 
+\subsubsection{Caesar cipher} 
+%discuss the learning outcomes e.g teach what caesar cipher is, how to open up decoder, teach how to decode. Discuss that it would be MCQ. Mock up how it would look. How i will use api request and web scraping to do.
+\subsubsection{Hash crack}   
+%discuss the learning outcomes e.g teach what md5 hash is that its a one way encryption so only way to crack is against dictionaries provide dictionarie then teach them to find which famous computer scientist it is.  Mock up how it would look. How i will use web scraping to do. 
+\subsubsection{Who is this ?}
+%discuss the learning outcomes e.g teach young audience maybe who some famous computer scientists are and why they are famous. Discuss how i will make it get progressively harder until at the end they win reward token. mock up how will look. Discuss how i will use face api, bing api and webscraping to do this.  
+
+%how this would look in the application etc mock up design 
 \subsection{Front end}   
 \subsubsection{Front end Framework}  
 Front end  Frameworks are  
@@ -135,21 +164,23 @@ There are 3 main contenders when it comes to front end frameworks: Angular, reac
 %find reference for each one then justify use of angular% 
 \subsubsection{Input}
 \subsubsection{User interface}  
-The user interface will take into account the literature and represent the application in the most effective way possible. Some drafted screens are shown below.   
+The user interface will take into account the literature and represent the application in the most effective way possible. Some drafted screens are shown below.  (Figure \ref{Mainscreen})
 
-\begin{figure*}[h]
+\begin{figure}[h]
     \centering
     \includegraphics[width=1.0\textwidth]{Figs/Ui_main_screen.PNG} 
-    \caption{Main Screen UI mock up}
-\end{figure*}   
+    \caption{Main Screen UI mock up} 
+    \label{Mainscreen}
+\end{figure}   
 
-The main screen has quite a lot going on. In a typical room, the player will have a choice to navigate both to the next room and the previous room to their left and right. If they go up they will reach the challenge terminal which when interacted with brings up the challenge. If they enter the correct answer the reward room will open up and they can collect their challenge token. If they get it incorrect the hint room below opens up. How many Challenge tokens they have is displayed and also the score they have accumulated so far. The user can quit or alter their settings with the drop down menu in the top left hand corner of the screen.
+The main screen has quite a lot going on. In a typical room, the player will have a choice to navigate both to the next room and the previous room to their left and right. If they go up they will reach the challenge terminal which when interacted with brings up the challenge. If they enter the correct answer the reward room will open up and they can collect their challenge token. If they get it incorrect the hint room below opens up. How many Challenge tokens they have is displayed and also the score they have accumulated so far. The user can quit or alter their settings with the drop down menu in the top left hand corner of the screen. (Figure \ref{Mainmenu}) (Figure \ref{fig:test1}) (Figure \ref{fig:test2})
 
-\begin{figure*}[h]
+\begin{figure}[h]
     \centering
     \includegraphics[width=1.0\textwidth]{Figs/Ui_main_menu.PNG} 
-    \caption{Main Menu UI mock up}
-\end{figure*}   
+    \caption{Main Menu UI mock up} 
+    \label{Mainmenu}
+\end{figure}   
 
 \begin{figure}
 \centering
@@ -167,7 +198,7 @@ The main screen has quite a lot going on. In a typical room, the player will hav
 \end{minipage}
 \end{figure}   
 
-When the user enters the hint room they are presented with a question and a choice of three answers. They will get the hint regardless but is meant to build their knowledge and whats been covered. The reward room is simple and just contains the challenge token.
+When the user enters the hint room they are presented with a question and a choice of three answers. They will get the hint regardless but is meant to build their knowledge and whats been covered. The reward room is simple and just contains the challenge token. (Figure \ref{fig:test3}) (Figure \ref{fig:test4})
 
 \begin{figure}
 \centering
@@ -261,7 +292,8 @@ As discussed in the literature, Feedback is fundamental to an educational applic
 \subsubsection{SQL vs NoSQL}   
 First off when designing the back end of an application what Database would be most efficient to use for the applications specific needs and potential uses. 
 %reference and and back up use of NOSQL and mongo DB (also discuss that managing the database part of the application when it comes to scaling because a lot of the load comes from complex queries making requests take longer, so techniques such as cacheing complex query results and effective organising of db tables with keys and index can be effective in reducing load. %
-\subsubsection{User Database}  
+\subsubsection{User Database}   
+Discuss the user database (Figure \ref{UserDB})
 
 \begin{figure}[h]
     \centering
@@ -270,7 +302,8 @@ First off when designing the back end of an application what Database would be m
     \label{UserDB}
 \end{figure}   
 
-\subsubsection{Challenges Database}  
+\subsubsection{Challenges Database}   
+Discuss The challenge Database (Figure \ref{ChallengeDB})
 
 \begin{figure}[h]
     \centering
@@ -279,7 +312,8 @@ First off when designing the back end of an application what Database would be m
     \label{ChallengeDB}
 \end{figure} 
 
-\subsubsection{Results Database}  
+\subsubsection{Results Database}   
+Discuss the results database (Figure \ref{ResultsDB})
 
 \begin{figure}[h]
     \centering

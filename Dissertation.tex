@@ -144,14 +144,59 @@ insert figure here
 
 The user would play as “anonybot” a robot working for moral Corp who when doing his job discovered they were unlawfully harvesting and processing the personal data of customers. When he confronted his superior about it he was locked down on the bottom floor of the headquarters. The user must play as anonybot as he ascends the floors so he can escape the HQ and out the company for what they are doing.  
 
-The inclusion of a character, story and an end goal to reach it all factors which have been cited as useful in engaging a younger audience with learning material, investing them and making them want to reach the end goal by the literature. As this application is aimed at the younger high school audience, with the aim of engaging them in cyber security this is also included in the theoretical design.
+The inclusion of a character, story and an end goal to reach it all factors which have been cited as useful in engaging a younger audience with learning material, investing them and making them want to reach the end goal by the literature. As this application is aimed at the younger high school audience, with the aim of engaging them in cyber security this is also included in the theoretical design. 
+
+So in summary the application would essentially be a gamified cyber security application, structured similarly to capture the flag (or CTF) events with the freedom of choice operating as the jeopardy style of CTF shown to be effective in engagement, the lessons serving as the challenges and the reward token serving as a flag. The hint system in place is also represented in typical jeopardy style CTFs. The difference is the character and story orientated take and the elevation of floors representing a respective level of Blooms Taxonomy. 
 %discuss how the game would be structured levels, floors etc
 \subsection{Lesson Design}  
 As discussed the level design would be rooms bundled into floors, each floor representing a different level of complexity on Blooms Taxonomy. For this design chapter I will briefly discuss what some of the lessons in the rooms on the first floor would look like, what their content will be, their learning outcomes and then go on to discuss how I would achieve this. 
 \subsubsection{Caesar cipher} 
-%discuss the learning outcomes e.g teach what caesar cipher is, how to open up decoder, teach how to decode. Discuss that it would be MCQ. Mock up how it would look. How i will use api request and web scraping to do.
+%discuss the learning outcomes e.g teach what caesar cipher is, how to open up decoder, teach how to decode. Discuss that it would be MCQ. Mock up how it would look. How i will use api request and web scraping to do. 
+One of the first things that would be covered in the application is basic encryption types, such as the Caesar cipher.  
+
+\emph{Learning Outcomes} 
+\newline the learning outcomes for this particular lesson would be:  
+
+\begin{itemize}\itemsep0pt
+	\item The user would know and understand what a Caesar cipher is 
+	\item The user will be able to use an online decoder to get cipher text into plain text
+\end{itemize} 
+
+\emph{Lesson Contents} 
+\newline The user would first in a text terminal be told what a Caesar cipher is and would be explained how encryption and decryption work using it. The user would then be given a random Caesar cipher of a famous computer scientist and told to open a online decoder. Using the decoder and referring to the provided steps the user will be able to get the plain text and when entered in the terminal would unlock the door.  
+
+\emph{How this would be done} 
+\newline Dynamic challenge generation is an important part of this application and would ensure that the students all have a unique experience meaning users can't copy off of each other's answers and will have a different experience if playing again. This is discussed furthermore later in the design chapter. For this lesson I will make test scenarios using random selection and API requested methods, these will also be discussed further later in the design chapter. 
+
+\emph{How it would look} 
+%insert figure here
+Another lesson that would be covered on the first floor of the application is hashing. 
+
+\emph{Learning Outcomes} 
+\newline the learning outcomes for this particular lesson would be:  
+
+\begin{itemize}\itemsep0pt
+	\item The user would know and understand what a hash is 
+	\item The user will be able to use the command line 
+	\item The user will, with instructions, be able to crack a hash using a dictionary and john the ripper. 
+\end{itemize} 
+
+\emph{Lesson Contents} 
+\newline The user would first in a text terminal be told what a Caesar cipher is and would be explained how encryption and decryption work using it. The user would then be given a random Caesar cipher of a famous computer scientist and told to open a online decoder. Using the decoder and referring to the provided steps the user will be able to get the plain text and when entered in the terminal would unlock the door.  
+
+\emph{How this would be done} 
+\newline Dynamic challenge generation is an important part of this application and would ensure that the students all have a unique experience meaning users can't copy off of each other's answers and will have a different experience if playing again. This is discussed furthermore later in the design chapter. For this lesson I will make test scenarios using random selection and API requested methods, these will also be discussed further later in the design chapter. 
+
+\emph{How it would look} 
+%insert figure here
+ 
+ 
+
+
+ 
 \subsubsection{Hash crack}   
 %discuss the learning outcomes e.g teach what md5 hash is that its a one way encryption so only way to crack is against dictionaries provide dictionarie then teach them to find which famous computer scientist it is.  Mock up how it would look. How i will use web scraping to do. 
+
 \subsubsection{Who is this ?}
 %discuss the learning outcomes e.g teach young audience maybe who some famous computer scientists are and why they are famous. Discuss how i will make it get progressively harder until at the end they win reward token. mock up how will look. Discuss how i will use face api, bing api and webscraping to do this.  
 

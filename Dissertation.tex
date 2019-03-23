@@ -119,7 +119,22 @@ insert my lit here
 
 \section{Design}
 \subsection{Introduction}  
-The literature has backed up the need for such an application, now I will look at how the areas covered can be implemented in the design of the application and go on to discuss how the applications infrastructure could be set up in an ideal scenario so that over 10,000 users can have access to the application at once. 
+The literature has backed up the need for such an application, now I will look at how the areas covered can be implemented in the design of the application and go on to discuss how the applications infrastructure could be set up in an ideal scenario so that over 10,000 users can have access to the application at once.  
+
+\subsection{Requirements analysis} 
+After doing the appropriate research on the topic, and designing the concept for the application I then looked into how best to carry out the research to meet my aims and objectives. Williams defines qualitative research as allowing the user to explore and better understand the phenomenon whereas quantitative research provides and objective measure of reality \cite{williams2007research}. Greenbaum has further discussed these research methods \cite{greenbaum1999moderating} and cited Michiello's table as useful for deciding a primary research method (Figure \ref{Research}). 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.75\textwidth]{Figs/research.PNG} 
+    \caption{Quantitative vs Qualitative} 
+    \label{Research}
+\end{figure}  
+
+As the table shows the qualitative method would involve me studying the human interaction side of things, e.g making the application and through the form of questionnaires, getting data on how the application was useful. A quantitative method involves measuring things, numerical comparisons, discovering facts etc This would involve prototyping aspects of the application and measuring their use. Both methods would be valid for meeting the aims and objectives of the project if designed right. However the qualitative method in this case would involve testing the application on the target audience (high school students 
+) and would therefore throw ethics into consideration. Another issue with the qualitative method is if I was planning to do a questionnaire to gather data on the effectiveness of the application, that questionnaire should really have  started to be designed earlier in the project life. The quantitative method however, could be useful in after theoretically designing the app prototyping components of it and gauging how useful it would be in achieving the desired effect by testing and measuring the technical performance of the prototyped components. This would help give insight into the proposed use of the technology and if it should be considered for this use. For this reason I have decided to choose the quantitative method of research and do a technical evaluation on prototyped elements of the proposed application.
+
+
 \subsection{Application Design}  
 To design the structure of the the application, and how the rooms/levels would be spaced out I used the literature to design an application that would effectively teach cyber security skills and knowledge. 
 
@@ -319,6 +334,8 @@ ncedegreehub.com/30-most-influential-computer-scientists-alive-today/' this or a
 
 The more complex use of web scraping would involve using the Bing API and the Microsoft cognitive engine. The script would ask the Bing API for 100 cryptographers, it would then store images of them in a list, returns one at random and sends it to the Microsoft cognitive engine to see if it recognised it. This script would be used to ask the users if they recognise the famous cryptographers and check their answer against the answer returned from the Microsoft cognitive engine. (Figure \ref{FaceQuiz})   
 
+%talk more about how it would work and then make diagram showing how it works%
+
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.5\textwidth]{Figs/Face_Quiz (1).png}
@@ -327,7 +344,7 @@ The more complex use of web scraping would involve using the Bing API and the Mi
 \end{figure}    
 
 \emph{Docker} 
-%talk about use of docker  
+%talk about use of docker and include figure showing how the api is going to be used to send data to database 
 (Figure \ref{DockerFace})
 
 \begin{figure}[h]
@@ -346,7 +363,7 @@ Discuss the user database (Figure \ref{UserDB})
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=1.0\textwidth]{Figs/User_Db.PNG} 
+    \includegraphics[width=0.75\textwidth]{Figs/User_Db.PNG} 
     \caption{User Database} 
     \label{UserDB}
 \end{figure}   
@@ -356,7 +373,7 @@ Discuss The challenge Database (Figure \ref{ChallengeDB})
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.5\textwidth]{Figs/Challenge_Db.PNG} 
+    \includegraphics[width=0.25\textwidth]{Figs/Challenge_Db.PNG} 
     \caption{Challenge Database} 
     \label{ChallengeDB}
 \end{figure} 
@@ -366,7 +383,7 @@ Discuss the results database (Figure \ref{ResultsDB})
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=1.0\textwidth]{Figs/Result_Db.PNG} 
+    \includegraphics[width=0.5\textwidth]{Figs/Result_Db.PNG} 
     \caption{Result Database} 
     \label{ResultsDB}
 \end{figure} 
@@ -374,11 +391,23 @@ Discuss the results database (Figure \ref{ResultsDB})
 
 %bit of research on load balancing e.g different algorithms such as random, round robin, and load based.  
 
-\subsection{Requirements analysis} 
-%Discuss different methodologies for evaluation 
-\subsection{Design Methodology} 
-%discuss what i am going to do pick 100 computer scientists of 3 levels of fame etc etc 
 
+
+
+\subsection{Design Methodology} 
+%discuss what i am going to do pick 100 computer scientists of 3 levels of fame etc etc   
+With the application theoretically designed and elements of the application discussed I will now look at how I am going to test and evaluate these prototyped elements after they have been implemented to get useful data out of this project. To do this I am going to test 3 different aspects of my implemented elements. 
+\subsubsection{How many times does the same question come up in the same run ?} This will be testing the effectiveness of the implemented dynamic challenge generation methods and how effective each method is for randomly generating a random question. This will also answer the question of what method is superior for this intended purpose, or has the most potential for this use.  
+
+To do this I will for each script I have made for each of the dynamic challenge generation methods, make a separate version for testing that runs through the script 100 times collecting the questions and answer pair each time then after it has ran 100 times it will look at the list of questions and answers and find how many times the same pair occurred in the run. By doing this it gives a numerical value for comparison across all of the methods and helps gauge how effective that particular method is for this chosen purpose and therefore its potential. 
+\subsubsection{How many out of 100 images are faces ?}  
+This test will be testing the effectiveness of the Bing API that I have chosen to use in the implementation of one of the dynamic challenge methods and for use in populating a database with challenges. By testing this it will tell us how useful this technology is and if it can be utilised for this purpose effectively. 
+
+To test this I am gong to make a test case of the script that uses the Bing API to collect faces for the challenge generation. In this proposed script a random topic such as 'famous computer scientists' or 'famous cryptographers' and then that is used as a search term for the Bing API which returns 100 images of that. I want to test how many of these 100 images are actually contain faces, or more accurately how many actually contain people. I will test this by using search terms with a varying likely hood to return faces, for example,  'Famous movie stars' is very likely to return a set of actors as they by nature are well known but a search term of 'famous cryptographers' on the other hand aren't as well known by nature. Doing this will not only evaluate how useful the Bing API if for general use but analysing different topics it can also be seen how useful it is for the specific  proposed purpose 
+\subsubsection{Out of 100 computer scientists, how many does the face API recognise ?} 
+This will test how effective the Microsoft cognitive engine Face API, used in my proposed web scraping face quiz script, is at recognising faces.  I believe this could be a very interesting test to carry out and the data gathered from doing this would not only be useful in learning how effective it would be to use this technology for the proposed purpose but for analysing exactly how good this technology is and help determine how it is working. 
+
+To achieve this I am going to make a separate script all together for this test. I am going to gather a list of 100 computer scientists separated into three levels 'world famous' e.g Bill Gates, Steve Jobs, 'industry famous' and 'well known'. I will then gather multiple images of each person on the list and do 10 runs of each of the images.Outputted will be how many of the 3 images were recognised or a 'recognition score' and how many times out of the 10 runs that API recognised the person or a 'consistency score', this will be outputted in a graphical format such as a csv file. I will also feature in the tests some 'dud' images of for example people who look like Steve jobs but actually are not to test how accurate the service is being. As mentioned before it is my hope that these tests will determine how useful the Face API is and help pinpoint its behaviour.
 \section{Implementation}
 After the research had been done and I had designed in theory what my application would look like and how it would work I could start to look at the implementation. I decided for my implementation to prototype certain parts of my theoretical design. I chose to prototype the dynamic challenge generation part of the project as I felt that it was an important part of the learning experience to make sure that a different challenge could be given to a user each time they used the application, or if it was used in a class to ensure that all the users had different experience's using the application and couldn't copy other users answers out of laziness. Dynamic challenge generation was also an interesting area to look at I thought it would be interesting to evaluate the effectiveness of the different approaches in creating a different challenge each time. Another part I decided to prototype was the docker element of the project as docker is an incredibly useful service which would benefit the project greatly if made and prototyping an element such as database population would help illustrate that as well as gauge how efficient it would be.  
 

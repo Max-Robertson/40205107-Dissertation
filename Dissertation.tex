@@ -29,7 +29,8 @@
 \fancyhf{}
 \renewcommand{\headrulewidth}{0.5pt}
 \renewcommand{\footrulewidth}{0.5pt}
-\setlength{\headheight}{15pt}
+\setlength{\headheight}{15pt} 
+\setlength{\parskip}{1em}
 \fancyhead[L]{Max Robertson - 40205107}
 \fancyhead[R]{ SOC10101 Honours Project}
 \fancyfoot[L]{}
@@ -119,12 +120,6 @@ insert my lit here
 \section{Design}
 \subsection{Introduction}  
 The literature has backed up the need for such an application, now I will look at how the areas covered can be implemented in the design of the application and go on to discuss how the applications infrastructure could be set up in an ideal scenario so that over 10,000 users can have access to the application at once. 
-\subsection{Requirements analysis} 
-%Discuss different methodologies for evaluation 
-\subsection{Design Methodology} 
-%discuss what i am going to do pick 100 computer scientists of 3 levels of fame etc etc  
-\subsection{Architecture Design} 
-%discuss how my prgram is structures, commuicating with api and DB etc 
 \subsection{Application Design}  
 To design the structure of the the application, and how the rooms/levels would be spaced out I used the literature to design an application that would effectively teach cyber security skills and knowledge. 
 
@@ -138,11 +133,9 @@ Another aspect to consider in regards to the structure is that putting “lesson
 
 The user would also need to not be discouraged if they for example could only complete two the lessons and is stuck on completing a third on a floor. Having looked over extensive literature on feedback it suggests that just telling the user that they are wrong isn’t very effective but that giving the user some form of hint is beneficial for the user allowing them to not give up if they don’t know the answer but be pointed in the right direction. For this reason a hint system is included in the theoretical design of the application.  If the user unsuccessfully attempts a lesson 3 times then a hint room could unlock. 
 
-The rooms could be designed to incorporate all of these features. In a typical room there would be an opening in every direction. One to the left taking the user to the previous room, one to the right taking the user to the next room, one above which will unlock when the user gets the question right and takes them to the reward room where they can collect the reward tokens and finally one below which would unlock on the third incorrect attempt taking the user to the hint room. This has been visualised in figure * 
+The rooms could be designed to incorporate all of these features. In a typical room there would be an opening in every direction. One to the left taking the user to the previous room, one to the right taking the user to the next room, one above which will unlock when the user gets the question right and takes them to the reward room where they can collect the reward tokens and finally one below which would unlock on the third incorrect attempt taking the user to the hint room. This has been visualised in figure *insert figure here*  
 
-insert figure here  
-
-The user would play as “anonybot” a robot working for moral Corp who when doing his job discovered they were unlawfully harvesting and processing the personal data of customers. When he confronted his superior about it he was locked down on the bottom floor of the headquarters. The user must play as anonybot as he ascends the floors so he can escape the HQ and out the company for what they are doing.  
+The user would play as “anonybot” a robot working for moral Corp who when doing his job discovered they were unlawfully harvesting and processing the personal data of customers. When he confronted his superior about it he was locked down on the bottom floor of the headquarters. The user must play as anonybot as he ascends the floors so he can escape the HQ and out the company for what they are doing.
 
 The inclusion of a character, story and an end goal to reach it all factors which have been cited as useful in engaging a younger audience with learning material, investing them and making them want to reach the end goal by the literature. As this application is aimed at the younger high school audience, with the aim of engaging them in cyber security this is also included in the theoretical design. 
 
@@ -154,7 +147,7 @@ As discussed the level design would be rooms bundled into floors, each floor rep
 %discuss the learning outcomes e.g teach what caesar cipher is, how to open up decoder, teach how to decode. Discuss that it would be MCQ. Mock up how it would look. How i will use api request and web scraping to do. 
 One of the first things that would be covered in the application is basic encryption types, such as the Caesar cipher.  
 
-\emph{Learning Outcomes} 
+\textbf{Learning Outcomes} 
 \newline the learning outcomes for this particular lesson would be:  
 
 \begin{itemize}\itemsep0pt
@@ -162,17 +155,25 @@ One of the first things that would be covered in the application is basic encryp
 	\item The user will be able to use an online decoder to get cipher text into plain text
 \end{itemize} 
 
-\emph{Lesson Contents} 
-\newline The user would first in a text terminal be told what a Caesar cipher is and would be explained how encryption and decryption work using it. The user would then be given a random Caesar cipher of a famous computer scientist and told to open a online decoder. Using the decoder and referring to the provided steps the user will be able to get the plain text and when entered in the terminal would unlock the door.  
+\textbf{Lesson Contents} 
+\newline The user would first in a text terminal be told what a Caesar cipher is and would be explained how encryption and decryption work using it. The user would then be given a random Caesar cipher of a famous computer scientist and told to open a online decoder. Using the decoder and referring to the provided steps the user will be able to get the plain text and when entered in the terminal would unlock the door.
 
-\emph{How this would be done} 
+\textbf{How this would be done} 
 \newline Dynamic challenge generation is an important part of this application and would ensure that the students all have a unique experience meaning users can't copy off of each other's answers and will have a different experience if playing again. This is discussed furthermore later in the design chapter. For this lesson I will make test scenarios using random selection and API requested methods, these will also be discussed further later in the design chapter. 
 
-\emph{How it would look} 
+\textbf{How it would look} 
 %insert figure here
+
+ 
+
+
+ 
+\subsubsection{Hash crack}   
+%discuss the learning outcomes e.g teach what md5 hash is that its a one way encryption so only way to crack is against dictionaries provide dictionarie then teach them to find which famous computer scientist it is.  Mock up how it would look. How i will use web scraping to do.  
+
 Another lesson that would be covered on the first floor of the application is hashing. 
 
-\emph{Learning Outcomes} 
+\textbf{Learning Outcomes} 
 \newline the learning outcomes for this particular lesson would be:  
 
 \begin{itemize}\itemsep0pt
@@ -181,34 +182,43 @@ Another lesson that would be covered on the first floor of the application is ha
 	\item The user will, with instructions, be able to crack a hash using a dictionary and john the ripper. 
 \end{itemize} 
 
-\emph{Lesson Contents} 
-\newline The user would first in a text terminal be told what a Caesar cipher is and would be explained how encryption and decryption work using it. The user would then be given a random Caesar cipher of a famous computer scientist and told to open a online decoder. Using the decoder and referring to the provided steps the user will be able to get the plain text and when entered in the terminal would unlock the door.  
+\textbf{Lesson Contents} 
+\newline The user would first in a text terminal be told what a hash is, about one way encryption and the use of it. Then the user will be taught briefly about the command line, basic commands and about john the ripper. the user will then get given a famous computer scientist hashed and be guided with a set of instructions on how to run the hash against a dictionary of computer scientist to get a match using john the ripper. Once the user find a match they will enter it and the door will unlock.
 
-\emph{How this would be done} 
-\newline Dynamic challenge generation is an important part of this application and would ensure that the students all have a unique experience meaning users can't copy off of each other's answers and will have a different experience if playing again. This is discussed furthermore later in the design chapter. For this lesson I will make test scenarios using random selection and API requested methods, these will also be discussed further later in the design chapter. 
+\textbf{How this would be done} 
+\newline For this lesson I will make test scenarios using the web scraping method, this will also be discussed further later in the design chapter. The lesson would then have a dictionary full of the hash value of different computer scientist provided to the user.  
 
-\emph{How it would look} 
+\textbf{How it would look} 
 %insert figure here
  
- 
-
-
- 
-\subsubsection{Hash crack}   
-%discuss the learning outcomes e.g teach what md5 hash is that its a one way encryption so only way to crack is against dictionaries provide dictionarie then teach them to find which famous computer scientist it is.  Mock up how it would look. How i will use web scraping to do. 
 
 \subsubsection{Who is this ?}
 %discuss the learning outcomes e.g teach young audience maybe who some famous computer scientists are and why they are famous. Discuss how i will make it get progressively harder until at the end they win reward token. mock up how will look. Discuss how i will use face api, bing api and webscraping to do this.  
 
+Also a possible lesson on the first floor would be a simple "who is this famous computer scientist" stage.  
+
+\textbf{Learning Outcomes} 
+\newline the learning outcomes for this particular lesson would be:  
+
+\begin{itemize}\itemsep0pt
+	\item The user will be able to recognise famous computer scientists.
+\end{itemize} 
+
+\textbf{Lesson Contents} 
+\newline The user will be presented with a question "which one of these people is *insert person here*" , four pictures will then be displayed on the screen, one being the right person and one the three others being other computer scientist. When the user gets this right they will proceed to stage 2 and be asked again, this time it will be slightly harder, a less famous computer scientist. Finally if they get that correct they will proceed to the third stage with a lesser known computer scientist. By answering the third question correct the lesson would be complete and the door would unlock. An incorrect answer will result in the user having to go back to the first stage again. This technique of try and try again has been shown to be effective for imparting knowledge (find reference I found for this and insert). 
+
+\textbf{How this would be done}  
+\newline For this lesson I will make test scenarios using the web scraping method with the use of two API's, which I will go into more detail about later in this chapter.  
+
+\textbf{How it would look} 
+%insert figure here
+ 
+
 %how this would look in the application etc mock up design 
-\subsection{Front end}   
-\subsubsection{Front end Framework}  
-Front end  Frameworks are  
-%find reference for description% 
-There are 3 main contenders when it comes to front end frameworks: Angular, react and vue.  
-%find reference for each one then justify use of angular% 
-\subsubsection{Input}
-\subsubsection{User interface}  
+
+
+\subsection{Technical Design} 
+\subsubsection{Front end: User Interface}  
 The user interface will take into account the literature and represent the application in the most effective way possible. Some drafted screens are shown below.  (Figure \ref{Mainscreen})
 
 \begin{figure}[h]
@@ -267,9 +277,9 @@ The feedback received at this level is basic but dependent on what the answer is
 {Register/Home screen} 
 {Room screen} 
 {Reward screen} 
-{Hint screen}
-\subsection{Middle end}  
-\subsubsection{Challenge Generator}  
+{Hint screen} 
+
+\subsubsection{Middle end: Dynamic Challenge generator}  
 One fundamental part of this application will be the challenge generator. Dynamic challenge generation is an important element of this application, it will ensure that if the user comes back and does it again they will have a different experience and also that users will be having a different experience than the users around them. I will look at three possible methods of dynamic challenge generation. \emph{Random challenge selection, API request} and \emph{Web scraping}.  
 
 \emph{Random Challenge selection} 
@@ -295,7 +305,7 @@ I will set up an API using a python script so I can make a request to it with an
 \end{figure}   
 
 
-\emph{Web Scarping} 
+\emph{Web Scraping} 
 I will develop two web scraping applications to test the effectiveness of it as a method of dynamic challenge generation, one simpler one and one more complex. for the more simple one I will scrape the names of influential computer scientists from sites like either 'https://www.computerscie
 ncedegreehub.com/30-most-influential-computer-scientists-alive-today/' this or a Wikipedia entry on something similar. Then will read those names into a list. The challenge would be generated by grabbing a random name from that list and running it through an online hash generator, providing all the information you need for the challenge (Figure \ref{WebScraper}).   
 
@@ -325,19 +335,13 @@ The more complex use of web scraping would involve using the Bing API and the Mi
     \includegraphics[width=0.5\textwidth]{Figs/Docker_face_pop.png} 
     \caption{Docker face pop flow chart} 
     \label{DockerFace}
-\end{figure}   
+\end{figure}    
 
-
-
-
-%literature to back up dynamic challenege generation%
-\subsubsection{Feedback} 
-As discussed in the literature, Feedback is fundamental to an educational application.  
-\subsection{Back end} 
-\subsubsection{SQL vs NoSQL}   
+\subsubsection{Back end: Databases} 
+\textbf{SQL vs NoSQL}   
 First off when designing the back end of an application what Database would be most efficient to use for the applications specific needs and potential uses. 
 %reference and and back up use of NOSQL and mongo DB (also discuss that managing the database part of the application when it comes to scaling because a lot of the load comes from complex queries making requests take longer, so techniques such as cacheing complex query results and effective organising of db tables with keys and index can be effective in reducing load. %
-\subsubsection{User Database}   
+\textbf{User Database}   
 Discuss the user database (Figure \ref{UserDB})
 
 \begin{figure}[h]
@@ -347,7 +351,7 @@ Discuss the user database (Figure \ref{UserDB})
     \label{UserDB}
 \end{figure}   
 
-\subsubsection{Challenges Database}   
+\textbf{Challenges Database}   
 Discuss The challenge Database (Figure \ref{ChallengeDB})
 
 \begin{figure}[h]
@@ -357,7 +361,7 @@ Discuss The challenge Database (Figure \ref{ChallengeDB})
     \label{ChallengeDB}
 \end{figure} 
 
-\subsubsection{Results Database}   
+\textbf{Results Database}   
 Discuss the results database (Figure \ref{ResultsDB})
 
 \begin{figure}[h]
@@ -367,19 +371,13 @@ Discuss the results database (Figure \ref{ResultsDB})
     \label{ResultsDB}
 \end{figure} 
 
-\subsubsection{Back end Framework} 
-With angular being chosen as the front end framework a similar evaluation needs to be done when choosing a back end framework that can work in conjunction with it.
-\subsection{Other utelized services} 
-\subsubsection{Github}  
-Github is an online code repository which can be used to keep track of software development updates and allow your code to be open source. 
-%more on githb ad how I could use in cpnjunction with docker% 
-\subsubsection{Docker}  
-Docker is a way of taking an forxen state of an application or "image" and running it as multiple "containers" which are similar to virtual machine instances except  
-%insert difference here and more about docker and how it could be used for my application% 
-\subsubsection{Load Balancing} 
-Load balancing is a way of handling a server traffic so that multiple requests get distributed between multiple servers, therefore reducing the load on each server and has been researched and used as way of scaling web applications \cite{chieu2009dynamic}.
 
-%bit of research on load balancing e.g different algorithms such as random, round robin, and load based. 
+%bit of research on load balancing e.g different algorithms such as random, round robin, and load based.  
+
+\subsection{Requirements analysis} 
+%Discuss different methodologies for evaluation 
+\subsection{Design Methodology} 
+%discuss what i am going to do pick 100 computer scientists of 3 levels of fame etc etc 
 
 \section{Implementation}
 After the research had been done and I had designed in theory what my application would look like and how it would work I could start to look at the implementation. I decided for my implementation to prototype certain parts of my theoretical design. I chose to prototype the dynamic challenge generation part of the project as I felt that it was an important part of the learning experience to make sure that a different challenge could be given to a user each time they used the application, or if it was used in a class to ensure that all the users had different experience's using the application and couldn't copy other users answers out of laziness. Dynamic challenge generation was also an interesting area to look at I thought it would be interesting to evaluate the effectiveness of the different approaches in creating a different challenge each time. Another part I decided to prototype was the docker element of the project as docker is an incredibly useful service which would benefit the project greatly if made and prototyping an element such as database population would help illustrate that as well as gauge how efficient it would be.  
@@ -391,17 +389,37 @@ I will use the Eclipse IDE to develop python scripts for the different methods o
 %include code snippets here, explain what they do etc. all scripts and docker files
 
 %need to talk about testing strategy, how am I going to test it ? 
-\subsection{From selection} 
-\subsection{Using API request} 
+\subsection{Starting simple: From selection}  
+\textbf{random\textunderscore selection.py} 
+%add code snippets and talk about what the program does%
+\subsection{Using API request}  
+\textbf{API.py} 
+%add code snippets and talk about what the program does% 
+\textbf{API\textunderscore request.py} 
+%add code snippets and talk about what the program does%
 \subsection{Web scraping} 
-\subsubsection{Basic web scraping} 
-\subsubsection{Web scraping with facial recognition} 
+\subsubsection{Basic web scraping}  
+\textbf{Web\textunderscore scraper\textunderscore final.py} 
+%add code snippets and talk about what the program does%
+\subsubsection{Web scraping with facial recognition}  
+\textbf{Face\textunderscore quiz\textunderscore final.py}
 \subsection{Challenge distribution with Docker} 
-\subsubsection{Python} 
-\subsubsection{Docker} 
+\subsubsection{Python}  
+\textbf{"Docker\textunderscore face\textunderscore pop\textunderscore final.py"} 
+%add code snippets and talk about what the program does%
+\subsubsection{Docker}  
+\textbf{requirements.txt} 
+%add code snippets and talk about what the file does% 
+\textbf{Dockerfile} 
+%add code snippets and talk about what the file does%  
+\textbf{docker-compose.yml}
+
 
 \section{Results} 
-%Results for for tests:out of X runs how many times did the same question show up ? to evaluate the three dynamic challenge generation method. test how many faces show up in search out of 100 ? to evaluate bing API effectiveness for different topics such as computer scientists and cryptographers. Out of 100 faces how many correct ? to evaluate facial recognition. Then evaluate further effectiveness of facial recognition by taking 100 famous computer scientists, cryptographers etc of varying fame level, very famous to kind of famous to not very famous and test success rate. feed it some duds, Bill Gates look a like etc. 
+%Results for for tests:out of X runs how many times did the same question show up ? to evaluate the three dynamic challenge generation method. test how many faces show up in search out of 100 ? to evaluate bing API effectiveness for different topics such as computer scientists and cryptographers. Out of 100 faces how many correct ? to evaluate facial recognition. Then evaluate further effectiveness of facial recognition by taking 100 famous computer scientists, cryptographers etc of varying fame level, very famous to kind of famous to not very famous and test success rate. feed it some duds, Bill Gates look a like etc.  
+\subsection{Test 1: how many times does the same question come up in the same run ?} 
+\subsection{Test 2: How many out of 100 images are faces ?} 
+\subsection{Test 3: Out of 100 computer scientists, how many does the face API recognise ?}
 
 \section{Evaluation}
 Evaluate my literature and implementation as a whole. 

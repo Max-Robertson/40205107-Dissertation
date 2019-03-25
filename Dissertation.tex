@@ -119,7 +119,7 @@ insert my lit here
 
 \section{Design}
 \subsection{Introduction}  
-The literature has backed up the need for such an application, now I will look at how the areas covered can be implemented in the design of the application and go on to discuss how the applications infrastructure could be set up in an ideal scenario so that over 10,000 users can have access to the application at once.  
+The literature has backed up the need for such an application, now I will look at how the areas covered can be implemented in the design of the application and go on to discuss how the application will be designed in its structure taking account what has been discovered in the literature. I will then  discuss the design of some lessons that application could contain and then go into detail about the technical design of the application. I will take into account methods of research and consider what the best approach to take is to meet the aims of the project. 
 
 \subsection{Requirements analysis} 
 After doing the appropriate research on the topic, and designing the concept for the application I then looked into how best to carry out the research to meet my aims and objectives. Williams defines qualitative research as allowing the user to explore and better understand the phenomenon whereas quantitative research provides and objective measure of reality \cite{williams2007research}. Greenbaum has further discussed these research methods \cite{greenbaum1999moderating} and cited Michiello's table as useful for deciding a primary research method (Figure \ref{Research}). 
@@ -338,21 +338,47 @@ The more complex use of web scraping would involve using the Bing API and the Mi
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.5\textwidth]{Figs/Face_Quiz (1).png}
+    \includegraphics[width=0.75\textwidth]{Figs/Face_Quiz (1).png}
     \caption{Face Quiz flow chart} 
     \label{FaceQuiz}
-\end{figure}    
+\end{figure}     
+
+So the script would select a random search term from a list of possible topics. It would then make a call to the Bing API which will return 100 images of the search term. One of these images will be selected at random and be sent to the Face API, the Face API sends the response back in a JSON format. This will loop until a match is found and the Face API matches a name to the face, when a match has been found the image is displayed and the user will be asked who it is. This process is illustrated in (Figure \ref{APIstructure})  
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.75\textwidth]{Figs/API_structure.png} 
+    \caption{API structure} 
+    \label{APIstructure}
+\end{figure}   
 
 \emph{Docker} 
-%talk about use of docker and include figure showing how the api is going to be used to send data to database 
-(Figure \ref{DockerFace})
+%talk about use of docker and include figure showing how the api is going to be used to send data to database  
+ 
+Docker is a way of systematically automate the faster deployment of applications using portable containers. Docker containers are created using base images, images are created manually are with Dockerfiles. Dockerfiles contain instructions to be automatically performed. They are used to organise deployment artefacts and simply the deployment process \cite{bernstein2014containers}. I will be using this service to populate the challenge database. I will do this by making a script (similar to the Face Quiz script) that instead of opening an image and asking the user who it is being displayed, when a match is found inserts into the challenge database the "question" ("who is this ?"), the image url and the answer (the name of the person), this script is shown in (Figure \ref{DockerFace}) and the structure of the script is shown in (Figure \ref{Dockerstructure}). I set up a Dockerfile to run this script and insert data into the database. Then using docker I could spin up X amount of containers and the database would be populated with X entries. An illustrated example of spinning up 5 container is shown in (Figure \ref{Dockerexample}). By designing it in this manor the database of challenges could be populated in a fast and efficient manor, which would also save processing time when retrieving challenges instead of having to perform the facial matches and image searches at the time of running the script the script could then just retrieve a set of images from the challenge db.
+ 
+
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.5\textwidth]{Figs/Docker_face_pop.png} 
     \caption{Docker face pop flow chart} 
     \label{DockerFace}
-\end{figure}    
+\end{figure}     
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.75\textwidth]{Figs/Dbinsert_structure.png} 
+    \caption{Database population structure} 
+    \label{Dockerstructure}
+\end{figure} 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.0\textwidth]{Figs/Docker.png} 
+    \caption{Docker Container example} 
+    \label{Dockerexample}
+\end{figure}
 
 \subsubsection{Back end: Databases} 
 \textbf{SQL vs NoSQL}   
@@ -419,29 +445,186 @@ I will use the Eclipse IDE to develop python scripts for the different methods o
 
 %need to talk about testing strategy, how am I going to test it ? 
 \subsection{Starting simple: From selection}  
-\textbf{random\textunderscore selection.py} 
-%add code snippets and talk about what the program does%
-\subsection{Using API request}  
-\textbf{API.py} 
-%add code snippets and talk about what the program does% 
+\textbf{random\textunderscore selection.py}  
+
+This script was designed to be the simplest method of dynamically generating a challenge, by just selecting from a list of question and answer pairs. the code shown in (Figure \ref{Random1}) takes care of that. First off a dictionary is defined of "caesar questions" is defined, with a key and value of the question and answer. A variable of question is then defined as a random choice of that dictionary and is printed. A for loop then grabs all of answers, correct and incorrect, and prints them before reading in the users response to an answer variable. 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.0\textwidth]{Figs/random1.PNG} 
+    \caption{Question selection} 
+    \label{Random1}
+\end{figure}   
+
+A function is then defined that loops through all of the items in "caesar questions" and compares the answer given by the user to the answer pair to all of the questions. If a match is found then the value "correctAnswers" is set to the corresponding question to the answer given, otherwise it remains empty. Finally the "answerChecked" value is set to what has been returned by that function, if this is equal to the question given at the start "correct" is printed if not "incorrect" is printed. The code for checking the answer is shown in (Figure \ref{Random2}).
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.0\textwidth]{Figs/random2.PNG} 
+    \caption{Answer Check} 
+    \label{Random2}
+\end{figure} 
+
+
+\subsection{Using API request}   
+
+I then began to implement the API method of dynamic challenge generation. In practice it would be more useful to do this with an actual website or service designed for this use but for test purposes I just made a script to represent the API being called to for the answers.  
+
+\textbf{API.py}    
+
+First I implemented the API that was to be called for a question. I set up an API that when ran would run on local host using python Flask. I then set a route for the request to be sent and read in a string that will represent the question to be sent back. depending on the value of the question string the API selects a question answer pair and returns it. The code for this is show in (Figure \ref{API}).
+
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.0\textwidth]{Figs/API.PNG} 
+    \caption{API} 
+    \label{API}
+\end{figure}
+
 \textbf{API\textunderscore request.py} 
-%add code snippets and talk about what the program does%
+Next up I implemented a script that would make a call to this API to get a question shown in (Figure \ref{API request}) . First off a set of tags to be sent are defined in "questions" and "question" is set to a random choice of them. a GET request is then sent to the API and the response is read in, each value contained within the json response is also read into "values". the "user question" and "user answer" variables are set to the question contained in the response and the answer contained in the response respectively, the question is then is then asked to the user and their answer compared to the answer. 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.0\textwidth]{Figs/API request.PNG} 
+    \caption{API Request} 
+    \label{API request}
+\end{figure}
+
 \subsection{Web scraping} 
-\subsubsection{Basic web scraping}  
-\textbf{Web\textunderscore scraper\textunderscore final.py} 
-%add code snippets and talk about what the program does%
-\subsubsection{Web scraping with facial recognition}  
-\textbf{Face\textunderscore quiz\textunderscore final.py}
+\subsubsection{Basic web scraping}   
+For my more basic attempt at a web scarper I decided to found a website listing off "30 influential computer scientists" and used it to pick them off and use them to generate questions. a hard coded hash method is shown and then a method of opening an online hash generator and putting the text through that as well. 
+
+\textbf{Web\textunderscore scraper\textunderscore final.py}  
+Foe this web scraping application I used the BeautifulSoup library for the opening of the website and getting names and the selenium library for opening open a browser and putting the text through an online hash generator. First off (Figure \ref{Webscrape1}) I set the source to the website I wanted to use and defined an empty list "people". Then I take the content returned from the web page and sift through it to find what I want. I inspected the web page and found where the headers were that I wanted to pick out and split the content according to that. After I almost had the text down to the strings I wanted I filtered it further and appended the filtered string to a list of people before "popping" some excess items that came after the desired list of people. A random "person" is selected from the list of "people" found from the website and after this a SHA256 hash is generated of the person from the list and displayed. 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.0\textwidth]{Figs/web_scrape1.PNG} 
+    \caption{Web scraping the names} 
+    \label{Webscrape1}
+\end{figure}  
+
+Then with code shown in (Figure \ref{Webscrape2}) I opened up a web page that calculates md5 hashes as a value is typed in. By inspecting the web page I identified the elements I would need such as the text box to enter the value to be hashed, which I set as "hashField" I also identified the area which the calculated hash is displayed and set that as "hashResult". I sent the "person" that was chosen to the text field "hashField" and once the value was entered read the value of what was in the returned hash field to "hashResult". I then printed this value along with the original person.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.0\textwidth]{Figs/web_scrape2.PNG} 
+    \caption{Getting hash through browser} 
+    \label{Webscrape2}
+\end{figure} 
+
+
+
+\subsubsection{Web scraping with facial recognition}   
+
+For this approach I took advantage of Microsoft Azure and used two API services. The Bing search API and the Computer Vision API which uses the Microsoft cognitive engine. I set up both of them on a Microsoft Azure account I created shown in figure (Figure \ref{Azure}) and used them to generate the keys and the links I needed to make my API calls in the script. This script will use the Bing search API to find 100 images of a search term then use the Vision API to recognize a face contained in an image from the search, if it matches a face to the name then it displays to user and asks who they are. 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.0\textwidth]{Figs/Azure.PNG} 
+    \caption{Microsoft Azure Cognitive Services} 
+    \label{Azure}
+\end{figure}
+
+\textbf{Face\textunderscore quiz\textunderscore final.py} 
+
+At the start of the script I declare variables such as a list of random cyber security topics to be chosen from such as "famous computer scientists" or "famous cryptographers" , a search term to be used for the Bing API which is a random choice of those topics and other variables used for the APIs such as subscription keys and headers and params etc. Then I define the findImages function shown in (Figure \ref{findimages}). In this function I set up the API client using the credentials set, then call the API with the search term decided and a count of 100 set as well as a filter of face applied. I then choose a random image and return the image url. 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.0\textwidth]{Figs/findimages.PNG} 
+    \caption{findImages function} 
+    \label{findimages}
+\end{figure}  
+
+Next up I defined the findMatch function shown in figures (Figure \ref{findmatch1}) and (Figure \ref{findmatch2}). First I declare the search term to be used within the function and call the findImages function with that search term, which as discussed, returns an image url that is concatenated in the "body" variable used to send a request to the vision API. The connection to the vision API is set up and a request is sent using that image url as the body. What gets returned is a json response which is broken down into data and is used in the next part to determine whether a match has been found or not. This is done handling certain errors which would mean a match has not been found. I did multiple runs and caught the different errors that were happening if a match wasn't found. For example if the categories or celebrities bracket was empty it meant that there was no match found for the face and when a name value was attempted to be read in and error would happen, with these errors that mean no match had been found the string "no match" is returned at their occurrence. Other exceptions to note was sometimes a match is found but when the image url was trying be accessed the website denied permission and sometimes it would return an image of multiple people which obviously isn't helpful when trying to ask a user who they are as it could be confusing as to which person the question would be referring to, this was solved by accessing the classification parameter and only accepting pictures that were wither of a person or a portrait of a person (dropping images classified as group images). These exceptions were handled and also returned "no match" if they occurred. If none of these exceptions occur then it means a match has been found and a name has been able to be matched to the face so the image url is returned.
+
+\begin{figure}
+\centering
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[width=1\linewidth]{Figs/findmatch1.PNG}
+  \captionof{figure}{findMatch function pt 1}
+  \label{findmatch1}
+\end{minipage}%
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[width=1\linewidth]{Figs/findmatch2.PNG}
+  \captionof{figure}{findMatch function pt 2}
+  \label{findmatch2}
+\end{minipage}
+\end{figure}   
+
+After this the getAnswer function is defined, as shown in (Figure \ref{getAnswer}). Firstly I set up the vision API to be used for the question, then sends an image to it, the vision API responds and the name is taken from the response and stored in a variable "name", the certainty score is also taken and rounded up and stored in a variable. Then the image is opened and the user is asked who it is, if they're answer matches the name determined from the API "correct" is returned if not "incorrect" is returned. 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.0\textwidth]{Figs/getanswer.PNG} 
+    \caption{getAnswer function} 
+    \label{getAnswer}
+\end{figure}  
+
+A variable of correct answers is set to 0. The finally inside a for loop that iterates 5 times, is a while loop that calls the findMatch function setting the variable "text" to the value it returns. The while loop breaks when the value returned is not equal to "no match", so essentially, if the image has not triggered any of the exception and a name has been mapped to the face, when this happens "text" is set to the image url and the while loop is broken. The "body" variable is then defined with that image url and the getAnswer function is called asking the user who is in the image and determining if they are correct. If the function returns correct answer then the correct answer variable is incremented by 1. After this process has been iterated through 5 times a score out of 5 is given and the script terminates. The code talked about in this final section is shown in (Figure \ref{askquestion}).
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.0\textwidth]{Figs/askquestion.PNG} 
+    \caption{Asks user question and iterates} 
+    \label{askquestion}
+\end{figure} 
+
+
+
+
 \subsection{Challenge distribution with Docker} 
-\subsubsection{Python}  
-\textbf{"Docker\textunderscore face\textunderscore pop\textunderscore final.py"} 
-%add code snippets and talk about what the program does%
-\subsubsection{Docker}  
-\textbf{requirements.txt} 
-%add code snippets and talk about what the file does% 
+\subsubsection{Python}   
+This python script was adapted from the face quiz script but with the use of the pymongo library used to insert challenge data into a MongoDb database. 
+
+\textbf{"Docker\textunderscore face\textunderscore pop\textunderscore final.py"}   
+
+The Docker face population script is very similar to the Face Quiz script discussed in the previous section. The only difference is that it doesn't have the getAnswer function as there is no user interaction and is therefore unnecessary to ask the user the questions and iterate through the process 5 times at the end. The other difference is the use of the pymongo library which is used to when the findMatch function determines there has been a match on the face, takes the "question" that would be asked, the image url for the selected image and the "name" of the person in the image (or the answer) and inserts it into the challenge Database. The lines of code used to establish the connection with the MongoDb and set up the variables (the "db" refered to as the host on line 43 is establsihed in the docker compose file and is discussed later) needed for the insert is shown in (Figure \ref{dbinsert1}). The line that was inserted into the findMatch function, after it was determined to be a match is shown in (Figure \ref{dbinsert2}).
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.0\textwidth]{Figs/dbinsert1.PNG} 
+    \caption{Establishing Database connection} 
+    \label{dbinsert1}
+\end{figure}  
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.0\textwidth]{Figs/dbinsert2.PNG} 
+    \caption{Inserting data into the database} 
+    \label{dbinsert2}
+\end{figure} 
+
+\subsubsection{Docker}   
+These are the files used to create Docker images and spin up the containers with my script running inside them so I can populate the database. 
+\textbf{requirements.txt}   
+This file is essentially just a list of all the external libraries used in the script that the machine will be running. The Dockerfile uses this file to pip install everything to contained inside. My requirements.txt is shown in (Figure \ref{req}) 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.0\textwidth]{Figs/requirements.PNG} 
+    \caption{Requirements.txt contents} 
+    \label{req}
+\end{figure} 
+
 \textbf{Dockerfile} 
-%add code snippets and talk about what the file does%  
-\textbf{docker-compose.yml}
+The Dockerfile its the instructions that are needed to build the docker image that will be spinned up in containers.  This included installing the requirements (as discussed in the previous section), copying the python script (docker\textunderscore face\textunderscore pop.py), exposing the port so it can contact the database and finally running. The syntax of this Dockerfile is shown in (Figure \ref{Dockerfile}). 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.0\textwidth]{Figs/Dockerfile.PNG} 
+    \caption{Dockerfile contents} 
+    \label{Dockerfile}
+\end{figure}  
+
+\textbf{docker-compose.yml} 
+
+Docker compose is a tool for defining and running multi container applications which can be used to configure the application. After this has been done all services can be created and started with a single command. I used docker compose to establish the services of "db" (this is the db reffered to in the docker face population script) which is a mongoDB image that I downloaded off of Docker Hub (where you can download from a library of images) and expose the correct ports and set the volume. Then the "client" is defined as using honours-project image (the image created using my requirements.txt and Dockerfile) and link it to the db service so data from the client service can be inserted into the database from the db service. The port is opened and then the environment I will be working with (which database I am going to use etc) is established.
 
 
 \section{Results} 

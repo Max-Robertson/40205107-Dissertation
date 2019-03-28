@@ -584,7 +584,7 @@ This python script was adapted from the face quiz script but with the use of the
 
 \textbf{"Docker\textunderscore face\textunderscore pop\textunderscore final.py"}   
 
-The Docker face population script is very similar to the Face Quiz script discussed in the previous section. The only difference is that it doesn't have the getAnswer function as there is no user interaction and is therefore unnecessary to ask the user the questions and iterate through the process 5 times at the end. The other difference is the use of the pymongo library which is used to when the findMatch function determines there has been a match on the face, takes the "question" that would be asked, the image url for the selected image and the "name" of the person in the image (or the answer) and inserts it into the challenge Database. The lines of code used to establish the connection with the MongoDb and set up the variables (the "db" refered to as the host on line 43 is establsihed in the docker compose file and is discussed later) needed for the insert is shown in (Figure \ref{dbinsert1}). The line that was inserted into the findMatch function, after it was determined to be a match is shown in (Figure \ref{dbinsert2}).
+The Docker face population script is very similar to the Face Quiz script discussed in the previous section. The only difference is that it doesn't have the getAnswer function as there is no user interaction and is therefore unnecessary to ask the user the questions and iterate through the process 5 times at the end. The other difference is the use of the pymongo library which is used to when the findMatch function determines there has been a match on the face, takes the "question" that would be asked, the image url for the selected image and the "name" of the person in the image (or the answer) and inserts it into the challenge Database. The lines of code used to establish the connection with the MongoDb and set up the variables (the "db" refered to as the host on line 43 is established in the docker compose file and is discussed later) needed for the insert is shown in (Figure \ref{dbinsert1}). The line that was inserted into the findMatch function, after it was determined to be a match is shown in (Figure \ref{dbinsert2}).
 
 \begin{figure}[h]
     \centering
@@ -629,9 +629,149 @@ Docker compose is a tool for defining and running multi container applications w
 
 \section{Results} 
 %Results for for tests:out of X runs how many times did the same question show up ? to evaluate the three dynamic challenge generation method. test how many faces show up in search out of 100 ? to evaluate bing API effectiveness for different topics such as computer scientists and cryptographers. Out of 100 faces how many correct ? to evaluate facial recognition. Then evaluate further effectiveness of facial recognition by taking 100 famous computer scientists, cryptographers etc of varying fame level, very famous to kind of famous to not very famous and test success rate. feed it some duds, Bill Gates look a like etc.  
-\subsection{Test 1: how many times does the same question come up in the same run ?} 
-\subsection{Test 2: How many out of 100 images are faces ?} 
-\subsection{Test 3: Out of 100 computer scientists, how many does the face API recognise ?}
+\subsection{Test 1: how many times does the same question come up in the same run ?}  
+\subsubsection{Making the test cases} 
+To perform this test on the different dynamic challenge methods I made altercations to the code of each of the methods so it would return the data I wanted for the purposes of this test. An example of the altercations made is show in (Figure \ref{testcases}) this particular example is taken from the random selection method but the code added to them all was pretty similar, just minor changes depending on how the questions were generated in each of them. These changes consisted of making a list "questions" which each question is added to as the script iterates though the process, "unique\textunderscore question" is another list declared which will be added to every time a question appears and hasn't yet been appended to "questions" (if this is the first time the question appears and is therefore unique). "occurrence \textunderscore count" is added to every time a question is retrieved that is in "questions" and therefore has already been asked. it then iterates through the question asking process 100 times. After this "ocount" is declared which is used to add the total number of occurrences for each unique question, this is used at the end of the script to calculate the average occurrence of a question in 100 runs. Also printed out is how many times each question showed up in that run and how many appearances of the same question there was in that run. Some sample output which I used to illustrate the results is shown in (Figure \ref{exout1}).
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.0\textwidth]{Figs/testcases.PNG} 
+    \caption{Example of changes made to produce test results} 
+    \label{testcases}
+\end{figure} 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.0\textwidth]{Figs/exampleoutput1.PNG} 
+    \caption{Example output of test cases} 
+    \label{exout1}
+\end{figure}  
+
+\subsubsection{The Results} 
+First I have collected the data and made a graph illustrating the average question occurrence in 100 runs. So for each of the unique questions asked how many times on average was it asked across the 100 runs. This is shown in (Figure \ref{r1}). The Random selection and API request was 25 times, web scraping was 3.44 times and web scraping with web scraping with API was 1.51 times.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.0\textwidth]{Figs/results1.PNG} 
+    \caption{Average Question Occurrence} 
+    \label{r1}
+\end{figure} 
+
+Next I took the number of times that a question that had already been asked was asked for each of the methods and plotted it in the graph shown in (Figure \ref{r2}). Random selection and API request methods had 96 occurrences of the same question, the web scraping method had 71 and the web scraping method using APIs had 34.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.0\textwidth]{Figs/results2.PNG} 
+    \caption{Same Question Occurrence} 
+    \label{r2}
+\end{figure}  
+
+Finally I took both of the results previous tests and plotted them on a graph shown in (Figure \ref{r3}) to show the correlation.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.0\textwidth]{Figs/results3.PNG} 
+    \caption{Dynamic Generation Method Results Correlation} 
+    \label{r3}
+\end{figure} 
+
+\subsection{Test 2: How many faces out of 100 images ?}.   
+\subsubsection{Making the test case}
+For this test I made a test script which called the Bing API and asked for 100 images with the face tag with four different search terms - "famous people", "famous actors", "famous computer scientists" and "famous cryptographers". The idea being to test the Bing APIs ability to accurately and consistently produce pictures of faces, using different search terms increasing in specificity to gauge how this affects it. I made a test case script for the evaluation of this simply taking a search term and calling the Bing API to return one hundred images with the face tag. I then used the selenium library to iterate through the content url of each of the 100 images returned and open them in a browser. This allowed me to quickly scan through the images looking for ones that did not contain a face. I did this for each search term changing the variable "search\textunderscore term" accordingly each time. The code used for this is shown in (Figure \ref{bingevc})  
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.0\textwidth]{Figs/bingevcode.PNG} 
+    \caption{Code used for Bing API test case} 
+    \label{bingevc}
+\end{figure} 
+
+\subsubsection{The Results} 
+
+I collected the results and counted each occurrence of "non face" images in the 100 returned by the Bing API for each search term 3 times to ensure accurate results.Both the "famous people" and "famous movie stars" returned 100 out of 100 images containing faces. "famous computer scientists" returned 93 out of 100 images containing faces and "famous cryptographers" returned 37 out of 100 images containing faces this is illustrated in (Figure \ref{bingev}). 
+
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.0\textwidth]{Figs/bingev.PNG} 
+    \caption{Bing API performance} 
+    \label{bingev}
+\end{figure}
+
+
+
+\subsection{Test 3: Out of 100 computer scientists, how many does the face API recognise ?}  
+
+\subsubsection{Making the test case}
+
+To make the test case for the face API evaluation I made alterations to the face quiz application. The first step however to select a list of 100 computer scientists. I gathered 100 names and grouped them by fame level. 10 very famous 15 well known and 75 industry recognised, this list is available in the appendix. After this list was decided I started the altercation by declaring three dictionaries, one for each fame bracket. In this dictionary was three image links for each person in the list, which I sourced myself rather than using the Bing API previously used in the project to ensure the data was consistent, in that they were a similar quality of photo, and accurate, in that the images were of who they were supposed to be. Other changes included adding two functions one similar to the findMatch function used earlier except it returned the certainty score called getScore and a second which just took the digits off of the end of the names of the people (as they were numbered 1-3 so that they were different keys) called mySplit. Then for each of the three dictionaries the following was done: Three variables were declared; “xcorrect” to count how many correct matches, “xscores” to collect the certainty scores of the matched faces and finally “xmatched” which collects the names of all of the people that have been matched. Then a for loop iterates through each of the values in the dictionary trying to find a match to the face, appending to the lists and incriminating the correct counter when a match is made.  After this has been done for all three dictionaries, the results are displayed giving: how many celebrities in that category were matched, the average confidence rating given with matches for that category and the total pictures that were matched.  Some code for this is shown in (Figures \ref{fec1} \ref{fec2} \ref{fec3}).  An example of the output is shown in (Figure \ref{feo}).   
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.0\textwidth]{Figs/faceevalcode1.PNG} 
+    \caption{Setting up of dictionaries} 
+    \label{fec1}
+\end{figure} 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.0\textwidth]{Figs/faceevalcode2.PNG} 
+    \caption{Appending lists and incriminating count} 
+    \label{fec2}
+\end{figure} 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.0\textwidth]{Figs/faceevalcode3.PNG} 
+    \caption{Formatting data to be output} 
+    \label{fec3}
+\end{figure} 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.0\textwidth]{Figs/faceevaloutput.PNG} 
+    \caption{Example output of Face API test case} 
+    \label{feo}
+\end{figure} 
+
+
+\subsubsection{The Results}
+
+For this test fed the Face API 3 different pictures of each of the computer scientists, and did three runs of the script and averaged out the results. The first metric measured was how many people were recognised, the average was 10 out of 10 for the very famous category, 15 out of 15 for the well known category and 58 out of 75 for the industry recognised as illustrated in (Figure \ref{fer1}). This equates to a total of 83 out of 100 computer scientists being recognised. 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.0\textwidth]{Figs/faceevalr1.PNG} 
+    \caption{Face API people recognised} 
+    \label{fer1}
+\end{figure}
+
+For the next part of this test I measured the average picture recognition, meaning the face API might have recognised the computer scientist but how many of the 3 pictures did it recognise ? Essentially how consistent was the Face API across all the 3 fame categories. The averages were 27 out of a possible 30 images recognised for the very famous category, 36 out of a possible 45 images were recognised in the well known category and 120.6 out of a possible 225 images were recognised in the industry recognised category, on average, as illustrated in (Figure \ref{fer2})  
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.0\textwidth]{Figs/faceevalr2.PNG} 
+    \caption{Face API images recognised} 
+    \label{fer2}
+\end{figure}
+
+The third and final metric gathered was the average confidence rate of the matches made, the Face API gives a confidence rating along with the match stating how sure it is that it is that person. The average confidence rating for the very famous category was 99.43 percent, the average confidence rating for the well known category was 98.54 percent and the average confidence rating for the industry recognised category was 98.71 percent, this is illustrated in (Figure \ref{fer3}). 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.0\textwidth]{Figs/faceevalr3.PNG} 
+    \caption{Face API average confidence ratings} 
+    \label{fer3}
+\end{figure} 
+
+I then took all of these results and mapped them on a graph to show a correlation, this is shown in (Figure \ref{fer4}) 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.0\textwidth]{Figs/faceevalr4.PNG} 
+    \caption{Face API performance} 
+    \label{fer4}
+\end{figure}
 
 \section{Evaluation}
 Evaluate my literature and implementation as a whole. 

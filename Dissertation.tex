@@ -289,7 +289,7 @@ The literature has backed up the need for such an application, now I will look a
 \subsection{Requirements analysis} 
 After doing the appropriate research on the topic, and designing the concept for the application I then looked into how best to carry out the research to meet my aims and objectives. Williams defines qualitative research as allowing the user to explore and better understand the phenomenon whereas quantitative research provides and objective measure of reality \cite{williams2007research}. Greenbaum has further discussed these research methods \cite{greenbaum1999moderating} and cited Michiello's table as useful for deciding a primary research method (Figure \ref{Research}). 
 
-\begin{figure}[h]
+\begin{figure}[!hb]
     \centering
     \includegraphics[width=0.75\textwidth]{Figs/research.PNG} 
     \caption{Quantitative vs Qualitative} 
@@ -303,17 +303,29 @@ As the table shows the qualitative method would involve me studying the human in
 \subsection{Application Design}  
 To design the structure of the the application, and how the rooms/levels would be spaced out I used the literature to design an application that would effectively teach cyber security skills and knowledge. 
 
-Firstly I would separate each “lesson” into a room in the game. A series of these rooms or “lessons” would make up a floor. These rooms would cover and teach different topics of cyber security. Instead of having floors cover different topics, which is how I had originally envisioned the application, the literature suggests that blooms taxonomy Is an effective teaching model to apply to cyber security education so each floor could represent a different level on the blooms taxonomy level of understanding. So as the user would progress up the floors the questions would get more complex and require deeper thought. This structure is illustrated in figure *.  This would allow the application to impart skills in an organised manor so that the user would get the most out of it and by the end of the application would be at the end of the blooms taxonomy understanding scale (change so makes more sense)
+Firstly I would separate each “lesson” into a room in the game. A series of these rooms or “lessons” would make up a floor. These rooms would cover and teach different topics of cyber security. Instead of having floors cover different topics, which is how I had originally envisioned the application, the literature suggests that blooms taxonomy Is an effective teaching model to apply to cyber security education so each floor could represent a different level on the blooms taxonomy level of understanding. So as the user would progress up the floors the questions would get more complex and require deeper thought. This structure is illustrated in (Figure \ref{gamearch}).  This would allow the application to impart skills in an organised manor so that the user would get the most out of it and by the end of the application would be at the end of the blooms taxonomy understanding scale (change so makes more sense)
 
-%insert figure here 
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.75\textwidth]{Figs/gamearch.png} 
+    \caption{Proposed Game Architecture} 
+    \label{gamearch}
+\end{figure}
 
-Another aspect to consider in regards to the structure is that putting “lessons” / rooms back to back requiring the user to complete the lesson in order to progress to the next would be a bad idea. This has been shown to stunt the learning of younger audiences and discourage them from continuing if they can’t get the answer. The literature backed this up implying that freedom of choice is an important factor in gamification and that it encourages the user to explore more and be more engaged with the learning process. To get around this the application feature something called “reward tokens” which the user would get every time they complete a room/lesson. Say there are 5 rooms on a floor, the user would need to obtain 3 reward tokens to proceed to the next floor. Therefore giving the user the freedom to choose which 3 lessons to complete. The user would also need to be stopped from just all 5 lessons on the first floor then only 1 in the second to progress, a solution to this would be to double the reward tokens the user gets for completing a lesson as the floors ascend and adjust the reward tokens needed to go up a floor according, this is illustrated in figure *. 
+Another aspect to consider in regards to the structure is that putting “lessons” / rooms back to back requiring the user to complete the lesson in order to progress to the next would be a bad idea. This has been shown to stunt the learning of younger audiences and discourage them from continuing if they can’t get the answer. The literature backed this up implying that freedom of choice is an important factor in gamification and that it encourages the user to explore more and be more engaged with the learning process. To get around this the application feature something called “reward tokens” which the user would get every time they complete a room/lesson. Say there are 5 rooms on a floor, the user would need to obtain 3 reward tokens to proceed to the next floor. Therefore giving the user the freedom to choose which 3 lessons to complete. The user would also need to be stopped from just all 5 lessons on the first floor then only 1 in the second to progress, a solution to this would be to double the reward tokens the user gets for completing a lesson as the floors ascend and adjust the reward tokens needed to go up a floor according. 
 
-%insert figure here 
+
 
 The user would also need to not be discouraged if they for example could only complete two the lessons and is stuck on completing a third on a floor. Having looked over extensive literature on feedback it suggests that just telling the user that they are wrong isn’t very effective but that giving the user some form of hint is beneficial for the user allowing them to not give up if they don’t know the answer but be pointed in the right direction. For this reason a hint system is included in the theoretical design of the application.  If the user unsuccessfully attempts a lesson 3 times then a hint room could unlock. 
 
-The rooms could be designed to incorporate all of these features. In a typical room there would be an opening in every direction. One to the left taking the user to the previous room, one to the right taking the user to the next room, one above which will unlock when the user gets the question right and takes them to the reward room where they can collect the reward tokens and finally one below which would unlock on the third incorrect attempt taking the user to the hint room. This has been visualised in figure *insert figure here*  
+The rooms could be designed to incorporate all of these features. In a typical room there would be an opening in every direction. One to the left taking the user to the previous room, one to the right taking the user to the next room, one above which will unlock when the user gets the question right and takes them to the reward room where they can collect the reward tokens and finally one below which would unlock on the third incorrect attempt taking the user to the hint room. This has been illustrated in (Figure \ref{roomarch})  
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.75\textwidth]{Figs/roomarch.png} 
+    \caption{Proposed Room Architecture} 
+    \label{roomarch}
+\end{figure}
 
 The user would play as “anonybot” a robot working for moral Corp who when doing his job discovered they were unlawfully harvesting and processing the personal data of customers. When he confronted his superior about it he was locked down on the bottom floor of the headquarters. The user must play as anonybot as he ascends the floors so he can escape the HQ and out the company for what they are doing.
 
@@ -500,19 +512,20 @@ ncedegreehub.com/30-most-influential-computer-scientists-alive-today/' this or a
 The more complex use of web scraping would involve using the Bing API and the Microsoft cognitive engine. The script would ask the Bing API for 100 cryptographers, it would then store images of them in a list, returns one at random and sends it to the Microsoft cognitive engine to see if it recognised it. This script would be used to ask the users if they recognise the famous cryptographers and check their answer against the answer returned from the Microsoft cognitive engine. (Figure \ref{FaceQuiz})   
 
 %talk more about how it would work and then make diagram showing how it works%
+\clearpage{}
 
-\begin{figure}[h]
+\begin{figure}[!ht]
     \centering
-    \includegraphics[width=0.75\textwidth]{Figs/Face_Quiz (1).png}
+    \includegraphics[width=0.50\textwidth]{Figs/Face_Quiz (1).png}
     \caption{Face Quiz flow chart} 
     \label{FaceQuiz}
 \end{figure}     
 
 So the script would select a random search term from a list of possible topics. It would then make a call to the Bing API which will return 100 images of the search term. One of these images will be selected at random and be sent to the Face API, the Face API sends the response back in a JSON format. This will loop until a match is found and the Face API matches a name to the face, when a match has been found the image is displayed and the user will be asked who it is. This process is illustrated in (Figure \ref{APIstructure})  
 
-\begin{figure}[h]
+\begin{figure}[!ht]
     \centering
-    \includegraphics[width=0.75\textwidth]{Figs/API_structure.png} 
+    \includegraphics[width=0.50\textwidth]{Figs/API_structure.png} 
     \caption{API structure} 
     \label{APIstructure}
 \end{figure}   
@@ -524,35 +537,36 @@ Docker is a way of systematically automate the faster deployment of applications
  
 
 
-\begin{figure}[h]
+\begin{figure}[!ht]
     \centering
     \includegraphics[width=0.5\textwidth]{Figs/Docker_face_pop.png} 
     \caption{Docker face pop flow chart} 
     \label{DockerFace}
 \end{figure}     
 
-\begin{figure}[h]
+\begin{figure}[!ht]
     \centering
-    \includegraphics[width=0.75\textwidth]{Figs/Dbinsert_structure.png} 
+    \includegraphics[width=0.50\textwidth]{Figs/Dbinsert_structure.png} 
     \caption{Database population structure} 
     \label{Dockerstructure}
 \end{figure} 
 
-\begin{figure}[h]
+\begin{figure}[!ht]
     \centering
-    \includegraphics[width=1.0\textwidth]{Figs/Docker.png} 
+    \includegraphics[width=0.50\textwidth]{Figs/Docker.png} 
     \caption{Docker Container example} 
     \label{Dockerexample}
 \end{figure}
 
 \subsubsection{Back end: Databases} 
 \textbf{SQL vs NoSQL}   
-First off when designing the back end of an application what Database would be most efficient to use for the applications specific needs and potential uses. 
-%reference and and back up use of NOSQL and mongo DB (also discuss that managing the database part of the application when it comes to scaling because a lot of the load comes from complex queries making requests take longer, so techniques such as cacheing complex query results and effective organising of db tables with keys and index can be effective in reducing load. %
-\textbf{User Database}   
-Discuss the user database (Figure \ref{UserDB})
+First off when designing the back end of an application what Database would be most efficient to use for the applications specific needs and potential uses. As this application would ideally be scalable and have data being inserted and taken out at high speeds if it was scaled, it made sense to design choose to use NOSQL over SQL with NOSQL growing in popularity because of its ease of access, speed and scalability \cite{li2013performance}. Database management is very important when considering scaling because a lot of the load comes from complex queries making results take longer, so techniques such as caching complex query results and effective organising of db tables with keys and index can be effective in reducing load.
+ 
 
-\begin{figure}[h]
+\textbf{User Database}   
+The user Database would be built to service pupils to make an account. So they can register at the beginning and have a score associated with it. Each user would have a username which would be stored in plain text and a password that would be stored as a hash, then a salt that would be used on the hash would be stored as well. When the user inserts a password, it would be hashed with this salt and compared against the stored password hash. The user would have a unique id so they can be identified and found in the database, and would have a table that stores account data such as join date, challenges complete and high scores the last two of which would be used to measure performance of users. (Figure \ref{UserDB})
+
+\begin{figure}[!ht]
     \centering
     \includegraphics[width=0.75\textwidth]{Figs/User_Db.PNG} 
     \caption{User Database} 
@@ -560,9 +574,9 @@ Discuss the user database (Figure \ref{UserDB})
 \end{figure}   
 
 \textbf{Challenges Database}   
-Discuss The challenge Database (Figure \ref{ChallengeDB})
+The challenge database would be used to store each question and answer pair with a challenge Id to identify the challenge and a challenge type to group them by. The challenge database will be populated using a chosen method and will be designed later in this chapter, the idea being when the database has been populated the application could take a random challenge from the database.  (Figure \ref{ChallengeDB})
 
-\begin{figure}[h]
+\begin{figure}[!ht]
     \centering
     \includegraphics[width=0.25\textwidth]{Figs/Challenge_Db.PNG} 
     \caption{Challenge Database} 
@@ -570,9 +584,9 @@ Discuss The challenge Database (Figure \ref{ChallengeDB})
 \end{figure} 
 
 \textbf{Results Database}   
-Discuss the results database (Figure \ref{ResultsDB})
+The Results Database would be used to match a user to more statistics such as total score earned, success rate, hints taken and challenges complete. This would be more used for performance analysis by teachers or supervisors to gauge the effectiveness of the application and how well certain students are performing.  (Figure \ref{ResultsDB})
 
-\begin{figure}[h]
+\begin{figure}[!ht]
     \centering
     \includegraphics[width=0.5\textwidth]{Figs/Result_Db.PNG} 
     \caption{Result Database} 

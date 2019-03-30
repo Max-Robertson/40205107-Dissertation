@@ -1,9 +1,63 @@
-%You can delete all the comments after you have finished your document
-%this sets up the defaults for the documents, 12pt font and A4 size. The article type sets this up as such as opposed to letter or memo.
+%% I have improved the format a bit (but you need to add page breaks before chapters). You have written it in the first person, which is not good for this level of dissertation. Can you get rid of that .. and say something like "This dissertation" ...
 
-%for the finer points LaTeX see https://en.wikibooks.org/wiki/LaTeX or http://tex.stackexchange.com/
+%% Search for every occurrence of "I" and change it to something like "The dissertation...". Only in the personal reflection part to you write in the first person.
+%% Make sure you talk about this dissertation being finished.
+%% The abstract reads like an introduction, and needs to be improved.
+%% Chapters should start on a new page.
+%% Your figure numbers needs to be reference (see Figure 2). Add a label and then reference it.
+%% You still have aims and objectives in lit review.
+%% You need to review Introduction, as there are bits that are old ... eg " The aim of this literature review"
+%% The objectives need to be reviewed for the dissertation, and make the bullet points.
+%% Please check you have reference all your diagrams in the text (eg Existing CTF Platforms).
+%% You still have a future work section in Chapter 2.
+%% The Results chapter looks too small, can you merge with Evaluation.
+%% Try not to jump from subsection to subsubsection without a small introduction on the section eg \subsection{Gamification}
+%% Your references disappear after Chapter 2. Can you add a few in for the other chapters?
+%% You need to add Conclusions and Future Work chapter: Summary of conclusions; Achievement of aim and objectives; Future Work; and Personal Reflection (only here can you use "I").
+%% Not that keen on the black background for charts
+% Also, the Introduction chapter is very short and doesn’t grab the reader. Can you put some diagrams in here, and provide a bit more context. Can you add an overview diagram of your whole dissertation in there? The background needs to be broken up a bit too with subsections.
+
+%Introduction
+%- Context.
+%- Background.
+%- Gamification.
+%- Aim and objectives.
+%- Dissertation structure.
+
+
+
+
+
 
 \documentclass[12pt,a4paper]{article}
+\usepackage{multicol}
+\usepackage{csquotes}
+\renewcommand{\thesection}{\arabic{section}}
+\usepackage{float} 
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{tabularx}
+\usepackage{hyperref}
+
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{comment}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\setlength{\headheight}{40pt} 
+\usepackage{float} 
+\usepackage{pdfpages}
+\usepackage{chngcntr}
+\counterwithin{figure}{section}
+\renewcommand\thefigure{\thesection-\arabic{figure}}
+\counterwithin{table}{section}
+\renewcommand\thetable{\thesection-\arabic{table}}
+\counterwithin{equation}{section}
+\renewcommand\theequation{\thesection-\arabic{equation}}
+\usepackage{lastpage}
+\pagenumbering{roman}
 \usepackage{titlesec} %these are how we import packages, one helps set up footers and title layout
 \usepackage{fancyhdr}
 
@@ -25,29 +79,14 @@
 % These packages are all incorporated in the memoir class to one degree or another...
 
 %header and footer settings
-\pagestyle{fancyplain}
-\fancyhf{}
-\renewcommand{\headrulewidth}{0.5pt}
-\renewcommand{\footrulewidth}{0.5pt}
-\setlength{\headheight}{15pt} 
-\setlength{\parskip}{1em}
+
+
 \fancyhead[L]{Max Robertson - 40205107}
 \fancyhead[R]{ SOC10101 Honours Project}
 \fancyfoot[L]{}
 \fancyfoot[C]{\thepage}
 
-%set better section layout
-\makeatletter
-\renewcommand\subsection{\@startsection {subsection}{1}{2mm} % name, level, indent
-                               {3pt plus 2pt minus 1pt} % before skip
-                               {3pt plus 0pt} % after skip
-                               {\normalfont\bfseries}}
-\makeatother
-\makeatletter
-\renewcommand\section{\@startsection {section}{1}{0mm} % name, level, indent
-                               {4pt plus 2pt minus 1pt} % before skip
-                               {4pt plus 0pt} % after skip
-                               {\bfseries}}
+
 \makeatother
 
 
@@ -63,10 +102,14 @@
 \pagebreak
 
 %LaTeX let you define the abstract separately so it wont get sucked into the main document.
-\begin{abstract}
-It has been widely acknowledged that there is a cyber security skills gap, with companies not having the staff they need to meet their security needs. An emphasis should be put on getting more people involved and engaged in cuber security at a younger age. 
 
-This dissertation looks into one method of doing that. First extensive research was done into learning models, gamified learning and education using CTFs. This research was then taken and used to design the concept for an application that would be used to teach cyber security to students that are in high school, the application design was done, some lessons were mocked up and then a technical design was done discussing some of the features that would be involved in making the application work. One of the features discussed is dynamic challenge generation and potential methods, this feature was implemented and then tested and evaluated. The methods implemented were; random selection, API request, web scraping and web scraping with API. After measuring the performance of each and of the APIs used in the final method the results show that web scraping with API has the most potential for use in dynamic challenge generation.
+%% You need a longer abstract. This is very passive, and reads like an introduction
+%% Add Problem, Aim, What you have design, what it was implemented in, what the main results are
+\begin{abstract}
+It has been widely acknowledged that there is a cyber security skills gap, with companies not having the staff they need to meet their security needs. One proposed solution is to get more people involved and engaged in cyber security at a younger age. Research has shown that gamification can be a useful tool to engage younger audiences with aspects such as: freedom of choice, interactive environment, characters and story lines. This dissertations aims to combine elements of gamification with the already existing CTF (or capture the flag) style learning to design the concept for an application that would be aimed at a high school aged audience with the objective of inciting an interest in cyber security, then to prototype technical elements behind the application such as dynamic challenge generation to test and measure the performance of them and evaluate their use for this purpose. Essentially this dissertation is trying to find out: Can gamification be applied to cyber security learning effectively ? and what is the most efficient way to dynamically generate random challenges for this application ? 
+
+Based on a review of the literature, an application was designed with consideration it the application structure,  designing the lessons included in the application and a technical design which discussed how the technology behind the application would work including the dynamic challenge generation, the methods were discussed and prototypes designed. Analysis of the results returned suggested that out of the four methods of dynamic challenge generation (random selection, API request, web scraping and web scraping with API) web scraping with API was the most effective returning performance numbers more than 2x better than any other method. These results indicate that web scraping with the use of APIs is the method best suited for this use with its unique potential to generate random challenges. Further work for this project would include developing the proposed application with further research done into how to scale the application to thousands of users. 
+
 \end{abstract}
 \pagebreak
 
@@ -88,22 +131,24 @@ Insert acknowledgements here
 	I would like to thank my cat, dog and family.
 \newpage
 
+\pagenumbering{arabic}
+\setcounter{page}{1}
 
 \section{Introduction} 
 \subsection{Background}  
-In recent years a shortage of IT skills has been seen, however a more severe shortage has been prevalent with Cyber security skills. With statistics like 45 percent of organizations claiming to be lacking in cyber security skills and (found by research done by the Information Systems Security Association) 70 percent of IT workers believe the lack of cyber security professionals is negatively impacting their existing work \cite{smith2018intelligent}. This has been a widely discussed issue in recent years and there has been a number of proposals for how to fix this 'cyber security skills gap' from developing the companies HR department so that an individual interested in gaining the relevant skills is given the appropriate training by the company to advancing security technology and crime deterrence so that less personnel are needed to close the gap \cite{cobb2016mind}. I however believe that an emphasis should be put on cyber security at an earlier age and high school students should be introduced to cyber security elements. If students are introduced to these elements at an there is more of a chance of capturing an interest in the subject and for  students to pursue a career in cyber security. Further more I believe if research is done in how to cater this material to the students and how to peak their interests the effect could be greater. This could be done through the use of gamification which has been proposed as a solution for engaging people in individually and socially sustainable behaviours, such as education \cite{su2015mobile}. CTF (Capture The Flag) competitions are held in cyber security communities which are essentially a gamfied environment where teams compete by completing different cyber security related challenges to ascertain 'flags' which will score them points. This project proposed to take the structure of a CTF competition and gamify it further for use in the education of cyber security.  
+In recent years a shortage of IT skills has been seen, however a more severe shortage has been prevalent with Cyber security skills. With statistics like 45 percent of organizations claiming to be lacking in cyber security skills and (found by research done by the Information Systems Security Association) 70 percent of IT workers believe the lack of cyber security professionals is negatively impacting their existing work \cite{smith2018intelligent}. This has been a widely discussed issue in recent years and there has been a number of proposals for how to fix this 'cyber security skills gap' from developing the companies HR department so that an individual interested in gaining the relevant skills is given the appropriate training by the company to advancing security technology and crime deterrence so that less personnel are needed to close the gap \cite{cobb2016mind}. One proposed solution is that an emphasis should be put on cyber security at an earlier age and high school students should be introduced to cyber security elements. If students are introduced to these elements at an there is more of a chance of capturing an interest in the subject and for  students to pursue a career in cyber security. Further more if research is done in how to cater this material to the students and how to peak their interests the effect could be greater. This could be done through the use of gamification which has been proposed as a solution for engaging people in individually and socially sustainable behaviours, such as education \cite{su2015mobile}. CTF (Capture The Flag) competitions are held in cyber security communities which are essentially a gamified environment where teams compete by completing different cyber security related challenges to ascertain 'flags' which will score them points. This project proposed to take the structure of a CTF competition and gamify it further for use in the education of cyber security.  
 
 Recent years has seen \emph{gamification} rise in popularity \cite{deterding2011game}. The commercial success of video games, with record breaking console sales and a huge presence on online multiplayer has called for research into the effects and relevance in the digital age, this effect made by the digital game medium has encouraged it's use in pursuits beyond entertainment \cite{seaborn2015gamification}. Capture the flag competitions are one way in which gamification has been adopted in computer science and have been widely used for raising awareness in Cyber security among university students and the like \cite{ford2017capture} with over 70 competitions being organized annually \cite{katsantonis2017conceptual1}. Some high profile CTF competitions include \emph{Picto CTF} \cite{pictoctf} an annual competition which 50,000 students have competed in to date \cite{pictoctfstat}, \emph{CSAW (Cyber Security Awareness Worldwide)} which boasts being the largest student run cyber security event in the world \cite{csaw} and Defcon \cite{defcon}, who proclaim to be "the biggest underground internet security gathering on the planet" also run a weekend long CTF contest \cite{cowan2003defcon}.  
 
 
 The activities in these competitions vary. One example of interest is from the previously discussed Defcon competition which contained an activity which tested a security administrators ability to secure a complex system with unknown but required functionality, which has been likened to a real life scenario faced by a consultant. The difficulty of this activity comes from successfully defending the system while simultaneously providing the required services to the score server, resulting in an action packed contest \cite{cowan2003defcon}. In a competition developed by universities in Texas the teams were told they had gained a contract to run a company network, the team were free to reorganize the equipment in any way they wanted but any service outages would be counted against them. The teams were scored on: their ability to keep  required services up and running, reaction to business generated injects (e.g addition or deletion of people) and ability to keep hostiles at bay. This activity took place over days so poor performance early, would be penalized later \cite{conklin2006cyber}. As well as being used for competitions CTFs are used for educational purposes \cite{noor2018usability}, this paper will investigate how to do this effectively.
 \subsection{Aims and Objectives} 
-As the area of 'the gamification of cyber security education' has been establishes as the area of research I shall establish some aims and objectives that I hope to achieve throughout the process of this project:  
+As the area of 'the gamification of cyber security education' has been establishes as the area of research some aims and objectives will be established that it is hoped will be achieved throughout the process of this project:  
 
 
-My first aim is to gain an understanding of different learning techniques that can I could apply when implementing my project as well as have an in depth understanding of the concepts that I propose to utilize during the implementation. I will achieve this by doing extensive research and produce a literature review, breaking down different learning techniques. I will also further look into CTFs and the associated available technologies to give a better understanding of how they work and how I could utilize aspects of them in implementation as well as a look into gamification, how to make use of the positives and avoid any pitfalls.  
+My first aim is to gain an understanding of different learning techniques that could apply when implementing the project as well as have an in depth understanding of the concepts that have been proposed to utilise during the implementation. This will be achieved by doing extensive research and produce a literature review, breaking down different learning techniques. Further research will be done into CTFs and the associated available technologies to give a better understanding of how they work and how aspects of them could be utilised for implementation as well as a look into gamification, how to make use of the positives and avoid any pitfalls.  
 
-The second aim of this Honours project will be take the research done in the literature review and understand the potential use of the aspects discuss, prototype aspects of a designed application measuring the effectiveness of different methods of dynamic challenge generation and how they could be utilized to aid in the creation of this proposed application. To achieve this aim I will complete the following objectives.  
+The second aim of this Honours project will be take the research done in the literature review and understand the potential use of the aspects discuss, prototype aspects of a designed application measuring the effectiveness of different methods of dynamic challenge generation and how they could be utilised to aid in the creation of this proposed application. To achieve this aim the following objectives will be complete:  
 
 \begin{itemize}\itemsep0pt
 	\item Design the application with reference to research.
@@ -115,22 +160,22 @@ The second aim of this Honours project will be take the research done in the lit
 
 
 \subsection{Dissertation Structure} 
-Here I will outline the structure of my dissertation and go through what is included in each chapter. 
+Here the structure of the dissertation will be outlined and what is included in each chapter will be discussed. 
 
-Chapter 2 is the research that has been done to back up the project. A closer look is taken into the cyber security skills gap and the potential solution for this problem is discussed. Then a look into different Learning Models that could be effective are researched which was important when proposing an learning application. After this I look into the use of CTFs and how their structure can and has been utilized for the teaching of cyber security. Finally I look into gamification discussing aspects such as game design, feedback and user interface as well as its use in computer science.  
+Chapter 2 is the research that has been done to back up the project. A closer look is taken into the cyber security skills gap and the potential solution for this problem is discussed. Then a look into different Learning Models that could be effective are researched which was important when proposing an learning application. After this, the use of CTFs and how their structure can and has been utilised for the teaching of cyber security will be looked into. Finally gamification is covered discussing aspects such as game design, feedback and user interface as well as its use in computer science.  
 
-Chapter 3 is where I Design how this application would be structured as well as look, taking what I learned from the literature into account and applying it to designing the elements of the application and what the user experience would be like. I then Design the possible "rooms" or lessons that would be offered in the first section of this application, I then talk about the technical design and mock up how the elements I decided to prototype would be made.  
+Chapter 3 is Design; how this application would be structured as well as look, taking what was learned from the literature into account and applying it to designing the elements of the application and what the user experience would be like. The possible "rooms" or lessons that would be offered in the first section of this application are then designed, this is followed by the technical design and a mock up of how the elements that were decided to be prototyped would be made.  
 
-Chapter 4 I cover my implementation of the code that was required to test and evaluate the different methods of dynamic challenge generation. I go through each of the scripts I made with code snippets, discussing what has been done and why I did it and the technology used to make the scripts. After discussing the scripts I talk about my implementation of Docker and how it can be used to populate a database.  
+Chapter 4 is the implementation of the code that was required to test and evaluate the different methods of dynamic challenge generation. This chapter goes through each of the scripts that were made with code snippets, discussing what has been done and why they were done and the technology used to make the scripts. After discussing the scripts the implementation of Docker and how it can be used to populate a database is discussed.  
 
-In chapter 5 I developed test case scripts to measure the performance of certain aspects of the scripts I made. This chapter displays the results in graphs which were made from the data returned by the test case scripts. Code snippets of the test case code and example output in some cases are also provided. 
+In chapter 5 talks about the developed test case scripts to measure the performance of certain aspects of the scripts that were made. This chapter displays the results in graphs which were made from the data returned by the test case scripts. Code snippets of the test case code and example output in some cases are also provided. 
 
-In Chapter 6 I take a look at the results found in the previous chapter and I evaluate the performance of the aspects implemented. I discuss what was expected and any correlations found and what that may suggest. I do this for each of the tests ran and then summarise and evaluate the implemented aspects as a whole. 
+In Chapter 6  a look is taken at the results found in the previous chapter and the performance of the aspects implemented is evaluated . Furtehr discussion is done about what was expected and any correlations found and what that may suggest. This is done for each of the tests ran and then summarise and evaluate the implemented aspects as a whole. 
 
-Finally, in chapter 7, I conclude the project discussing my aims and objectives and how successfully this project has met them. After this I self evaluate discussing how well I performed through out the project, what things I did well and what things I could have done better. Finally I discuss the future work that could be involved with this project.
+Finally, in chapter 7, the project is concluded by discussing my aims and objectives and how successfully this project has met them. After this self evaluate is done. Finally a discussion of possible future work that could be involved with this project is done, considering aspects of the project that could be realised with further work.
 
 
-
+\newpage
 
 \section{Literature Review}
 \subsection{Introduction}
@@ -144,27 +189,31 @@ The demand for Cyber Security has been rising in recent years, as a result those
 The aim of this literature review is to determine effective measures of teaching cyber security skills using gamification, additionally which learning models to consider when teaching these skills and draw conclusions using that information to form the basis of CTF learning environment project. 
 
 
-The first objective will be to investigate learning models such as Blooms taxonomy and Psychomotor learning, their pros and cons in a learning environment. The next objective will be to determine the effects positive and negative of gamification on teaching skills, generally and more specifically in cyber security, to students in the classroom. Then I will look at existing CTF platforms and determine useful aspects of each, which would be favourable for teaching cyber security. Lastly I will discuss what has been discovered by the previously discussed objectives and draw conclusions from them.
+The first objective will be to investigate learning models such as Blooms taxonomy and Psychomotor learning, their pros and cons in a learning environment. The next objective will be to determine the effects positive and negative of gamification on teaching skills, generally and more specifically in cyber security, to students in the classroom. Then existing CTF platforms and determine useful aspects of each, which would be favourable for teaching cyber security will be covered. Lastly what has been discovered by the previously discussed objectives will be discussed and conclusions will be drawn from them.
 
 \subsection{Learning Models}
 \subsubsection{Bloom's Taxonomy} 
 Blooms Taxonomy is a hierarchy of cognitive learning levels and is presented to help students have a greater level of understanding and abstraction in their course and their entire educational experience \cite{bloom1965bloom}. Originally Blooms taxonomy was defined by the following stages: \emph{Knowledge, Comprehension, Application, Analysis, Synthesis and Evaluation} \cite{anderson1994bloom}. This original model was used to determine the effectiveness of learning objectives and often identified that there was a heavy emphasis on objectives requiring only recall or recognition when actually the objectives falling into the categories from comprehension to synthesis are regarded as the \emph{most} important \cite{krathwohl2002revision}.  
 
 
-A newer model was developed changing some of the stages order and some of names to their verb form, the revised stages are: \emph{Remembering, Understanding, Applying, Analyzing, Evaluating and Creating} \cite{forehand2010bloom}. Furthermore, the new model takes into account multiple domains, a cognitive domain and a knowledge domain (as shown in figure 2),  This table can be used to effectively determine the use of these domains in a learning objectives and identify possible areas of neglection \cite{krathwohl2002revision2}. 
+A newer model was developed changing some of the stages order and some of names to their verb form, the revised stages are: \emph{Remembering, Understanding, Applying, Analyzing, Evaluating and Creating} \cite{forehand2010bloom}. Furthermore, the new model takes into account multiple domains, a cognitive domain and a knowledge domain (see Figure \ref{fig:fig2}),  This table can be used to effectively determine the use of these domains in a learning objectives and identify possible areas of neglection \cite{krathwohl2002revision2}. 
 
 \begin{figure*}[h]
     \centering
     \includegraphics[width=0.9\textwidth]{Figs/blooms.PNG} 
     \caption{Taxonomy Table (Krathwohl 2002)}
+    \label{fig:fig2}
 \end{figure*}  
+
 \emph{"Is blooms taxonomy appropriate to computer science ?"}, this question has been discussed \cite{johnson2006bloom} and it has been observed that it can be difficult to decide upon which cognitive level a certain task lies at, as educators with a more intimate level of the course material are likely to associate a different level with a task than an educator who does not. This has been discussed further by (Thompson et al. 2008)\cite{thompson2008bloom} who addressed this issue and noted that there hadn't been an agreed upon interpretation of blooms taxonomy for computer science so attempted to do so for a programming module, it was concluded that once staff involved in the teaching of the course an agreement could be made on which cognitive levels tasks belonged to which suggested that the revised blooms taxonomy could be effectively used in the programming domain with regards to exam questioning. Trying to cover all the cognitive levels in an examination however could end up making the exam longer than needed so it has been advised \cite{scott2003bloom} to combine multiple cognitive levels in one question to solve this problem. 
 
-Niekerk and Solms discuss applying blooms taxonomy to information security education and how it can improve security educational programs. They raise potential issues such as that a program that has not been tailored to the specific needs of an individual, or the needs of a specific target audience will be ineffective. They also give an example of how to apply blooms to information security saying that teaching a student what a password is would lie on the \emph{remember} and \emph{understand} level of blooms taxonomy, however, the necessary information to understand  why their own password is needed in order to safeguard might be as high as the \emph{evaluate} level of the taxonomy \cite{van2009using}. An example of blooms taxonomy applied to information security is shown below in figure 3.  
+Niekerk and Solms discuss applying blooms taxonomy to information security education and how it can improve security educational programs. They raise potential issues such as that a program that has not been tailored to the specific needs of an individual, or the needs of a specific target audience will be ineffective. They also give an example of how to apply blooms to information security saying that teaching a student what a password is would lie on the \emph{remember} and \emph{understand} level of blooms taxonomy, however, the necessary information to understand  why their own password is needed in order to safeguard might be as high as the \emph{evaluate} level of the taxonomy \cite{van2009using}. An example of blooms taxonomy applied to information security is shown (see Figure \ref{fig:fig3}).  
+
 \begin{figure*}[h]
     \centering
     \includegraphics[width=0.9\textwidth]{Figs/blooms2.PNG} 
     \caption{Blooms applied to information security (Niekerk and Solms 2009)}
+    \label{fig:fig3}
 \end{figure*} 
 
 Buchanan et al. have done research into blending bloom's taxonomy and serious game design suggesting that there may be a way to connect game interaction and the learning objective levels of blooms taxonomy concluding serious games are a good medium for this as they allow novice learner to focus on the general concepts and skills of the subject matter, and not become distracted by a tools interface \cite{buchanan2011blending2}. 
@@ -191,26 +240,29 @@ Cyber security skills will have to be used in different challenge scenarios to f
 \subsubsection{Existing CTF platforms}  
 A variety of platforms have been developed to host CTF tournaments, each have their own advantages and are useful for different situations.  
 \textbf{CTFd} 
-The CTFd framework focuses on ease of use and customizability.  Written predominantly in python. It handles Static and regex-based flags. Users can access hints if they are stuck on challenge. File uploads to the server on Amazon S3. Includes features such as Dynamic scoring, Score graphs, team management and hiding. CTFd also allows users to customize everything using plug in and theme interface \cite{ctfd}.   
+The CTFd framework focuses on ease of use and customisability.  Written predominantly in python. It handles Static and regex-based flags. Users can access hints if they are stuck on challenge. File uploads to the server on Amazon S3. Includes features such as Dynamic scoring, Score graphs, team management and hiding. CTFd also allows users to customise everything using plug in and theme interface \cite{ctfd}.   
 
-When running a CTF using this platform the admin can observe the performance of the participants easily using a statistics page, which tracks things such as the ratio of correct submissions to wrong submissions. The admin can also check the teams, scoreboard and customize the configuration. This flexibility of content creation is CTFd's strength and makes it ideal for changing for intended purposes such as training \cite{noor2018usability} 
-/
+When running a CTF using this platform the admin can observe the performance of the participants easily using a statistics page, which tracks things such as the ratio of correct submissions to wrong submissions. The admin can also check the teams, scoreboard and customise the configuration. This flexibility of content creation is CTFd's strength and makes it ideal for changing for intended purposes such as training \cite{noor2018usability}. The user interface for ctfd is relatively simple (see Figure \ref{fig:fig4}).
+
+%% Where is the reference for this
 \begin{figure*}[h]
     \centering
     \includegraphics[width=0.6\textwidth]{Figs/ctfd.png} 
     \caption{CTFd User Interface}
+    \label{fig:fig4}
 \end{figure*} 
 
-As mentioned the CTFd framework is highly customizable allowing the core code to be altered for specific purposes as plug ins, some that have already been developed include: different question formats such as multiple questions, different scoreboard formats and ctf event countdown timers \cite{ctfdplugin}. After downloading the platform you can set up a CTF event, logging in to an admin account on the CTF allows you to easily create your own challenge, setting the category of the challenge the type of flag (e.g static or regex) and what the flag is. The customization allows the creation of new routes, modifying existing routes, Add tables to the database, registering asset types and challenge type creation \cite{ctfdplugin2}.     
+As mentioned the CTFd framework is highly customisable allowing the core code to be altered for specific purposes as plug ins, some that have already been developed include: different question formats such as multiple questions, different scoreboard formats and ctf event countdown timers \cite{ctfdplugin}. After downloading the platform you can set up a CTF event, logging in to an admin account on the CTF allows you to easily create your own challenge, setting the category of the challenge the type of flag (e.g static or regex) and what the flag is. The customisation allows the creation of new routes, modifying existing routes, Add tables to the database, registering asset types and challenge type creation \cite{ctfdplugin2}.     
 
 
 \textbf{Facebook CTF} 
-Used for hosting jeopardy and \emph{king of the hill} style CTF competitions. Written in Hack. Can be two players up to several hundred. It has a fancy AI showing a world map, each of the challenges appear in different countries and users will beat the challenges to claim that country. Can be installed in either development mode or production mode. Capturing the countries give you points, you accumulate points which can be compared against other teams/players using a dynamic leader board (Figure 5 \cite{fbctf}).  
+Used for hosting jeopardy and \emph{king of the hill} style CTF competitions. Written in Hack. Can be two players up to several hundred. It has a fancy AI showing a world map, each of the challenges appear in different countries and users will beat the challenges to claim that country. Can be installed in either development mode or production mode. Capturing the countries give you points, you accumulate points which can be compared against other teams/players using a dynamic leader board (see Figure \ref{fig:fig5}) \cite{fbctf}.  
 
 \begin{figure*}[h]
     \centering
     \includegraphics[width=0.6\textwidth]{Figs/fbctf.jpg} 
     \caption{Facebook CTF visualization}
+    \label{fig:fig5}
 \end{figure*}   
 
 Facebook does not emphasize on customizing the platform as much as ctfd. The platform allows the adding of challenges as an admin by giving a title, question, answer, points, hint, hint penalty and what country on the map the challenge will be placed on but not as much is given with the install to actually change the platform for personal use. Also accessible as an admin is the ability is configuration, controls, announcement and team management where teams can be monitored and given admin privileges. The platform does allow for new pages to be inserted by editing the IndexController file that is included with the initial install. 
@@ -224,15 +276,20 @@ With CTF's gaining in popularity there has been an abundance of applications dev
 
 
 \subsubsection{CTFs in the classroom}
-CTFs (class capture the flags) have been researched \cite{mirkovic2014class}, small scoped competitions engaging students in attack and defence scenarios as teams reporting back that this spiked students interest in learning and allowed them to master skills discussed in lectures and introduced in practicals (suggested differences between a competition CTF and a class CTF can be seen in figure 6).  
+CTFs (class capture the flags) have been researched \cite{mirkovic2014class}, small scoped competitions engaging students in attack and defence scenarios as teams reporting back that this spiked students interest in learning and allowed them to master skills discussed in lectures and introduced in practicals (for suggested differences between a competition CTF and a class CTF (see Figure \ref{fig:fig6})   
+
 \begin{figure*}[h]
     \centering
     \includegraphics[width=0.9\textwidth]{Figs/cctfs.PNG} 
     \caption{Comparison of CTFs and CCTFs (Mirkovic, Peterson 2014)}
-\end{figure*}   
+    \label{fig:fig6}
+\end{figure*}    
+
 Capture the flag platforms are being used in the classroom for networking \cite{prabawa2017using}, presenting labs in a CTF game with the materials being transferred into challenges, reporting back an increase in the students comprehension skills as well as being eager and motivated to learn. CTFs have even been used by the united states air force academy for teaching cyber security \cite{carlisle2015using} citing students pushing their own boundary for knowledge as an advantage and state they are looking how to further incorporate CTF into their curriculum. CTFs are a thorough security exercise that integrates well with cyber security educational targets and so can be used effectively to train cyber security professionals \cite{eagle2004capture1} as well as an attractive and effective way to raise awareness and interest in security while simultaneously educating for prevention and addressing the private and government sector needs \cite{albert2010high3}. The competitive element of these events drives and compels all participants to more enthusiastically commit and engage in active experimentation and learning \cite{albert2010high5}, this freedom is a key part which motivates students to experiment and forces those students to hone skills that are not normally covered in a standard information security curriculum \cite{eagle2004capture2}. Albert et al performed a study and gathered results by doing a survey, the majority of comments indicated that the students enjoyed themselves and learned more about a field they were interested in and was successful in educating high school students about higher education opportunities \cite{albert2010high6}. 
 
-\subsection{Gamification} . 
+\subsection{Gamification}
+Try to introduce section here.
+
 \subsubsection{Gamified elements vs. Gamified experience}
 Gamification has been defined as "the use of game design elements in non-game contexts" \cite{deterding2011gamification}. It is important to know when considering the gamification of learning there is a difference between gamifying a whole experience and adding gamified elements. Gamifying an experience involves an actual game, there is a start state, gameplay and an end state. Users can tell they have reached the end when there is a "win state", a long the way the game will have taught some knowledge and skills to the user. Gamifying elements, however, only uses elements of a game. Users will not play through a game start to finish, rather, participate in game elements such as completing challenges or earning points or badges for completing those tasks \cite{kapp2012}.  
 
@@ -270,24 +327,24 @@ It is important when looking into developing learning material using gamificatio
 HCI (Human Computer Interaction) focuses on how best to design interactive systems so that they are both productive and as pleasurable to use by the intended user as possible \cite{smith2006human}, getting the user interface right can make a fundamental difference \cite{ritter2014foundations1}. Traditional user interfaces deliver information with a minimum of subtlety and, due to users limited attention capacity, must keep throughput low \cite{bulling2016pervasive}.  One important aspect that should be considered when designing a user interface is consistency, for example can all the pop down menus be easily identified by a shared marker such as a downwards arrow. A menu without such notification would be an inconstancy and could initially confuse the user \cite{nielsen2014coordinating}. A dangerous assumption that is made when designing user interfaces is that 'Everyone is like me', this should be avoided and it should be taken into consideration the gap in understanding between the designer and the targeted user \cite{ritter2014foundations2}. However when designing a user interface with novice users in mind a balance needs to be struck as to support expert users who are often trapped in "beginner mode" \cite{cockburn2015supporting}. Many in the computer field cite different ways to design better user interfaces such as "Know the user", "designers are users too, just give them the space and time to design it" and "make the components good enough and the system will take care of itself" \cite{card2017psychology}.
 
    
-
+%% This should not be here .//..
 \subsection{Future Work} 
 In the future I am going to design an application that will take full advantage of the researched areas maintaining the goal of engaging a younger audience with the possibility of developing an interest in cyber security. I hope to make a serious game application with elements of a CTF competition used in the design process with blooms taxonomy being considered in the design process also. By doing this I will combine the elements of serious games which research has shown can engage a younger audience using elements such as story and player control with the structure of CTFs which competitive nature compels students and freedom of choice encourages students to experiment and learn various areas. As it is designed to be an educational tool the research done on Blooms taxonomy will be applied ensuring the appropriate domains are covered and that the learning element of the application is done at an engaging level and is not overwhelming or boring. Combining these elements into one cohesive application will emphasise gamification, taking advantage of the many positives that research has shown it can have whilst also taking into account the potential pitfalls that can be involved when using gamification as to avoid them. Ultimately the goal of this work will be to combine the research done here with knowledge of available alternatives to produce a tool which is effective in handling complex subjects in a way that younger students can understand and apply the skills after use an additional effect hopefully being, which the research shows is often the case with CTF style learning, an increase in interest for the subject of cyber security itself.
 
 \subsection{Conclusions}
-To conclude, the Cyber Security industry is crying out for professionals who are skilled and experts in their field. Deploying CTF styled learning in a gamified fashion in the classroom could help combat this shortage, with an almost unanimous agreement across many research papers that  the CTF style of learning helps users get to grips with cyber security skills and potentially spark an interest in cyber security. By combining the the two it is possible to take advantage of the benefits of both CTF learning and the discussed benefits of a gamified experience. While the impact of this style of learning should not be underestimated it should also be taken into account that there are potential drawbacks which should be taken into account during the development of the platform. Similarly caution should be taken when developing the learning material, making sure the appropriate levels of the cognitive domain are covered while keeping the questions at an achievable level. While it may not have been clear in the past how to apply certain taxonomies to computer science or how to efficiently use gamified learning in a classroom environment, their use is becoming more and more common and with the popularization of CTFs as a teaching tool and the benefits of gamified learning being widely discussed solutions are being discovered so that this method of learning can succeed and benefit the cyber security industry.
-\subsection{summary}
+To conclude, the Cyber Security industry is crying out for professionals who are skilled and experts in their field. Deploying CTF styled learning in a gamified fashion in the classroom could help combat this shortage, with an almost unanimous agreement across many research papers that  the CTF style of learning helps users get to grips with cyber security skills and potentially spark an interest in cyber security. By combining the the two it is possible to take advantage of the benefits of both CTF learning and the discussed benefits of a gamified experience. While the impact of this style of learning should not be underestimated it should also be taken into account that there are potential drawbacks which should be taken into account during the development of the platform. Similarly caution should be taken when developing the learning material, making sure the appropriate levels of the cognitive domain are covered while keeping the questions at an achievable level. While it may not have been clear in the past how to apply certain taxonomies to computer science or how to efficiently use gamified learning in a classroom environment, their use is becoming more and more common and with the popularisation of CTFs as a teaching tool and the benefits of gamified learning being widely discussed solutions are being discovered so that this method of learning can succeed and benefit the cyber security industry.
+%\subsection{summary}
 % summarise my literature review here 
 
  
 % possibly talk about and explain randomness, random number generator ? how am i generating randomness ? 
-
+\newpage
 \section{Design}
 \subsection{Introduction}  
-The literature has backed up the need for such an application, now I will look at how the areas covered can be implemented in the design of the application and go on to discuss how the application will be designed in its structure taking account what has been discovered in the literature. I will then  discuss the design of some lessons that application could contain and then go into detail about the technical design of the application. I will take into account methods of research and consider what the best approach to take is to meet the aims of the project. 
+The literature has backed up the need for such an application, now how the areas covered can be implemented in the design of the application will be looked into and will go on to discuss how the application will be designed in regard to its structure taking account what has been discovered in the literature. The design of some of the lessons that application could contain will be done before then going into detail about the technical design of the application. This will take into account methods of research and consider what the best approach to take is to meet the aims of the project. 
 
 \subsection{Requirements analysis} 
-After doing the appropriate research on the topic, and designing the concept for the application I then looked into how best to carry out the research to meet my aims and objectives. Williams defines qualitative research as allowing the user to explore and better understand the phenomenon whereas quantitative research provides and objective measure of reality \cite{williams2007research}. Greenbaum has further discussed these research methods \cite{greenbaum1999moderating} and cited Michiello's table as useful for deciding a primary research method (Figure \ref{Research}). 
+After doing the appropriate research on the topic, and designing the concept for the application how best to carry out the research to meet my aims and objectives was then considered. Williams defines qualitative research as allowing the user to explore and better understand the phenomenon whereas quantitative research provides and objective measure of reality \cite{williams2007research}. Greenbaum has further discussed these research methods \cite{greenbaum1999moderating} and cited Michiello's table as useful for deciding a primary research method (see Figure \ref{Research}). 
 
 \begin{figure}[!hb]
     \centering
@@ -297,13 +354,13 @@ After doing the appropriate research on the topic, and designing the concept for
 \end{figure}  
 
 As the table shows the qualitative method would involve me studying the human interaction side of things, e.g making the application and through the form of questionnaires, getting data on how the application was useful. A quantitative method involves measuring things, numerical comparisons, discovering facts etc This would involve prototyping aspects of the application and measuring their use. Both methods would be valid for meeting the aims and objectives of the project if designed right. However the qualitative method in this case would involve testing the application on the target audience (high school students 
-) and would therefore throw ethics into consideration. Another issue with the qualitative method is if I was planning to do a questionnaire to gather data on the effectiveness of the application, that questionnaire should really have  started to be designed earlier in the project life. The quantitative method however, could be useful in after theoretically designing the app prototyping components of it and gauging how useful it would be in achieving the desired effect by testing and measuring the technical performance of the prototyped components. This would help give insight into the proposed use of the technology and if it should be considered for this use. For this reason I have decided to choose the quantitative method of research and do a technical evaluation on prototyped elements of the proposed application.
+) and would therefore throw ethics into consideration. Another issue with the qualitative method is if this dissertation was planning to do a questionnaire to gather data on the effectiveness of the application, that questionnaire should really have  started to be designed earlier in the project life. The quantitative method however, could be useful in after theoretically designing the app prototyping components of it and gauging how useful it would be in achieving the desired effect by testing and measuring the technical performance of the prototyped components. This would help give insight into the proposed use of the technology and if it should be considered for this use. For this reason it was decided to choose the quantitative method of research and do a technical evaluation on prototyped elements of the proposed application.
 
 
 \subsection{Application Design}  
-To design the structure of the the application, and how the rooms/levels would be spaced out I used the literature to design an application that would effectively teach cyber security skills and knowledge. 
+To design the structure of the the application, and how the rooms/levels would be spaced out the literature was reffered to, to design an application that would effectively teach cyber security skills and knowledge. 
 
-Firstly I would separate each “lesson” into a room in the game. A series of these rooms or “lessons” would make up a floor. These rooms would cover and teach different topics of cyber security. Instead of having floors cover different topics, which is how I had originally envisioned the application, the literature suggests that blooms taxonomy Is an effective teaching model to apply to cyber security education so each floor could represent a different level on the blooms taxonomy level of understanding. So as the user would progress up the floors the questions would get more complex and require deeper thought. This structure is illustrated in (Figure \ref{gamearch}).  This would allow the application to impart skills in an organised manor so that the user would get the most out of it and by the end of the application would be at the end of the blooms taxonomy understanding scale (change so makes more sense)
+Firstly each “lesson” would be separated into a room in the game. A series of these rooms or “lessons” would make up a floor. These rooms would cover and teach different topics of cyber security. Instead of having floors cover different topics, which is how the application had originally been envisioned, the literature suggests that blooms taxonomy Is an effective teaching model to apply to cyber security education so each floor could represent a different level on the blooms taxonomy level of understanding. So as the user would progress up the floors the questions would get more complex and require deeper thought. For a visual representation of this structure (see Figure \ref{gamearch}).  This would allow the application to impart skills in an organised manor so that the user would get the most out of it and by the end of the application would be at the end of the blooms taxonomy understanding scale (change so makes more sense)
 
 \begin{figure}[h]
     \centering
@@ -318,7 +375,7 @@ Another aspect to consider in regards to the structure is that putting “lesson
 
 The user would also need to not be discouraged if they for example could only complete two the lessons and is stuck on completing a third on a floor. Having looked over extensive literature on feedback it suggests that just telling the user that they are wrong isn’t very effective but that giving the user some form of hint is beneficial for the user allowing them to not give up if they don’t know the answer but be pointed in the right direction. For this reason a hint system is included in the theoretical design of the application.  If the user unsuccessfully attempts a lesson 3 times then a hint room could unlock. 
 
-The rooms could be designed to incorporate all of these features. In a typical room there would be an opening in every direction. One to the left taking the user to the previous room, one to the right taking the user to the next room, one above which will unlock when the user gets the question right and takes them to the reward room where they can collect the reward tokens and finally one below which would unlock on the third incorrect attempt taking the user to the hint room. This has been illustrated in (Figure \ref{roomarch})  
+The rooms could be designed to incorporate all of these features. In a typical room there would be an opening in every direction. One to the left taking the user to the previous room, one to the right taking the user to the next room, one above which will unlock when the user gets the question right and takes them to the reward room where they can collect the reward tokens and finally one below which would unlock on the third incorrect attempt taking the user to the hint room. For a visual representation of this structure  (see Figure \ref{roomarch}). 
 
 \begin{figure}[h]
     \centering
@@ -334,7 +391,7 @@ The inclusion of a character, story and an end goal to reach it all factors whic
 So in summary the application would essentially be a gamified cyber security application, structured similarly to capture the flag (or CTF) events with the freedom of choice operating as the jeopardy style of CTF shown to be effective in engagement, the lessons serving as the challenges and the reward token serving as a flag. The hint system in place is also represented in typical jeopardy style CTFs. The difference is the character and story orientated take and the elevation of floors representing a respective level of Blooms Taxonomy. 
 %discuss how the game would be structured levels, floors etc
 \subsection{Lesson Design}  
-As discussed the level design would be rooms bundled into floors, each floor representing a different level of complexity on Blooms Taxonomy. For this design chapter I will briefly discuss what some of the lessons in the rooms on the first floor would look like, what their content will be, their learning outcomes and then go on to discuss how I would achieve this. 
+As discussed the level design would be rooms bundled into floors, each floor representing a different level of complexity on Blooms Taxonomy. For this design chapter this dissertation will briefly discuss what some of the lessons in the rooms on the first floor would look like, what their content will be, their learning outcomes and then go on to discuss how this dissertation will achieve this. 
 \subsubsection{Caesar cipher} 
 %discuss the learning outcomes e.g teach what caesar cipher is, how to open up decoder, teach how to decode. Discuss that it would be MCQ. Mock up how it would look. How i will use api request and web scraping to do. 
 One of the first things that would be covered in the application is basic encryption types, such as the Caesar cipher.  
@@ -351,10 +408,17 @@ One of the first things that would be covered in the application is basic encryp
 \newline The user would first in a text terminal be told what a Caesar cipher is and would be explained how encryption and decryption work using it. The user would then be given a random Caesar cipher of a famous computer scientist and told to open a online decoder. Using the decoder and referring to the provided steps the user will be able to get the plain text and when entered in the terminal would unlock the door.
 
 \textbf{How this would be done} 
-\newline Dynamic challenge generation is an important part of this application and would ensure that the students all have a unique experience meaning users can't copy off of each other's answers and will have a different experience if playing again. This is discussed furthermore later in the design chapter. For this lesson I will make test scenarios using random selection and API requested methods, these will also be discussed further later in the design chapter. 
+\newline Dynamic challenge generation is an important part of this application and would ensure that the students all have a unique experience meaning users can't copy off of each other's answers and will have a different experience if playing again. This is discussed furthermore later in the design chapter. For this lesson test scenarios would be made using random selection and API requested methods, these will also be discussed further later in the design chapter. 
 
-\textbf{How it would look} 
-%insert figure here
+\textbf{How it would look}  
+The caesar cipher lesson has been mocked up (see Figure \ref{caesarmock}).
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.0\textwidth]{Figs/caesermock.PNG} 
+    \caption{Caesar Lesson Mock up} 
+    \label{caesarmock}
+\end{figure}   
+
 
  
 
@@ -378,10 +442,10 @@ Another lesson that would be covered on the first floor of the application is ha
 \newline The user would first in a text terminal be told what a hash is, about one way encryption and the use of it. Then the user will be taught briefly about the command line, basic commands and about john the ripper. the user will then get given a famous computer scientist hashed and be guided with a set of instructions on how to run the hash against a dictionary of computer scientist to get a match using john the ripper. Once the user find a match they will enter it and the door will unlock.
 
 \textbf{How this would be done} 
-\newline For this lesson I will make test scenarios using the web scraping method, this will also be discussed further later in the design chapter. The lesson would then have a dictionary full of the hash value of different computer scientist provided to the user.  
+\newline For this lesson the test scenarios would be made using the web scraping method, this will also be discussed further later in the design chapter. The lesson would then have a dictionary full of the hash value of different computer scientist provided to the user.  
 
 \textbf{How it would look} 
-%insert figure here
+This lesson would look the same as the caesar lesson, with the lesson being done over the command line.
  
 
 \subsubsection{Who is this ?}
@@ -400,18 +464,21 @@ Also a possible lesson on the first floor would be a simple "who is this famous 
 \newline The user will be presented with a question "which one of these people is *insert person here*" , four pictures will then be displayed on the screen, one being the right person and one the three others being other computer scientist. When the user gets this right they will proceed to stage 2 and be asked again, this time it will be slightly harder, a less famous computer scientist. Finally if they get that correct they will proceed to the third stage with a lesser known computer scientist. By answering the third question correct the lesson would be complete and the door would unlock. An incorrect answer will result in the user having to go back to the first stage again. This technique of try and try again has been shown to be effective for imparting knowledge (find reference I found for this and insert). 
 
 \textbf{How this would be done}  
-\newline For this lesson I will make test scenarios using the web scraping method with the use of two API's, which I will go into more detail about later in this chapter.  
+\newline For this lesson the test scenarios would be made using the web scraping method with the use of two API's, which this dissertation will go into more detail about later in this chapter.  
 
-\textbf{How it would look} 
-%insert figure here
- 
-
-%how this would look in the application etc mock up design 
+\textbf{How it would look}  
+The "who is this" lesson would show four images on the screen and ask "which one of these picture is Alan Turing" for example the user would select one of the four pictures and depending on whether they were correct or not the stage counter would change (see Figure \ref{facemock}).
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.0\textwidth]{Figs/facemock.PNG} 
+    \caption{Face match Lesson Mock up} 
+    \label{facemock}
+\end{figure}  
 
 
 \subsection{Technical Design} 
 \subsubsection{Front end: User Interface}  
-The user interface will take into account the literature and represent the application in the most effective way possible. Some drafted screens are shown below.  (Figure \ref{Mainscreen})
+The user interface will take into account the literature and represent the application in the most effective way possible. The main screen would be relatively simple (see Figure \ref{Mainscreen}).
 
 \begin{figure}[h]
     \centering
@@ -420,7 +487,7 @@ The user interface will take into account the literature and represent the appli
     \label{Mainscreen}
 \end{figure}   
 
-The main screen has quite a lot going on. In a typical room, the player will have a choice to navigate both to the next room and the previous room to their left and right. If they go up they will reach the challenge terminal which when interacted with brings up the challenge. If they enter the correct answer the reward room will open up and they can collect their challenge token. If they get it incorrect the hint room below opens up. How many Challenge tokens they have is displayed and also the score they have accumulated so far. The user can quit or alter their settings with the drop down menu in the top left hand corner of the screen. (Figure \ref{Mainmenu}) (Figure \ref{fig:test1}) (Figure \ref{fig:test2})
+The main screen has quite a lot going on. In a typical room, the player will have a choice to navigate both to the next room and the previous room to their left and right. If they go up they will reach the challenge terminal which when interacted with brings up the challenge. If they enter the correct answer the reward room will open up and they can collect their challenge token. If they get it incorrect the hint room below opens up. How many Challenge tokens they have is displayed and also the score they have accumulated so far. The user can quit or alter their settings with the drop down menu in the top left hand corner of the screen (see Figure \ref{Mainmenu})
 
 \begin{figure}[h]
     \centering
@@ -445,7 +512,7 @@ The main screen has quite a lot going on. In a typical room, the player will hav
 \end{minipage}
 \end{figure}   
 
-When the user enters the hint room they are presented with a question and a choice of three answers. They will get the hint regardless but is meant to build their knowledge and whats been covered. The reward room is simple and just contains the challenge token. (Figure \ref{fig:test3}) (Figure \ref{fig:test4})
+When the user enters the hint room they are presented with a question and a choice of three answers (see Figure \ref{fig:test1}). They will get the hint regardless but is meant to build their knowledge and whats been covered. The reward room is simple and just contains the challenge token (see Figure \ref{fig:test2}). 
 
 \begin{figure}
 \centering
@@ -463,20 +530,16 @@ When the user enters the hint room they are presented with a question and a choi
 \end{minipage}
 \end{figure}  
 
-The feedback received at this level is basic but dependent on what the answer is different doors unlock.
+The feedback received at this level is basic but dependent on what the answer is different doors unlock (see Figures \ref{fig:test3} \ref{fig:test4}).
 
-%insert annotated mockflow screens%
-{Register/Home screen} 
-{Room screen} 
-{Reward screen} 
-{Hint screen} 
+
 
 \subsubsection{Middle end: Dynamic Challenge generator}  
-One fundamental part of this application will be the challenge generator. Dynamic challenge generation is an important element of this application, it will ensure that if the user comes back and does it again they will have a different experience and also that users will be having a different experience than the users around them. I will look at three possible methods of dynamic challenge generation. \emph{Random challenge selection, API request} and \emph{Web scraping}.  
+One fundamental part of this application will be the challenge generator. Dynamic challenge generation is an important element of this application, it will ensure that if the user comes back and does it again they will have a different experience and also that users will be having a different experience than the users around them. This dissertation will look at three possible methods of dynamic challenge generation. \emph{Random challenge selection, API request} and \emph{Web scraping}.  
 
 \emph{Random Challenge selection} 
 
-This will involve setting up a list of possible questions with corresponding answers, then selecting one of those questions at random. I will ask a multiple choice question populated with the correct answer and the answers to the other questions. The script would them check for the user input and check if the answer matches the correct answer giving simple feedback accordingly. This will be the simplest method and the easiest to implement (Figure \ref{RandomSelection}).  
+This will involve setting up a list of possible questions with corresponding answers, then selecting one of those questions at random. A multiple choice question would be asked populated with the correct answer and the answers to the other questions. The script would them check for the user input and check if the answer matches the correct answer giving simple feedback accordingly. This will be the simplest method and the easiest to implement (see Figure \ref{RandomSelection}).  
 
 \begin{figure}[h]
     \centering
@@ -487,7 +550,7 @@ This will involve setting up a list of possible questions with corresponding ans
 
 
 \emph{API request} 
-I will set up an API using a python script so I can make a request to it with another script. The script will select a random word from a list, the world will correspond with a question that the API will send back when it receives this word. The user will then send back the answer which will be sent to the API and checked (Figure \ref{APIRequest}).   
+An API will be set up using a python script so a request can be made to it with another script. The script will select a random word from a list, the world will correspond with a question that the API will send back when it receives this word. The user will then send back the answer which will be sent to the API and checked (see Figure \ref{APIRequest}).   
 
 \begin{figure}[h]
     \centering
@@ -498,8 +561,8 @@ I will set up an API using a python script so I can make a request to it with an
 
 
 \emph{Web Scraping} 
-I will develop two web scraping applications to test the effectiveness of it as a method of dynamic challenge generation, one simpler one and one more complex. for the more simple one I will scrape the names of influential computer scientists from sites like either 'https://www.computerscie
-ncedegreehub.com/30-most-influential-computer-scientists-alive-today/' this or a Wikipedia entry on something similar. Then will read those names into a list. The challenge would be generated by grabbing a random name from that list and running it through an online hash generator, providing all the information you need for the challenge (Figure \ref{WebScraper}).   
+Two web scraping applications will be developed to test the effectiveness of it as a method of dynamic challenge generation, one simpler one and one more complex. For the more simple one the names of influential computer scientists will be scraped from sites like either 'https://www.computerscie
+ncedegreehub.com/30-most-influential-computer-scientists-alive-today/' this or a Wikipedia entry on something similar. Then will read those names into a list. The challenge would be generated by grabbing a random name from that list and running it through an online hash generator, providing all the information you need for the challenge (see Figure \ref{WebScraper}).   
 
 \begin{figure}[h]
     \centering
@@ -509,7 +572,7 @@ ncedegreehub.com/30-most-influential-computer-scientists-alive-today/' this or a
 \end{figure}   
 
 
-The more complex use of web scraping would involve using the Bing API and the Microsoft cognitive engine. The script would ask the Bing API for 100 cryptographers, it would then store images of them in a list, returns one at random and sends it to the Microsoft cognitive engine to see if it recognised it. This script would be used to ask the users if they recognise the famous cryptographers and check their answer against the answer returned from the Microsoft cognitive engine. (Figure \ref{FaceQuiz})   
+The more complex use of web scraping would involve using the Bing API and the Microsoft cognitive engine. The script would ask the Bing API for 100 cryptographers, it would then store images of them in a list, returns one at random and sends it to the Microsoft cognitive engine to see if it recognised it. This script would be used to ask the users if they recognise the famous cryptographers and check their answer against the answer returned from the Microsoft cognitive engine (see Figure \ref{FaceQuiz}).   
 
 %talk more about how it would work and then make diagram showing how it works%
 \clearpage{}
@@ -521,7 +584,7 @@ The more complex use of web scraping would involve using the Bing API and the Mi
     \label{FaceQuiz}
 \end{figure}     
 
-So the script would select a random search term from a list of possible topics. It would then make a call to the Bing API which will return 100 images of the search term. One of these images will be selected at random and be sent to the Face API, the Face API sends the response back in a JSON format. This will loop until a match is found and the Face API matches a name to the face, when a match has been found the image is displayed and the user will be asked who it is. This process is illustrated in (Figure \ref{APIstructure})  
+So the script would select a random search term from a list of possible topics. It would then make a call to the Bing API which will return 100 images of the search term. One of these images will be selected at random and be sent to the Face API, the Face API sends the response back in a JSON format. This will loop until a match is found and the Face API matches a name to the face, when a match has been found the image is displayed and the user will be asked who it is (see Figure \ref{APIstructure}).  
 
 \begin{figure}[!ht]
     \centering
@@ -533,7 +596,7 @@ So the script would select a random search term from a list of possible topics. 
 \emph{Docker} 
 %talk about use of docker and include figure showing how the api is going to be used to send data to database  
  
-Docker is a way of systematically automate the faster deployment of applications using portable containers. Docker containers are created using base images, images are created manually are with Dockerfiles. Dockerfiles contain instructions to be automatically performed. They are used to organise deployment artefacts and simply the deployment process \cite{bernstein2014containers}. I will be using this service to populate the challenge database. I will do this by making a script (similar to the Face Quiz script) that instead of opening an image and asking the user who it is being displayed, when a match is found inserts into the challenge database the "question" ("who is this ?"), the image url and the answer (the name of the person), this script is shown in (Figure \ref{DockerFace}) and the structure of the script is shown in (Figure \ref{Dockerstructure}). I set up a Dockerfile to run this script and insert data into the database. Then using docker I could spin up X amount of containers and the database would be populated with X entries. An illustrated example of spinning up 5 container is shown in (Figure \ref{Dockerexample}). By designing it in this manor the database of challenges could be populated in a fast and efficient manor, which would also save processing time when retrieving challenges instead of having to perform the facial matches and image searches at the time of running the script the script could then just retrieve a set of images from the challenge db.
+Docker is a way of systematically automate the faster deployment of applications using portable containers. Docker containers are created using base images, images are created manually are with Dockerfiles. Dockerfiles contain instructions to be automatically performed. They are used to organise deployment artefacts and simply the deployment process \cite{bernstein2014containers}. This service will be used to populate the challenge database. This will be done by making a script (similar to the Face Quiz script) that instead of opening an image and asking the user who it is being displayed, when a match is found inserts into the challenge database the "question" ("who is this ?"), the image url and the answer (the name of the person) (see Figure \ref{DockerFace}) This would be all that is needed to populate the challenge database ( see Figure \ref{Dockerstructure}). A Dockerfile was set up to run this script and insert data into the database. Then using docker X amount of containers could be spun up and the database would be populated with X entries (see Figure \ref{Dockerexample}). By designing it in this manor the database of challenges could be populated in a fast and efficient manor, which would also save processing time when retrieving challenges instead of having to perform the facial matches and image searches at the time of running the script the script could then just retrieve a set of images from the challenge db.
  
 
 
@@ -564,7 +627,7 @@ First off when designing the back end of an application what Database would be m
  
 
 \textbf{User Database}   
-The user Database would be built to service pupils to make an account. So they can register at the beginning and have a score associated with it. Each user would have a username which would be stored in plain text and a password that would be stored as a hash, then a salt that would be used on the hash would be stored as well. When the user inserts a password, it would be hashed with this salt and compared against the stored password hash. The user would have a unique id so they can be identified and found in the database, and would have a table that stores account data such as join date, challenges complete and high scores the last two of which would be used to measure performance of users. (Figure \ref{UserDB})
+The user Database would be built to service pupils to make an account. So they can register at the beginning and have a score associated with it. Each user would have a username which would be stored in plain text and a password that would be stored as a hash, then a salt that would be used on the hash would be stored as well. When the user inserts a password, it would be hashed with this salt and compared against the stored password hash. The user would have a unique id so they can be identified and found in the database, and would have a table that stores account data such as join date, challenges complete and high scores the last two of which would be used to measure performance of users (see Figure \ref{UserDB}).
 
 \begin{figure}[!ht]
     \centering
@@ -574,7 +637,7 @@ The user Database would be built to service pupils to make an account. So they c
 \end{figure}   
 
 \textbf{Challenges Database}   
-The challenge database would be used to store each question and answer pair with a challenge Id to identify the challenge and a challenge type to group them by. The challenge database will be populated using a chosen method and will be designed later in this chapter, the idea being when the database has been populated the application could take a random challenge from the database.  (Figure \ref{ChallengeDB})
+The challenge database would be used to store each question and answer pair with a challenge Id to identify the challenge and a challenge type to group them by. The challenge database will be populated using a chosen method and will be designed later in this chapter, the idea being when the database has been populated the application could take a random challenge from the database (see Figure \ref{ChallengeDB})
 
 \begin{figure}[!ht]
     \centering
@@ -584,7 +647,7 @@ The challenge database would be used to store each question and answer pair with
 \end{figure} 
 
 \textbf{Results Database}   
-The Results Database would be used to match a user to more statistics such as total score earned, success rate, hints taken and challenges complete. This would be more used for performance analysis by teachers or supervisors to gauge the effectiveness of the application and how well certain students are performing.  (Figure \ref{ResultsDB})
+The Results Database would be used to match a user to more statistics such as total score earned, success rate, hints taken and challenges complete. This would be more used for performance analysis by teachers or supervisors to gauge the effectiveness of the application and how well certain students are performing (see Figure \ref{ResultsDB})
 
 \begin{figure}[!ht]
     \centering
@@ -601,24 +664,26 @@ The Results Database would be used to match a user to more statistics such as to
 
 \subsection{Design Methodology} 
 %discuss what i am going to do pick 100 computer scientists of 3 levels of fame etc etc   
-With the application theoretically designed and elements of the application discussed I will now look at how I am going to test and evaluate these prototyped elements after they have been implemented to get useful data out of this project. To do this I am going to test 3 different aspects of my implemented elements. 
+With the application theoretically designed and elements of the application discussed this dissertation will now look at how these prototyped elements will be tested and evaluated after they have been implemented to get useful data out of this project. To do this 3 different aspects of my implemented elements will be tested. 
 \subsubsection{How many times does the same question come up in the same run ?} This will be testing the effectiveness of the implemented dynamic challenge generation methods and how effective each method is for randomly generating a random question. This will also answer the question of what method is superior for this intended purpose, or has the most potential for this use.  
 
-To do this I will for each script I have made for each of the dynamic challenge generation methods, make a separate version for testing that runs through the script 100 times collecting the questions and answer pair each time then after it has ran 100 times it will look at the list of questions and answers and find how many times the same pair occurred in the run. By doing this it gives a numerical value for comparison across all of the methods and helps gauge how effective that particular method is for this chosen purpose and therefore its potential. 
+To do this, for each script that has been made for each of the dynamic challenge generation methods, a separate version for testing that, runs through the script 100 times collecting the questions and answer pair each time then after it has ran 100 times it will look at the list of questions and answers and find how many times the same pair occurred in the run, will be made. By doing this it gives a numerical value for comparison across all of the methods and helps gauge how effective that particular method is for this chosen purpose and therefore its potential. 
 \subsubsection{How many out of 100 images are faces ?}  
-This test will be testing the effectiveness of the Bing API that I have chosen to use in the implementation of one of the dynamic challenge methods and for use in populating a database with challenges. By testing this it will tell us how useful this technology is and if it can be utilised for this purpose effectively. 
+This test will be testing the effectiveness of the Bing API that has been chosen to use in the implementation of one of the dynamic challenge methods and for use in populating a database with challenges. By testing this it will tell us how useful this technology is and if it can be utilised for this purpose effectively. 
 
-To test this I am gong to make a test case of the script that uses the Bing API to collect faces for the challenge generation. In this proposed script a random topic such as 'famous computer scientists' or 'famous cryptographers' and then that is used as a search term for the Bing API which returns 100 images of that. I want to test how many of these 100 images are actually contain faces, or more accurately how many actually contain people. I will test this by using search terms with a varying likely hood to return faces, for example,  'Famous movie stars' is very likely to return a set of actors as they by nature are well known but a search term of 'famous cryptographers' on the other hand aren't as well known by nature. Doing this will not only evaluate how useful the Bing API if for general use but analysing different topics it can also be seen how useful it is for the specific  proposed purpose 
+To test this a test case of the script will be made that uses the Bing API to collect faces for the challenge generation. In this proposed script a random topic such as 'famous computer scientists' or 'famous cryptographers' and then that is used as a search term for the Bing API which returns 100 images of that. For the purposes of this dissertation, how many of these 100 images are actually contain faces, will be tested or more accurately how many actually contain people. This will be tested by using search terms with a varying likely hood to return faces, for example,  'Famous movie stars' is very likely to return a set of actors as they by nature are well known but a search term of 'famous cryptographers' on the other hand aren't as well known by nature. Doing this will not only evaluate how useful the Bing API if for general use but analysing different topics it can also be seen how useful it is for the specific  proposed purpose 
 \subsubsection{Out of 100 computer scientists, how many does the face API recognise ?} 
-This will test how effective the Microsoft cognitive engine Face API, used in my proposed web scraping face quiz script, is at recognising faces.  I believe this could be a very interesting test to carry out and the data gathered from doing this would not only be useful in learning how effective it would be to use this technology for the proposed purpose but for analysing exactly how good this technology is and help determine how it is working. 
+This will test how effective the Microsoft cognitive engine Face API, used in my proposed web scraping face quiz script, is at recognising faces. This could be a very interesting test to carry out and the data gathered from doing this would not only be useful in learning how effective it would be to use this technology for the proposed purpose but for analysing exactly how good this technology is and help determine how it is working. 
 
-To achieve this I am going to make a separate script all together for this test. I am going to gather a list of 100 computer scientists separated into three levels 'world famous' e.g Bill Gates, Steve Jobs, 'industry famous' and 'well known'. I will then gather multiple images of each person on the list and do 10 runs of each of the images.Outputted will be how many of the 3 images were recognised or a 'recognition score' and how many times out of the 10 runs that API recognised the person or a 'consistency score', this will be outputted in a graphical format such as a csv file. I will also feature in the tests some 'dud' images of for example people who look like Steve jobs but actually are not to test how accurate the service is being. As mentioned before it is my hope that these tests will determine how useful the Face API is and help pinpoint its behaviour.
+To achieve this a separate script all together will be made for this test. A list of 100 computer scientists will be gathered and separated into three levels 'world famous' e.g Bill Gates, Steve Jobs, 'industry famous' and 'well known'. Multiple images of each person on the list will then be gathered and 3 runs of each will be done of the images.Outputted will be how many of the 3 images were recognised or a 'recognition score' and how many times out of the 3 runs that API recognised the person or a 'consistency score', this will be outputted in a graphical format such as a csv file. Also featured in the tests will be  some 'dud' images of for example people who look like Steve jobs but actually are not to test how accurate the service is being. As mentioned before it is my hope that these tests will determine how useful the Face API is and help pinpoint its behaviour. 
+
+\newpage
 \section{Implementation}
-After the research had been done and I had designed in theory what my application would look like and how it would work I could start to look at the implementation. I decided for my implementation to prototype certain parts of my theoretical design. I chose to prototype the dynamic challenge generation part of the project as I felt that it was an important part of the learning experience to make sure that a different challenge could be given to a user each time they used the application, or if it was used in a class to ensure that all the users had different experience's using the application and couldn't copy other users answers out of laziness. Dynamic challenge generation was also an interesting area to look at I thought it would be interesting to evaluate the effectiveness of the different approaches in creating a different challenge each time. Another part I decided to prototype was the docker element of the project as docker is an incredibly useful service which would benefit the project greatly if made and prototyping an element such as database population would help illustrate that as well as gauge how efficient it would be.  
+After the research had been done and a theoretical design for what the application would look like and how it would work was completed it was time to start the implementation stage of this dissertation. It was then decided for the implementation to prototype certain parts of my theoretical design. The dynamic challenge generation part of the project was chosen to be prototyped as this was an important part of the learning experience to make sure that a different challenge could be given to a user each time they used the application, or if it was used in a class to ensure that all the users had different experience's using the application and couldn't copy other users answers out of laziness. Dynamic challenge generation was also an interesting area to look at and would be interesting to evaluate the effectiveness of the different approaches in creating a different challenge each time. Another part that was prototyped was the docker element of the project as docker is an incredibly useful service which would benefit the project greatly if made and prototyping an element such as database population would help illustrate that as well as gauge how efficient it would be.  
 
-For the implementation stage I decided to use Python for the programming language and Eclipse as the IDE. I chose python out of a mix of personal preference as I has used in in the years leading up to this project and had more experience than any of the other programming languages and the practicality of using it for this project as python has extensive support libraries, useful for completing the variety of tasks that I wanted to do, combined with the fact that it is a widely used language and recognised in the industry it seemed like a sensible choice. Eclipse I chose to use as I have has exposure with it in my uni career and thought it better to use something I am experiences with and know than learn the specifics of a new IDE.
+For the implementation stage Python was used for the programming language and Eclipse as the IDE. Python was chosen out of a mix of personal preference as some experience had been picked up leading up to this project and had more than any of the other programming languages as well as the practicality of using it for this project as python has extensive support libraries, useful for completing the variety of tasks that this dissertation proposed to implement, combined with the fact that it is a widely used language and recognised in the industry it seemed like a sensible choice. Eclipse was chosen to use due to exposure with it and for the purposes of this dissertation thought it better to use this rather than learn how to use a new IDE.
 
-I will use the Eclipse IDE to develop python scripts for the different methods of dynamic challenge generation, at least a script for each. I will then use a combination of docker and python to create a service which populates a database with challenges in an efficient matter. The aim of this implementation stage is to develop something that in a later stage will give an understanding into which method of dynamic challenge generation is the most effective and how to best distribute this method.   
+The Eclipse IDE will be used to develop python scripts for the different methods of dynamic challenge generation, at least a script for each. A combination of docker and python will then be used to create a service which populates a database with challenges in an efficient matter. The aim of this implementation stage is to develop something that in a later stage will give an understanding into which method of dynamic challenge generation is the most effective and how to best distribute this method.   
 
 %include code snippets here, explain what they do etc. all scripts and docker files
 
@@ -626,18 +691,18 @@ I will use the Eclipse IDE to develop python scripts for the different methods o
 \subsection{Starting simple: From selection}  
 \textbf{random\textunderscore selection.py}  
 
-This script was designed to be the simplest method of dynamically generating a challenge, by just selecting from a list of question and answer pairs. the code shown in (Figure \ref{Random1}) takes care of that. First off a dictionary is defined of "caesar questions" is defined, with a key and value of the question and answer. A variable of question is then defined as a random choice of that dictionary and is printed. A for loop then grabs all of answers, correct and incorrect, and prints them before reading in the users response to an answer variable. 
+This script was designed to be the simplest method of dynamically generating a challenge, by just selecting from a list of question and answer pairs (see Figure \ref{Random1}) takes care of that. First off a dictionary is defined of "caesar questions" is defined, with a key and value of the question and answer. A variable of question is then defined as a random choice of that dictionary and is printed. A for loop then grabs all of answers, correct and incorrect, and prints them before reading in the users response to an answer variable. 
 
-\begin{figure}[h]
+\begin{figure}[!ht]
     \centering
     \includegraphics[width=1.0\textwidth]{Figs/random1.PNG} 
     \caption{Question selection} 
     \label{Random1}
 \end{figure}   
 
-A function is then defined that loops through all of the items in "caesar questions" and compares the answer given by the user to the answer pair to all of the questions. If a match is found then the value "correctAnswers" is set to the corresponding question to the answer given, otherwise it remains empty. Finally the "answerChecked" value is set to what has been returned by that function, if this is equal to the question given at the start "correct" is printed if not "incorrect" is printed. The code for checking the answer is shown in (Figure \ref{Random2}).
+A function is then defined that loops through all of the items in "caesar questions" and compares the answer given by the user to the answer pair to all of the questions. If a match is found then the value "correctAnswers" is set to the corresponding question to the answer given, otherwise it remains empty. Finally the "answerChecked" value is set to what has been returned by that function, if this is equal to the question given at the start "correct" is printed if not "incorrect" is printed (see Figure \ref{Random2}).
 
-\begin{figure}[h]
+\begin{figure}[!ht]
     \centering
     \includegraphics[width=1.0\textwidth]{Figs/random2.PNG} 
     \caption{Answer Check} 
@@ -647,14 +712,14 @@ A function is then defined that loops through all of the items in "caesar questi
 
 \subsection{Using API request}   
 
-I then began to implement the API method of dynamic challenge generation. In practice it would be more useful to do this with an actual website or service designed for this use but for test purposes I just made a script to represent the API being called to for the answers.  
+This script was created to implement the API method of dynamic challenge generation. In practice it would be more useful to do this with an actual website or service designed for this use but for test purposes a script to represent the API being called to for the answers was made.  
 
 \textbf{API.py}    
 
-First I implemented the API that was to be called for a question. I set up an API that when ran would run on local host using python Flask. I then set a route for the request to be sent and read in a string that will represent the question to be sent back. depending on the value of the question string the API selects a question answer pair and returns it. The code for this is show in (Figure \ref{API}).
+First the API that was to be called for a question was implemented. An API that when ran would run on local host using python Flask was set up. A route for the request to be sent and read in a string that will represent the question to be sent back, was then set. depending on the value of the question string the API selects a question answer pair and returns it (see Figure \ref{API}).
 
 
-\begin{figure}[h]
+\begin{figure}[!ht]
     \centering
     \includegraphics[width=1.0\textwidth]{Figs/API.PNG} 
     \caption{API} 
@@ -662,9 +727,9 @@ First I implemented the API that was to be called for a question. I set up an AP
 \end{figure}
 
 \textbf{API\textunderscore request.py} 
-Next up I implemented a script that would make a call to this API to get a question shown in (Figure \ref{API request}) . First off a set of tags to be sent are defined in "questions" and "question" is set to a random choice of them. a GET request is then sent to the API and the response is read in, each value contained within the json response is also read into "values". the "user question" and "user answer" variables are set to the question contained in the response and the answer contained in the response respectively, the question is then is then asked to the user and their answer compared to the answer. 
+Next up a script that would make a call to this API to get a question shown in (see Figure \ref{API request}) was implemented. First off a set of tags to be sent are defined in "questions" and "question" is set to a random choice of them. a GET request is then sent to the API and the response is read in, each value contained within the json response is also read into "values". the "user question" and "user answer" variables are set to the question contained in the response and the answer contained in the response respectively, the question is then is then asked to the user and their answer compared to the answer. 
 
-\begin{figure}[h]
+\begin{figure}[!ht]
     \centering
     \includegraphics[width=1.0\textwidth]{Figs/API request.PNG} 
     \caption{API Request} 
@@ -673,21 +738,21 @@ Next up I implemented a script that would make a call to this API to get a quest
 
 \subsection{Web scraping} 
 \subsubsection{Basic web scraping}   
-For my more basic attempt at a web scarper I decided to found a website listing off "30 influential computer scientists" and used it to pick them off and use them to generate questions. a hard coded hash method is shown and then a method of opening an online hash generator and putting the text through that as well. 
+For my more basic attempt at a web scarper a basic website was found listing off "30 influential computer scientists" and used it to pick them off and use them to generate questions. a hard coded hash method is shown and then a method of opening an online hash generator and putting the text through that as well. 
 
 \textbf{Web\textunderscore scraper\textunderscore final.py}  
-Foe this web scraping application I used the BeautifulSoup library for the opening of the website and getting names and the selenium library for opening open a browser and putting the text through an online hash generator. First off (Figure \ref{Webscrape1}) I set the source to the website I wanted to use and defined an empty list "people". Then I take the content returned from the web page and sift through it to find what I want. I inspected the web page and found where the headers were that I wanted to pick out and split the content according to that. After I almost had the text down to the strings I wanted I filtered it further and appended the filtered string to a list of people before "popping" some excess items that came after the desired list of people. A random "person" is selected from the list of "people" found from the website and after this a SHA256 hash is generated of the person from the list and displayed. 
+For this web scraping application the BeautifulSoup library was used for the opening of the website and getting names and the selenium library for opening open a browser and putting the text through an online hash generator. First off (see Figure \ref{Webscrape1}) the source was set to the website that was chosen to be used and defined an empty list "people". Then the content returned from the web page is taken and sifted through to find what is wanted. The web page is inspected and the headers were found that contained the information that was wanted to be picked out (the names) so the data returned from the source was split accordingly. After the text was almost down to the strings that were wanted it was filtered further and appended the filtered string to a list of people before "popping" some excess items that came after the desired list of people. A random "person" is selected from the list of "people" found from the website and after this a SHA256 hash is generated of the person from the list and displayed. 
 
-\begin{figure}[h]
+\begin{figure}[!ht]
     \centering
     \includegraphics[width=1.0\textwidth]{Figs/web_scrape1.PNG} 
     \caption{Web scraping the names} 
     \label{Webscrape1}
 \end{figure}  
 
-Then with code shown in (Figure \ref{Webscrape2}) I opened up a web page that calculates md5 hashes as a value is typed in. By inspecting the web page I identified the elements I would need such as the text box to enter the value to be hashed, which I set as "hashField" I also identified the area which the calculated hash is displayed and set that as "hashResult". I sent the "person" that was chosen to the text field "hashField" and once the value was entered read the value of what was in the returned hash field to "hashResult". I then printed this value along with the original person.
+ A web page that calculates md5 hashes of a value that is typed in is opened (see Figure \ref{Webscrape2}). By inspecting the web page the elements needed were identified such as the text box to enter the value to be hashed, which was set as "hashField", also identified was the area which the calculated hash is displayed and set that as "hashResult". The "person" that was chosen was sent to the text field "hashField" and once the value was entered read the value of what was in the returned hash field to "hashResult". This value was then printed along with the original person.
 
-\begin{figure}[h]
+\begin{figure}[!ht]
     \centering
     \includegraphics[width=1.0\textwidth]{Figs/web_scrape2.PNG} 
     \caption{Getting hash through browser} 
@@ -698,9 +763,9 @@ Then with code shown in (Figure \ref{Webscrape2}) I opened up a web page that ca
 
 \subsubsection{Web scraping with facial recognition}   
 
-For this approach I took advantage of Microsoft Azure and used two API services. The Bing search API and the Computer Vision API which uses the Microsoft cognitive engine. I set up both of them on a Microsoft Azure account I created shown in figure (Figure \ref{Azure}) and used them to generate the keys and the links I needed to make my API calls in the script. This script will use the Bing search API to find 100 images of a search term then use the Vision API to recognize a face contained in an image from the search, if it matches a face to the name then it displays to user and asks who they are. 
+For this approach the services of Microsoft Azure were taken advantage of using two API services available from from their cognitive services. The Bing search API and the Computer Vision API which uses the Microsoft cognitive engine. Both were set up on a Microsoft Azure account that was created (see Figure \ref{Azure}) and used them to generate the keys and the links that were needed to make my API calls in the script. This script will use the Bing search API to find 100 images of a search term then use the Vision API to recognize a face contained in an image from the search, if it matches a face to the name then it displays to user and asks who they are. 
 
-\begin{figure}[h]
+\begin{figure}[!ht]
     \centering
     \includegraphics[width=1.0\textwidth]{Figs/Azure.PNG} 
     \caption{Microsoft Azure Cognitive Services} 
@@ -709,16 +774,16 @@ For this approach I took advantage of Microsoft Azure and used two API services.
 
 \textbf{Face\textunderscore quiz\textunderscore final.py} 
 
-At the start of the script I declare variables such as a list of random cyber security topics to be chosen from such as "famous computer scientists" or "famous cryptographers" , a search term to be used for the Bing API which is a random choice of those topics and other variables used for the APIs such as subscription keys and headers and params etc. Then I define the findImages function shown in (Figure \ref{findimages}). In this function I set up the API client using the credentials set, then call the API with the search term decided and a count of 100 set as well as a filter of face applied. I then choose a random image and return the image url. 
+At the start of the script variables are declared such as a list of random cyber security topics to be chosen from such as "famous computer scientists" or "famous cryptographers" , a search term to be used for the Bing API which is a random choice of those topics and other variables used for the APIs such as subscription keys and headers and params etc. Then the findImages function is defined (see Figure \ref{findimages}). In this function the API client is set up using the credentials set, then call the API with the search term decided and a count of 100 set as well as a filter of face applied. A random image is then chosen and  the image url is returned. 
 
-\begin{figure}[h]
+\begin{figure}[!ht]
     \centering
     \includegraphics[width=1.0\textwidth]{Figs/findimages.PNG} 
     \caption{findImages function} 
     \label{findimages}
 \end{figure}  
 
-Next up I defined the findMatch function shown in figures (Figure \ref{findmatch1}) and (Figure \ref{findmatch2}). First I declare the search term to be used within the function and call the findImages function with that search term, which as discussed, returns an image url that is concatenated in the "body" variable used to send a request to the vision API. The connection to the vision API is set up and a request is sent using that image url as the body. What gets returned is a json response which is broken down into data and is used in the next part to determine whether a match has been found or not. This is done handling certain errors which would mean a match has not been found. I did multiple runs and caught the different errors that were happening if a match wasn't found. For example if the categories or celebrities bracket was empty it meant that there was no match found for the face and when a name value was attempted to be read in and error would happen, with these errors that mean no match had been found the string "no match" is returned at their occurrence. Other exceptions to note was sometimes a match is found but when the image url was trying be accessed the website denied permission and sometimes it would return an image of multiple people which obviously isn't helpful when trying to ask a user who they are as it could be confusing as to which person the question would be referring to, this was solved by accessing the classification parameter and only accepting pictures that were wither of a person or a portrait of a person (dropping images classified as group images). These exceptions were handled and also returned "no match" if they occurred. If none of these exceptions occur then it means a match has been found and a name has been able to be matched to the face so the image url is returned.
+Next up the findMatch function was defined (see Figures \ref{findmatch1} \ref{findmatch2}). First the search term to be used within the function is declared and the findImages function is called with that search term, which as discussed, returns an image url that is concatenated in the "body" variable used to send a request to the vision API. The connection to the vision API is set up and a request is sent using that image url as the body. What gets returned is a json response which is broken down into data and is used in the next part to determine whether a match has been found or not. This is done handling certain errors which would mean a match has not been found. Multiple runs were done and caught the different errors that were happening if a match wasn't found. For example if the categories or celebrities bracket was empty it meant that there was no match found for the face and when a name value was attempted to be read in and error would happen, with these errors that mean no match had been found the string "no match" is returned at their occurrence. Other exceptions to note was sometimes a match is found but when the image url was trying be accessed the website denied permission and sometimes it would return an image of multiple people which obviously isn't helpful when trying to ask a user who they are as it could be confusing as to which person the question would be referring to, this was solved by accessing the classification parameter and only accepting pictures that were wither of a person or a portrait of a person (dropping images classified as group images). These exceptions were handled and also returned "no match" if they occurred. If none of these exceptions occur then it means a match has been found and a name has been able to be matched to the face so the image url is returned.
 
 \begin{figure}
 \centering
@@ -736,18 +801,18 @@ Next up I defined the findMatch function shown in figures (Figure \ref{findmatch
 \end{minipage}
 \end{figure}   
 
-After this the getAnswer function is defined, as shown in (Figure \ref{getAnswer}). Firstly I set up the vision API to be used for the question, then sends an image to it, the vision API responds and the name is taken from the response and stored in a variable "name", the certainty score is also taken and rounded up and stored in a variable. Then the image is opened and the user is asked who it is, if they're answer matches the name determined from the API "correct" is returned if not "incorrect" is returned. 
+After this the getAnswer function is defined (see Figure \ref{getAnswer}). Firstly the vision API was et up to be used for the question, then sends an image to it, the vision API responds and the name is taken from the response and stored in a variable "name", the certainty score is also taken and rounded up and stored in a variable. Then the image is opened and the user is asked who it is, if they're answer matches the name determined from the API "correct" is returned if not "incorrect" is returned. 
 
-\begin{figure}[h]
+\begin{figure}[!ht]
     \centering
     \includegraphics[width=1.0\textwidth]{Figs/getanswer.PNG} 
     \caption{getAnswer function} 
     \label{getAnswer}
 \end{figure}  
 
-A variable of correct answers is set to 0. The finally inside a for loop that iterates 5 times, is a while loop that calls the findMatch function setting the variable "text" to the value it returns. The while loop breaks when the value returned is not equal to "no match", so essentially, if the image has not triggered any of the exception and a name has been mapped to the face, when this happens "text" is set to the image url and the while loop is broken. The "body" variable is then defined with that image url and the getAnswer function is called asking the user who is in the image and determining if they are correct. If the function returns correct answer then the correct answer variable is incremented by 1. After this process has been iterated through 5 times a score out of 5 is given and the script terminates. The code talked about in this final section is shown in (Figure \ref{askquestion}).
+A variable of correct answers is set to 0. The finally inside a for loop that iterates 5 times, is a while loop that calls the findMatch function setting the variable "text" to the value it returns. The while loop breaks when the value returned is not equal to "no match", so essentially, if the image has not triggered any of the exception and a name has been mapped to the face, when this happens "text" is set to the image url and the while loop is broken. The "body" variable is then defined with that image url and the getAnswer function is called asking the user who is in the image and determining if they are correct. If the function returns correct answer then the correct answer variable is incremented by 1. After this process has been iterated through 5 times a score out of 5 is given and the script terminates (see Figure \ref{askquestion}).
 
-\begin{figure}[h]
+\begin{figure}[!ht]
     \centering
     \includegraphics[width=1.0\textwidth]{Figs/askquestion.PNG} 
     \caption{Asks user question and iterates} 
@@ -763,16 +828,16 @@ This python script was adapted from the face quiz script but with the use of the
 
 \textbf{"Docker\textunderscore face\textunderscore pop\textunderscore final.py"}   
 
-The Docker face population script is very similar to the Face Quiz script discussed in the previous section. The only difference is that it doesn't have the getAnswer function as there is no user interaction and is therefore unnecessary to ask the user the questions and iterate through the process 5 times at the end. The other difference is the use of the pymongo library which is used to when the findMatch function determines there has been a match on the face, takes the "question" that would be asked, the image url for the selected image and the "name" of the person in the image (or the answer) and inserts it into the challenge Database. The lines of code used to establish the connection with the MongoDb and set up the variables (the "db" refered to as the host on line 43 is established in the docker compose file and is discussed later) needed for the insert is shown in (Figure \ref{dbinsert1}). The line that was inserted into the findMatch function, after it was determined to be a match is shown in (Figure \ref{dbinsert2}).
+The Docker face population script is very similar to the Face Quiz script discussed in the previous section. The only difference is that it doesn't have the getAnswer function as there is no user interaction and is therefore unnecessary to ask the user the questions and iterate through the process 5 times at the end. The other difference is the use of the pymongo library which is used to when the findMatch function determines there has been a match on the face, takes the "question" that would be asked, the image url for the selected image and the "name" of the person in the image (or the answer) and inserts it into the challenge Database (see Figure \ref{dbinsert2}). In the code (see Figure \ref{dbinsert1}) the "db" referred to as the host on line 43 is established in the docker compose file and is discussed later.  .
 
-\begin{figure}[h]
+\begin{figure}[!ht]
     \centering
     \includegraphics[width=1.0\textwidth]{Figs/dbinsert1.PNG} 
     \caption{Establishing Database connection} 
     \label{dbinsert1}
 \end{figure}  
 
-\begin{figure}[h]
+\begin{figure}[!ht]
     \centering
     \includegraphics[width=1.0\textwidth]{Figs/dbinsert2.PNG} 
     \caption{Inserting data into the database} 
@@ -780,11 +845,11 @@ The Docker face population script is very similar to the Face Quiz script discus
 \end{figure} 
 
 \subsubsection{Docker}   
-These are the files used to create Docker images and spin up the containers with my script running inside them so I can populate the database. 
+These are the files used to create Docker images and spin up the containers with my script running inside them so the database can be populated. 
 \textbf{requirements.txt}   
-This file is essentially just a list of all the external libraries used in the script that the machine will be running. The Dockerfile uses this file to pip install everything to contained inside. My requirements.txt is shown in (Figure \ref{req}) 
+This file is essentially just a list of all the external libraries used in the script that the machine will be running. The Dockerfile uses this file to pip install everything to contained inside (see Figure \ref{req}) 
 
-\begin{figure}[h]
+\begin{figure}[!ht]
     \centering
     \includegraphics[width=1.0\textwidth]{Figs/requirements.PNG} 
     \caption{Requirements.txt contents} 
@@ -792,9 +857,9 @@ This file is essentially just a list of all the external libraries used in the s
 \end{figure} 
 
 \textbf{Dockerfile} 
-The Dockerfile its the instructions that are needed to build the docker image that will be spinned up in containers.  This included installing the requirements (as discussed in the previous section), copying the python script (docker\textunderscore face\textunderscore pop.py), exposing the port so it can contact the database and finally running. The syntax of this Dockerfile is shown in (Figure \ref{Dockerfile}). 
+The Dockerfile its the instructions that are needed to build the docker image that will be spinned up in containers.  This included installing the requirements (as discussed in the previous section), copying the python script (docker\textunderscore face\textunderscore pop.py), exposing the port so it can contact the database and finally running (see Figure \ref{Dockerfile}). 
 
-\begin{figure}[h]
+\begin{figure}[!ht]
     \centering
     \includegraphics[width=1.0\textwidth]{Figs/Dockerfile.PNG} 
     \caption{Dockerfile contents} 
@@ -803,23 +868,23 @@ The Dockerfile its the instructions that are needed to build the docker image th
 
 \textbf{docker-compose.yml} 
 
-Docker compose is a tool for defining and running multi container applications which can be used to configure the application. After this has been done all services can be created and started with a single command. I used docker compose to establish the services of "db" (this is the db reffered to in the docker face population script) which is a mongoDB image that I downloaded off of Docker Hub (where you can download from a library of images) and expose the correct ports and set the volume. Then the "client" is defined as using honours-project image (the image created using my requirements.txt and Dockerfile) and link it to the db service so data from the client service can be inserted into the database from the db service. The port is opened and then the environment I will be working with (which database I am going to use etc) is established.
+Docker compose is a tool for defining and running multi container applications which can be used to configure the application. After this has been done all services can be created and started with a single command. Docker compose was used to establish the services of "db" (this is the db reffered to in the docker face population script) which is a mongoDB image that was downloaded off of Docker Hub (where you can download from a library of images) and expose the correct ports and set the volume. Then the "client" is defined as using honours-project image (the image created using my requirements.txt and Dockerfile) and link it to the db service so data from the client service can be inserted into the database from the db service. The port is opened and then the environment that will be worked with (which database is going to be used etc) is established.
 
-
+\newpage
 \section{Results} 
 %Results for for tests:out of X runs how many times did the same question show up ? to evaluate the three dynamic challenge generation method. test how many faces show up in search out of 100 ? to evaluate bing API effectiveness for different topics such as computer scientists and cryptographers. Out of 100 faces how many correct ? to evaluate facial recognition. Then evaluate further effectiveness of facial recognition by taking 100 famous computer scientists, cryptographers etc of varying fame level, very famous to kind of famous to not very famous and test success rate. feed it some duds, Bill Gates look a like etc.  
 \subsection{Test 1: how many times does the same question come up in the same run ?}  
 \subsubsection{Making the test cases} 
-To perform this test on the different dynamic challenge methods I made altercations to the code of each of the methods so it would return the data I wanted for the purposes of this test. An example of the altercations made is show in (Figure \ref{testcases}) this particular example is taken from the random selection method but the code added to them all was pretty similar, just minor changes depending on how the questions were generated in each of them. These changes consisted of making a list "questions" which each question is added to as the script iterates though the process, "unique\textunderscore question" is another list declared which will be added to every time a question appears and hasn't yet been appended to "questions" (if this is the first time the question appears and is therefore unique). "occurrence \textunderscore count" is added to every time a question is retrieved that is in "questions" and therefore has already been asked. it then iterates through the question asking process 100 times. After this "ocount" is declared which is used to add the total number of occurrences for each unique question, this is used at the end of the script to calculate the average occurrence of a question in 100 runs. Also printed out is how many times each question showed up in that run and how many appearances of the same question there was in that run. Some sample output which I used to illustrate the results is shown in (Figure \ref{exout1}).
+To perform this test on the different dynamic challenge methods altercations were made to the code of each of the methods so it would return the data wanted for the purposes of this test and this dissertation (see Figure \ref{testcases}) this particular example is taken from the random selection method but the code added to them all was pretty similar, just minor changes depending on how the questions were generated in each of them. These changes consisted of making a list "questions" which each question is added to as the script iterates though the process, "unique\textunderscore question" is another list declared which will be added to every time a question appears and hasn't yet been appended to "questions" (if this is the first time the question appears and is therefore unique). "occurrence \textunderscore count" is added to every time a question is retrieved that is in "questions" and therefore has already been asked. it then iterates through the question asking process 100 times. After this "ocount" is declared which is used to add the total number of occurrences for each unique question, this is used at the end of the script to calculate the average occurrence of a question in 100 runs. Also printed out is how many times each question showed up in that run and how many appearances of the same question there was in that run (see Figure \ref{exout1}).
 
-\begin{figure}[h]
+\begin{figure}[!ht]
     \centering
     \includegraphics[width=1.0\textwidth]{Figs/testcases.PNG} 
     \caption{Example of changes made to produce test results} 
     \label{testcases}
 \end{figure} 
 
-\begin{figure}[h]
+\begin{figure}[!ht]
     \centering
     \includegraphics[width=1.0\textwidth]{Figs/exampleoutput1.PNG} 
     \caption{Example output of test cases} 
@@ -827,27 +892,27 @@ To perform this test on the different dynamic challenge methods I made altercati
 \end{figure}  
 
 \subsubsection{The Results} 
-First I have collected the data and made a graph illustrating the average question occurrence in 100 runs. So for each of the unique questions asked how many times on average was it asked across the 100 runs. This is shown in (Figure \ref{r1}). The Random selection and API request was 25 times, web scraping was 3.44 times and web scraping with web scraping with API was 1.51 times.
+First data was collected and a graph was made illustrating the average question occurrence in 100 runs. So for each of the unique questions asked how many times on average was it asked across the 100 runs (see Figure \ref{r1}). The Random selection and API request was 25 times, web scraping was 3.44 times and web scraping with web scraping with API was 1.51 times.
 
-\begin{figure}[h]
+\begin{figure}[!ht]
     \centering
     \includegraphics[width=1.0\textwidth]{Figs/results1.PNG} 
     \caption{Average Question Occurrence} 
     \label{r1}
 \end{figure} 
 
-Next I took the number of times that a question that had already been asked was asked for each of the methods and plotted it in the graph shown in (Figure \ref{r2}). Random selection and API request methods had 96 occurrences of the same question, the web scraping method had 71 and the web scraping method using APIs had 34.
+Next the number of times that a question that had already been asked was asked was taken for each of the methods (see Figure \ref{r2}). Random selection and API request methods had 96 occurrences of the same question, the web scraping method had 71 and the web scraping method using APIs had 34.
 
-\begin{figure}[h]
+\begin{figure}[!ht]
     \centering
     \includegraphics[width=1.0\textwidth]{Figs/results2.PNG} 
     \caption{Same Question Occurrence} 
     \label{r2}
 \end{figure}  
 
-Finally I took both of the results previous tests and plotted them on a graph shown in (Figure \ref{r3}) to show the correlation.
+Finally both of the results previous tests were taken plotted on a graph  (see Figure \ref{r3}) to show the correlation.
 
-\begin{figure}[h]
+\begin{figure}[!ht]
     \centering
     \includegraphics[width=1.0\textwidth]{Figs/results3.PNG} 
     \caption{Dynamic Generation Method Results Correlation} 
@@ -856,9 +921,9 @@ Finally I took both of the results previous tests and plotted them on a graph sh
 
 \subsection{Test 2: How many faces out of 100 images ?}.   
 \subsubsection{Making the test case}
-For this test I made a test script which called the Bing API and asked for 100 images with the face tag with four different search terms - "famous people", "famous actors", "famous computer scientists" and "famous cryptographers". The idea being to test the Bing APIs ability to accurately and consistently produce pictures of faces, using different search terms increasing in specificity to gauge how this affects it. I made a test case script for the evaluation of this simply taking a search term and calling the Bing API to return one hundred images with the face tag. I then used the selenium library to iterate through the content url of each of the 100 images returned and open them in a browser. This allowed me to quickly scan through the images looking for ones that did not contain a face. I did this for each search term changing the variable "search\textunderscore term" accordingly each time. The code used for this is shown in (Figure \ref{bingevc})  
+For this test a test script was made which called the Bing API and asked for 100 images with the face tag with four different search terms - "famous people", "famous actors", "famous computer scientists" and "famous cryptographers". The idea being to test the Bing APIs ability to accurately and consistently produce pictures of faces, using different search terms increasing in specificity to gauge how this affects it. A test case script was made for the evaluation of this simply taking a search term and calling the Bing API to return one hundred images with the face tag. The selenium library was then used to iterate through the content url of each of the 100 images returned and open them in a browser. This allowed me to quickly scan through the images looking for ones that did not contain a face. This was done for each search term changing the variable "search\textunderscore term" accordingly each time (see Figure \ref{bingevc}).  
 
-\begin{figure}[h]
+\begin{figure}[!ht]
     \centering
     \includegraphics[width=1.0\textwidth]{Figs/bingevcode.PNG} 
     \caption{Code used for Bing API test case} 
@@ -867,10 +932,10 @@ For this test I made a test script which called the Bing API and asked for 100 i
 
 \subsubsection{The Results} 
 
-I collected the results and counted each occurrence of "non face" images in the 100 returned by the Bing API for each search term 3 times to ensure accurate results.Both the "famous people" and "famous movie stars" returned 100 out of 100 images containing faces. "famous computer scientists" returned 93 out of 100 images containing faces and "famous cryptographers" returned 37 out of 100 images containing faces this is illustrated in (Figure \ref{bingev}). 
+The results were collected and each occurrence of "non face"  images in the 100 returned by the Bing API was counted for each search term 3 times to ensure accurate results.Both the "famous people" and "famous movie stars" returned 100 out of 100 images containing faces. "famous computer scientists" returned 93 out of 100 images containing faces and "famous cryptographers" returned 37 out of 100 images containing faces (see Figure \ref{bingev}). 
 
 
-\begin{figure}[h]
+\begin{figure}[!ht]
     \centering
     \includegraphics[width=1.0\textwidth]{Figs/bingev.PNG} 
     \caption{Bing API performance} 
@@ -883,30 +948,30 @@ I collected the results and counted each occurrence of "non face" images in the 
 
 \subsubsection{Making the test case}
 
-To make the test case for the face API evaluation I made alterations to the face quiz application. The first step however to select a list of 100 computer scientists. I gathered 100 names and grouped them by fame level. 10 very famous 15 well known and 75 industry recognised, this list is available in the appendix. After this list was decided I started the altercation by declaring three dictionaries, one for each fame bracket. In this dictionary was three image links for each person in the list, which I sourced myself rather than using the Bing API previously used in the project to ensure the data was consistent, in that they were a similar quality of photo, and accurate, in that the images were of who they were supposed to be. Other changes included adding two functions one similar to the findMatch function used earlier except it returned the certainty score called getScore and a second which just took the digits off of the end of the names of the people (as they were numbered 1-3 so that they were different keys) called mySplit. Then for each of the three dictionaries the following was done: Three variables were declared; “xcorrect” to count how many correct matches, “xscores” to collect the certainty scores of the matched faces and finally “xmatched” which collects the names of all of the people that have been matched. Then a for loop iterates through each of the values in the dictionary trying to find a match to the face, appending to the lists and incriminating the correct counter when a match is made.  After this has been done for all three dictionaries, the results are displayed giving: how many celebrities in that category were matched, the average confidence rating given with matches for that category and the total pictures that were matched.  Some code for this is shown in (Figures \ref{fec1} \ref{fec2} \ref{fec3}).  An example of the output is shown in (Figure \ref{feo}).   
+To make the test case for the face API evaluation alterations were made to the face quiz application. The first step however to select a list of 100 computer scientists. 100 names were gathered and grouped them by fame level. 10 very famous 15 well known and 75 industry recognised, this list is available in the appendix. After this list was decided the alteration was started by declaring three dictionaries, one for each fame bracket. In this dictionary was three image links for each person in the list, which was sourced independently rather than using the Bing API previously used in the project to ensure the data was consistent, in that they were a similar quality of photo, and accurate, in that the images were of who they were supposed to be. Other changes included adding two functions one similar to the findMatch function used earlier except it returned the certainty score called getScore and a second which just took the digits off of the end of the names of the people (as they were numbered 1-3 so that they were different keys) called mySplit. Then for each of the three dictionaries the following was done: Three variables were declared; “xcorrect” to count how many correct matches, “xscores” to collect the certainty scores of the matched faces and finally “xmatched” which collects the names of all of the people that have been matched. Then a for loop iterates through each of the values in the dictionary trying to find a match to the face, appending to the lists and incriminating the correct counter when a match is made  (see Figures \ref{fec1} \ref{fec2} \ref{fec3}).  After this has been done for all three dictionaries, the results are displayed giving: how many celebrities in that category were matched, the average confidence rating given with matches for that category and the total pictures that were matched (see Figure \ref{feo}).    
 
-\begin{figure}[h]
+\begin{figure}[!ht]
     \centering
     \includegraphics[width=1.0\textwidth]{Figs/faceevalcode1.PNG} 
     \caption{Setting up of dictionaries} 
     \label{fec1}
 \end{figure} 
 
-\begin{figure}[h]
+\begin{figure}[!ht]
     \centering
     \includegraphics[width=1.0\textwidth]{Figs/faceevalcode2.PNG} 
     \caption{Appending lists and incriminating count} 
     \label{fec2}
 \end{figure} 
 
-\begin{figure}[h]
+\begin{figure}[!ht]
     \centering
     \includegraphics[width=1.0\textwidth]{Figs/faceevalcode3.PNG} 
     \caption{Formatting data to be output} 
     \label{fec3}
 \end{figure} 
 
-\begin{figure}[h]
+\begin{figure}[!ht]
     \centering
     \includegraphics[width=1.0\textwidth]{Figs/faceevaloutput.PNG} 
     \caption{Example output of Face API test case} 
@@ -916,42 +981,43 @@ To make the test case for the face API evaluation I made alterations to the face
 
 \subsubsection{The Results}
 
-For this test fed the Face API 3 different pictures of each of the computer scientists, and did three runs of the script and averaged out the results. The first metric measured was how many people were recognised, the average was 10 out of 10 for the very famous category, 15 out of 15 for the well known category and 58 out of 75 for the industry recognised as illustrated in (Figure \ref{fer1}). This equates to a total of 83 out of 100 computer scientists being recognised. 
+For this test fed the Face API 3 different pictures of each of the computer scientists, and did three runs of the script and averaged out the results. The first metric measured was how many people were recognised, the average was 10 out of 10 for the very famous category, 15 out of 15 for the well known category and 58 out of 75 for the industry recognised (see Figure \ref{fer1}). This equates to a total of 83 out of 100 computer scientists being recognised. 
 
-\begin{figure}[h]
+\begin{figure}[!ht]
     \centering
     \includegraphics[width=1.0\textwidth]{Figs/faceevalr1.PNG} 
     \caption{Face API people recognised} 
     \label{fer1}
 \end{figure}
 
-For the next part of this test I measured the average picture recognition, meaning the face API might have recognised the computer scientist but how many of the 3 pictures did it recognise ? Essentially how consistent was the Face API across all the 3 fame categories. The averages were 27 out of a possible 30 images recognised for the very famous category, 36 out of a possible 45 images were recognised in the well known category and 120.6 out of a possible 225 images were recognised in the industry recognised category, on average, as illustrated in (Figure \ref{fer2})  
+For the next part of this test the average picture recognition was measured, meaning the face API might have recognised the computer scientist but how many of the 3 pictures did it recognise ? Essentially how consistent was the Face API across all the 3 fame categories. The averages were 27 out of a possible 30 images recognised for the very famous category, 36 out of a possible 45 images were recognised in the well known category and 120.6 out of a possible 225 images were recognised in the industry recognised category, on average (see Figure \ref{fer2})  
 
-\begin{figure}[h]
+\begin{figure}[!ht]
     \centering
     \includegraphics[width=1.0\textwidth]{Figs/faceevalr2.PNG} 
     \caption{Face API images recognised} 
     \label{fer2}
 \end{figure}
 
-The third and final metric gathered was the average confidence rate of the matches made, the Face API gives a confidence rating along with the match stating how sure it is that it is that person. The average confidence rating for the very famous category was 99.43 percent, the average confidence rating for the well known category was 98.54 percent and the average confidence rating for the industry recognised category was 98.71 percent, this is illustrated in (Figure \ref{fer3}). 
+The third and final metric gathered was the average confidence rate of the matches made, the Face API gives a confidence rating along with the match stating how sure it is that it is that person. The average confidence rating for the very famous category was 99.43 percent, the average confidence rating for the well known category was 98.54 percent and the average confidence rating for the industry recognised category was 98.71 percent (see Figure \ref{fer3}). 
 
-\begin{figure}[h]
+\begin{figure}[!ht]
     \centering
     \includegraphics[width=1.0\textwidth]{Figs/faceevalr3.PNG} 
     \caption{Face API average confidence ratings} 
     \label{fer3}
 \end{figure} 
 
-I then took all of these results and mapped them on a graph to show a correlation, this is shown in (Figure \ref{fer4}) 
+All of these results were then taken and mapped on a graph to show a correlation (see Figure \ref{fer4}) 
 
-\begin{figure}[h]
+\begin{figure}[!ht]
     \centering
     \includegraphics[width=1.0\textwidth]{Figs/faceevalr4.PNG} 
     \caption{Face API performance} 
     \label{fer4}
 \end{figure}
 
+\newpage
 \section{Evaluation}
 \subsection{Evaluating Test 1 Results}   
 Test 1 was "how many times does the same question come up in the same run ?" and was evaluating the performance of the different methods of dynamic challenge generation. When discussing these results and the ones soon to follow it is important to acknowledge that the implementation of both the API request and random selection methods were both very simple. With a selection of 4 questions to choose from the performance was never going to be very high when it comes to dynamic challenge generation. Adding another question to the selection would slightly increase the the performance and so on and so on. This could go on forever but for these methods would require a lot of hard work and hard coding in potential challenges. So when looking at these numbers instead of evaluating these results for these specific scripts it should be evaluated as the potential this method carries to be scaled for the intended use based on the results received.  
@@ -965,15 +1031,15 @@ Overall this test has shown that the use of the web scraping with API method has
 \subsection{Evaluating Test 2 Results}  
 Test 2 was "How many faces out of 100 images ?" and was evaluating the performance of the Bing API used in the implementation of my web scraping with API dynamic challenge generation method. The Bing API has a query parameter called ImageContent which you can use to specify you want faces to be returned, this was done for all the runs.
 
-The data collected for this test was measuring how many images out of the 100 that were returned, contained faces (and therefore could be used for the intended purpose more effectively). I did this using four different search terms "famous people", "famous movie stars", "famous computer scientists" and "famous cryptographers" as discussed in the results chapter the idea was to gauge how effective the Bing API was at returning faces the more specific the search term got, with "famous people" and "famous movie stars" likely to return very well known people and "famous computer scientists" and "famous cryptographers" with being more specific search terms they have less possibilities to collect from, this is important to evaluate as with the intended purpose these specific search terms would be getting used.  
+The data collected for this test was measuring how many images out of the 100 that were returned, contained faces (and therefore could be used for the intended purpose more effectively). This was done using four different search terms "famous people", "famous movie stars", "famous computer scientists" and "famous cryptographers" as discussed in the results chapter the idea was to gauge how effective the Bing API was at returning faces the more specific the search term got, with "famous people" and "famous movie stars" likely to return very well known people and "famous computer scientists" and "famous cryptographers" with being more specific search terms they have less possibilities to collect from, this is important to evaluate as with the intended purpose these specific search terms would be getting used.  
 
-The "famous people" search term returned 100 out of 100 images containing faces, as did "famous movie stars", "famous computer scientists" returned 93 out of 100 images containing faces and "famous cryptographers" only returned 37 out of 100 images containing faces. This shows a dramatic decrease in the amount of images containing faces returned when the search term gets as specific as "famous cryptographers". The images returned were of graphs explaining cryptography terms, pictures of books, pictures of keys etc essentially things that are associated with cryptography but not actually famous cryptographers a lot of the time. From what I can tell this is because that there are less big names associated with cryptography, at least in the same manor as the other search terms, and so the results that Bing collects the images from are discussing cryptography rather than a person associated with cryptography so return these images. This isn't a massive blow to using the Bing API for the intended purpose, as has been shown it can still be effective and if you use a variety of search terms with varying specificity as I have it stops the challenge generation from relying on this specific search term. However it is important to note that the more specific the search term the less option it has to choose from for faces and therefore will take longer to return a face that has been matched and therefor if this search term is used soley will likely slow down the process. 
+The "famous people" search term returned 100 out of 100 images containing faces, as did "famous movie stars", "famous computer scientists" returned 93 out of 100 images containing faces and "famous cryptographers" only returned 37 out of 100 images containing faces. This shows a dramatic decrease in the amount of images containing faces returned when the search term gets as specific as "famous cryptographers". The images returned were of graphs explaining cryptography terms, pictures of books, pictures of keys etc essentially things that are associated with cryptography but not actually famous cryptographers a lot of the time. From context it seems this is because that there are less big names associated with cryptography, at least in the same manor as the other search terms, and so the results that Bing collects the images from are discussing cryptography rather than a person associated with cryptography so return these images. This isn't a massive blow to using the Bing API for the intended purpose, as has been shown it can still be effective and if you use a variety of search terms with varying specificity as this dissertation has it stops the challenge generation from relying on this specific search term. However it is important to note that the more specific the search term the less option it has to choose from for faces and therefore will take longer to return a face that has been matched and therefor if this search term is used soley will likely slow down the process. 
 
 \subsection{Evaluating Test 3 Results}  
 Test 3 was "Out of 100 computer scientists, how many does the face API recognise ?" and was evaluating the performance of the Face API used in the implementation of my web scraping with API dynamic challenge generation method. 
-As previously mentioned for this test I made a list of 100 computer scientists and separated them into different fame categories to try and see how effective the Face API was in determining each different category. The first set of data collected for this test was how many people in each category were recognised. In both the very famous and well known categories all of the computer scientists were recognised where as with the industry recognised category 58 out of 75 were recognised, resulting in a total of 83 out of 100 computer scientists recognised. This performance was as expected in that the recognition rate of the people was less as they became less known however this performance was still relatively high. Even with 75 people included that were not very famous the Face API still managed to recognise over 80 percent of the 100 people.  
+As previously mentioned for this test a list of 100 computer scientists was made and separated them into different fame categories to try and see how effective the Face API was in determining each different category. The first set of data collected for this test was how many people in each category were recognised. In both the very famous and well known categories all of the computer scientists were recognised where as with the industry recognised category 58 out of 75 were recognised, resulting in a total of 83 out of 100 computer scientists recognised. This performance was as expected in that the recognition rate of the people was less as they became less known however this performance was still relatively high. Even with 75 people included that were not very famous the Face API still managed to recognise over 80 percent of the 100 people.  
 
-The next set of data collected was how many of the actual images were recognised. Here I was looking at although the Face API may have recognised one of the images of the computer scientist, How consistent was it across the 3 images provided. The scores came back as follows: 27 out of 30 images recognised for the very famous category, 36 out of 45 for well known and 120.6 out 225 for industry recognised. This equates also to 2.7 out of the 3 images provided on average for very famous, 2.4 out of 3 for well known and 1.6 out of 3 for industry recognised. Here we see a more drastic drop in performance when it comes to the lesser known people, although the Face API was able to recognise over 77 percent of the people included in the industry recognised category it only recognised 53.6 percent of the total images in the same category. this is quite a drastic drop and should be taken into account for this considered purpose. This would suggest maybe it best to gather multiple images of people if intending to use them, if they are lesser known as this could be down to the API learning who certain pictures are but struggling to match them when a face is at a different angle.  
+The next set of data collected was how many of the actual images were recognised. Here this dissertation was investigating although the Face API may have recognised one of the images of the computer scientist, How consistent was it across the 3 images provided. The scores came back as follows: 27 out of 30 images recognised for the very famous category, 36 out of 45 for well known and 120.6 out 225 for industry recognised. This equates also to 2.7 out of the 3 images provided on average for very famous, 2.4 out of 3 for well known and 1.6 out of 3 for industry recognised. Here we see a more drastic drop in performance when it comes to the lesser known people, although the Face API was able to recognise over 77 percent of the people included in the industry recognised category it only recognised 53.6 percent of the total images in the same category. this is quite a drastic drop and should be taken into account for this considered purpose. This would suggest maybe it best to gather multiple images of people if intending to use them, if they are lesser known as this could be down to the API learning who certain pictures are but struggling to match them when a face is at a different angle.  
 
 The final set of data collected was the average certainty rating given when a match was made. The results were fairly consistent through out all of the categories with very famous having 99.43 percent, well known having 98.54 percent and industry recognised having 98.71 percent. While it can be seen that technically the industry recognised category has a marginally higher average confidence rating but this is likely insignificant and the point to take from these results is that the confidence ratings returned from the Face API are very high, and consistently very high which is essential if its to be used for this intended purpose. 
 
@@ -981,19 +1047,23 @@ Overall the Results show that the Face API is very effective with it recognising
 
 \subsection{Evaluating Test Results} 
 
-Overall the implementation stage has proved effective in determining the dynamic challenge generation method with the most potential is web scraping with API. The Bing API proved effective but the performance got gradually worse the more specific the search term got, as discussed this isn't fatal but should be considered when using the Bing API for generating cyber security challenges, as proposed. The Face API performed well in the tests provided also with a high recognition rate and the low photo recognition for the lower fame tier being an issue that is easily remedied by supplying a surplus of images this API can be deemed suitable for this purpose and furthermore can give an edge in challenge generation that wouldn't be possible without.
+Overall the implementation stage has proved effective in determining the dynamic challenge generation method with the most potential is web scraping with API. The Bing API proved effective but the performance got gradually worse the more specific the search term got, as discussed this isn't fatal but should be considered when using the Bing API for generating cyber security challenges, as proposed. The Face API performed well in the tests provided also with a high recognition rate and the low photo recognition for the lower fame tier being an issue that is easily remedied by supplying a surplus of images this API can be deemed suitable for this purpose and furthermore can give an edge in challenge generation that wouldn't be possible without. 
 
-\section{conclusion} 
-\subsection{Aims and Objectives}  
-In this section I will discuss how well this project has met the aims and objectives set at the beginning of the project.  
+\newpage
+\section{conclusions} 
+\subsection{Summary of conclusions}
+To be completed.
 
-The first aim of this project was to do the relevant research looking into different learning techniques and further into CTF learning to provide a literature review. This project succeeded to meet this aim, the literature was well researched and covered all of the areas of identified interest, as well as learning models and CTF learning I also did extensive research on gamification and how this could be applied to the classroom. Ultimately the aim was to cover the topic to a point where I could propose and design an application with the intended purpose of engaging a younger audience with cyber security in answer to the cyber security skills gap, and I believe my literature review met this aim.   
+\subsection{Achievement of aim and Objectives}  
+In this section this dissertation will discuss how well this project has met the aims and objectives set at the beginning of the project.  
 
-The second aim of this project was to take what was learned from the literature an use it to design a proof of concept for an application that took into account the literature discussed. The design chapter of this project achieved this aim, I took what I learned about learning models and gamified learning as well as aspects of CTF styled learning and applied these to design the architecture of how this application would work, mocking up how it would look and technically designing aspects of it that would later be implemented. 
+The first aim of this project was to do the relevant research looking into different learning techniques and further into CTF learning to provide a literature review. This project succeeded to meet this aim, the literature was well researched and covered all of the areas of identified interest, as well as learning models and CTF learning, extensive research was also done on gamification and how this could be applied to the classroom. Ultimately the aim was to cover the topic to a point where an application with the intended purpose of engaging a younger audience with cyber security in answer to the cyber security skills gap could be proposed and designed, the literature review in chapter 2 of this dissertation met this aim.   
 
-The first objective was designing the application with reference to the literature which as just discussed was achieved. The next step was to design learning materials to be used in conjunction with the application, I had originally intended to mock up about 5 lessons to give a wider span of what the application would look like however due to time I decided to mock up 3 and concentrate on them. The next two objectives were to design technical aspects of the proposed application and implement them, the first of which being completed in the technical design sub chapter and the second of which being completed in the implementation chapter. I would have liked to have gone into more detail with the technical design of the application and maybe talk about how I could have built it as a web application, how that would have been structured and how I could have scaled it but also due to time constraints I didn't feel that I could deliver a sound attempt. The final objective was to test and evaluate the useful of the prototype elements, this was a success and I believe I performed and series of appropriate tests that collected interesting data allowing me to come to the conclusions that I had intended without ambiguity.  
+The second aim of this project was to take what was learned from the literature an use it to design a proof of concept for an application that took into account the literature discussed. The design chapter of this project achieved this aim, this dissertation took what was learned about learning models and gamified learning as well as aspects of CTF styled learning and applied these to design the architecture of how this application would work, mocking up how it would look and technically designing aspects of it that would later be implemented. 
 
-Overall, although some sacrifices were made due to time, I feel that I have satisfied for the most part all of my aims and objectives and that this project achieved what it set out to.
+The first objective was designing the application with reference to the literature which as just discussed was achieved. The next step was to design learning materials to be used in conjunction with the application, it was originally intended to mock up about 5 lessons to give a wider span of what the application would look like however due to time it was decided to mock up 3 and concentrate on them. The next two objectives were to design technical aspects of the proposed application and implement them, the first of which being completed in the technical design sub chapter and the second of which being completed in the implementation chapter. With more time more detail would have went into the technical design of the application and maybe how the application could have been built as a web application, how that would have been structured and how it could have been scaled would have been discussed and included in this dissertation but also due to time constraints sound attempt could not have been delivered. The final objective was to test and evaluate the useful of the prototype elements, this was a success, this dissertation performed a series of appropriate tests that collected interesting data allowing for it to come to the conclusions that were desired without ambiguity.  
+
+Overall, although some sacrifices were made due to time, this dissertation has satisfied for the most part all of the aims and objectives set at the beginning and that this project achieved what it set out to.
 
 
 \subsection{Self Evaluation}  

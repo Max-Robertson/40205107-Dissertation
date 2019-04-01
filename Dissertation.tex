@@ -76,8 +76,9 @@
 \usepackage{verbatim} % adds environment for commenting out blocks of text & for better verbatim
 \usepackage{subfig} % make it possible to include more than one captioned figure/table in a single float
 \usepackage[toc,page]{appendix}
-% These packages are all incorporated in the memoir class to one degree or another...
-
+% These packages are all incorporated in the memoir class to one degree or another... 
+\usepackage{listings}
+\lstset{breaklines}
 %header and footer settings
 
 
@@ -672,8 +673,12 @@ This will test how effective the Microsoft cognitive engine Face API, used in my
 
 To achieve this a separate script all together will be made for this test. A list of 100 computer scientists will be gathered and separated into three levels 'world famous' e.g Bill Gates, Steve Jobs, 'industry famous' and 'well known'. Multiple images of each person on the list will then be gathered and 3 runs of each will be done of the images.Outputted will be how many of the 3 images were recognised or a 'recognition score' and how many times out of the 3 runs that API recognised the person or a 'consistency score', this will be outputted in a graphical format such as a csv file. Also featured in the tests will be  some 'dud' images of for example people who look like Steve jobs but actually are not to test how accurate the service is being. As mentioned before it is my hope that these tests will determine how useful the Face API is and help pinpoint its behaviour. 
 
+\subsection{Conclusions}
+This chapter of the dissertation covered the design of the proposed application with heavy reference to the literature a theoretical design was mocked up oh how the application would look and would be structured as well as what the lesson content would be and how they would be distributed. Following this the chapter discussed the technical elements that would be involved with designing such an application mocking up user interface and an in depth design of the dynamic challenge generation, discussing different methods that could be used and designing the implementation of those methods before finally talking about how the back end would be set up and designing a way of populating this with challenges. This chapter is then concluded with a discussion about how these features could be tested for their potential and performance after they have been implemented.
+
 \newpage
 \section{Implementation}
+\subsection{Introduction}
 After the research had been done and a theoretical design for what the application would look like and how it would work was completed it was time to start the implementation stage of this dissertation. It was then decided for the implementation to prototype certain parts of my theoretical design. The dynamic challenge generation part of the project was chosen to be prototyped as this was an important part of the learning experience to make sure that a different challenge could be given to a user each time they used the application, or if it was used in a class to ensure that all the users had different experience's using the application and couldn't copy other users answers out of laziness. Dynamic challenge generation was also an interesting area to look at and would be interesting to evaluate the effectiveness of the different approaches in creating a different challenge each time. Another part that was prototyped was the docker element of the project as docker is an incredibly useful service which would benefit the project greatly if made and prototyping an element such as database population would help illustrate that as well as gauge how efficient it would be.  
 
 For the implementation stage Python was used for the programming language and Eclipse as the IDE. Python was chosen out of a mix of personal preference as some experience had been picked up leading up to this project and had more than any of the other programming languages as well as the practicality of using it for this project as python has extensive support libraries, useful for completing the variety of tasks that this dissertation proposed to implement, combined with the fact that it is a widely used language and recognised in the industry it seemed like a sensible choice. Eclipse was chosen to use due to exposure with it and for the purposes of this dissertation thought it better to use this rather than learn how to use a new IDE.
@@ -863,11 +868,24 @@ The Dockerfile its the instructions that are needed to build the docker image th
 
 \textbf{docker-compose.yml} 
 
-Docker compose is a tool for defining and running multi container applications which can be used to configure the application. After this has been done all services can be created and started with a single command. Docker compose was used to establish the services of "db" (this is the db reffered to in the docker face population script) which is a mongoDB image that was downloaded off of Docker Hub (where you can download from a library of images) and expose the correct ports and set the volume. Then the "client" is defined as using honours-project image (the image created using my requirements.txt and Dockerfile) and link it to the db service so data from the client service can be inserted into the database from the db service. The port is opened and then the environment that will be worked with (which database is going to be used etc) is established.
+Docker compose is a tool for defining and running multi container applications which can be used to configure the application. After this has been done all services can be created and started with a single command. Docker compose was used to establish the services of "db" (this is the db reffered to in the docker face population script) which is a mongoDB image that was downloaded off of Docker Hub (where you can download from a library of images) and expose the correct ports and set the volume. Then the "client" is defined as using honours-project image (the image created using my requirements.txt and Dockerfile) and link it to the db service so data from the client service can be inserted into the database from the db service. The port is opened and then the environment that will be worked with (which database is going to be used etc) is established (see Figure \ref{Dockercompose}). 
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.4\textwidth]{Figs/dockercomposecode.PNG} 
+    \caption{docker-compose.yml contents} 
+    \label{Dockercompose}
+\end{figure} 
+
+\subsection{Conclusions}
+This chapter of the dissertation has shown how the four methods of dynamic challenge generation methods were implemented using python scripts as well as the implementation of a database population technique using Docker. The methods were implemented with a varying degree of complexity (with the random selection method being implemented with a limited selection of challenges, where as the web scraping with API was implemented selecting a random image from 100 returned using a search term which itself was randomly chosen from a list of search terms) with the ultimate goal to measure the potential of the method rather than the performance of the individual script. The web scraping with API method used both the Bing image search API and Vision API which were authenticated using a Microsoft azure account created for this project, this gives the potential for this project to not only measure the performance of the implemented challenge generation methods but to measure the performance of the utilised APIs and their potential use for this purpose also.
 
 \newpage
 \section{Results and Evaluation} 
 %Results for for tests:out of X runs how many times did the same question show up ? to evaluate the three dynamic challenge generation method. test how many faces show up in search out of 100 ? to evaluate bing API effectiveness for different topics such as computer scientists and cryptographers. Out of 100 faces how many correct ? to evaluate facial recognition. Then evaluate further effectiveness of facial recognition by taking 100 famous computer scientists, cryptographers etc of varying fame level, very famous to kind of famous to not very famous and test success rate. feed it some duds, Bill Gates look a like etc.  
+\subsection{Introduction}
+with the methods being implemented their potential could now be measured, along with the performance of the APIs taken advantage of in one of the methods. It was decided in the Design chapter that the three tests that would be "Test 1: how many times does the same question come up in the same run", "Test 2: How many out of 100 images are faces ?" and "Out of 100 Computer scientists, how many does the face API recognise ?" this chapter contains the results of these tests which were carried out by implementing test case scripts and discusses the results evaluating what they indicate.  
+
 \subsection{Test 1: how many times does the same question come up in the same run ?}  
 \subsubsection{Making the test cases} 
 To perform this test on the different dynamic challenge methods altercations were made to the code of each of the methods so it would return the data wanted for the purposes of this test and this dissertation (see Figure \ref{testcases}) this particular example is taken from the random selection method but the code added to them all was pretty similar, just minor changes depending on how the questions were generated in each of them. These changes consisted of making a list "questions" which each question is added to as the script iterates though the process, "unique\textunderscore question" is another list declared which will be added to every time a question appears and hasn't yet been appended to "questions" (if this is the first time the question appears and is therefore unique). "occurrence \textunderscore count" is added to every time a question is retrieved that is in "questions" and therefore has already been asked. it then iterates through the question asking process 100 times. After this "ocount" is declared which is used to add the total number of occurrences for each unique question, this is used at the end of the script to calculate the average occurrence of a question in 100 runs. Also printed out is how many times each question showed up in that run and how many appearances of the same question there was in that run (see Figure \ref{exout1}).
@@ -924,7 +942,7 @@ The second set of data collected showed how many times in 100 runs did an occurr
 
 Overall this test has shown that the use of the web scraping with API method has more potential for the use of dynamic challenge generation with it out performing the other 3 by quite a bit. As discussed the implementation of this should be considered but even if more challenges were added to the first two methods you would have to add a lot and it would take a lot of time to achieve the same sort of numbers being returned from web scraping with API. Web scraping as a method as a whole has great potential and is superior both to random selection and API request methods for this purpose, however the use of APIs to aide this method gives it an edge and increases the performance. The APIs also do a lot of the heavy lifting in that they return images, or facial matches and you don't have to manually mine the elements you need as with web scraping on its own.
 
-\subsection{Test 2: How many faces out of 100 images ?}.   
+\subsection{Test 2: How many out of 100 images are faces ?}.   
 \subsubsection{Making the test case}
 For this test a test script was made which called the Bing API and asked for 100 images with the face tag with four different search terms - "famous people", "famous actors", "famous computer scientists" and "famous cryptographers". The idea being to test the Bing APIs ability to accurately and consistently produce pictures of faces, using different search terms increasing in specificity to gauge how this affects it. A test case script was made for the evaluation of this simply taking a search term and calling the Bing API to return one hundred images with the face tag. The selenium library was then used to iterate through the content url of each of the 100 images returned and open them in a browser. This allowed me to quickly scan through the images looking for ones that did not contain a face. This was done for each search term changing the variable "search\textunderscore term" accordingly each time (see Figure \ref{bingevc}).  
 
@@ -1038,13 +1056,13 @@ The final set of data collected was the average certainty rating given when a ma
 
 Overall the Results show that the Face API is very effective with it recognising 83 out of 100 computer and the average confidence rating being over 98 percent in all three categories, the only area of concern is the rate at which it recognises images in the lesser known category with almost half of the images not being matched. This is not as much of a problem as this can be balances out by feeding multiple images of the same person to find a match. Analysing the performance of this API it can definitely be deemed effective and suitable for the intended use.  
 
-\subsection{Evaluation of Results as a whole} 
+\subsection{Conclusions} 
 
 Overall the implementation stage has proved effective in determining the dynamic challenge generation method with the most potential is web scraping with API. The Bing API proved effective but the performance got gradually worse the more specific the search term got, as discussed this isn't fatal but should be considered when using the Bing API for generating cyber security challenges, as proposed. The Face API performed well in the tests provided also with a high recognition rate and the low photo recognition for the lower fame tier being an issue that is easily remedied by supplying a surplus of images this API can be deemed suitable for this purpose and furthermore can give an edge in challenge generation that wouldn't be possible without. 
 
 
 \newpage
-\section{conclusions} 
+\section{Conclusions and Future Work} 
 \subsection{Summary of conclusions}
 A review of the literature was done, investigating different learning model, their significance and use in the classroom and more specifically their use in computer science. After this the literature on CTF learning was reviewed before finally taking a more in depth look at the literature on gamification which showed the various uses and the potential it has for cyber security education (as well as various pitfalls to avoid), furthermore suggesting that there maybe be a way to combine gamification and learning models such as Blooms taxonomy. This knowledge was then taken and applied to a theoretical design for an application that would teach young audiences cyber security before technical elements behind the application were discussed, including dynamic challenge generation methods, which were designed and implemented. After the implementation, test case scripts were made in order to evaluate the performance of the methods and the APIs utilised. The results fed back suggested: Web scraping with the use of APIs is the most effective method of dynamic challenge generation, and that both of the APIs used, while the performance slightly suffer from the specificity  that comes with certain areas of cyber security, have impressive performance results that justify their use for this purpose.
 
@@ -1068,7 +1086,7 @@ Another aspect of this project that could be taken further is the work on dynami
 
 Over the course of this project I have learned a great deal about researching, project management, independent learning, and have developed many of my practical skills giving me further experience in python, with use of Microsoft Azure and APIs as well as new tools and services such as docker all of which I have enjoyed and has given me thought for which direction to take my career. 
 
-First id like to discuss my project management as I think this as my weakest are but one in which I've learned the most. This project did not always look like this from the start and took many different forms in the first few months, I started out with a different idea and was implementing something different I then decided that this area wasn't going to be worthwhile so pivoted to another idea for practical implementation, going as far as to start developing it before realising that there not only wasn't enough emphasis on my chosen course so it wasn't accurately showcasing what I had learned at my time at Napier but it also would have been a nightmare to evaluate, this is when I finally settled on the final idea. This was down to my poor project management and the fact that I settled on an idea without properly investigating its worth as a project and what it would look like if chosen for this project and what that would mean. I have learned to think further down the line instead of just focusing on trying to get it done, because I ended up in a position where I was behind schedule by quite a bit and this wasn't down to me neglecting this project in favour of my other modules or out of laziness, consistently working on this project I thought was actually one of my key strengths, but was down to me starting a project wasting time on it then starting from scratch. In the end once I had my project final and decided I dedicated all my time to completing it and getting it to a point where I was proud of it because I was concerned at one point that my project wouldn't flow and while the flow of the project and all of its connected parts did suffer a little bit, again down to the poor project management and starting over on different ideas, I feel that what the project ended up being flows quite well and is coherent, providing solutions to the problems raised at the beginning. In hindsight I would dedicate more time at the beginning of the project investigating my ideas further to determine what would work at a far earlier stage. 
+First I'd like to discuss my project management as I think this as my weakest are but one in which I've learned the most. This project did not always look like this from the start and took many different forms in the first few months, I started out with a different idea and was implementing something different I then decided that this area wasn't going to be worthwhile so pivoted to another idea for practical implementation, going as far as to start developing it before realising that there not only wasn't enough emphasis on my chosen course so it wasn't accurately showcasing what I had learned at my time at Napier but it also would have been a nightmare to evaluate, this is when I finally settled on the final idea. This was down to my poor project management and the fact that I settled on an idea without properly investigating its worth as a project and what it would look like if chosen for this project and what that would mean. I have learned to think further down the line instead of just focusing on trying to get it done, because I ended up in a position where I was behind schedule by quite a bit and this wasn't down to me neglecting this project in favour of my other modules or out of laziness, consistently working on this project I thought was actually one of my key strengths, but was down to me starting a project wasting time on it then starting from scratch. In the end once I had my project final and decided I dedicated all my time to completing it and getting it to a point where I was proud of it because I was concerned at one point that my project wouldn't flow and while the flow of the project and all of its connected parts did suffer a little bit, again down to the poor project management and starting over on different ideas, I feel that what the project ended up being flows quite well and is coherent, providing solutions to the problems raised at the beginning. In hindsight I would dedicate more time at the beginning of the project investigating my ideas further to determine what would work at a far earlier stage. 
 
 An aspect of the project I thought I done well was the research element. I was very well organised through out the research chapter, going through collecting papers that covered the relevant areas, printing out the papers and highlighting different topics with different colours which helped the flow of my literature review. This resulted in a well researched literature review which provided a solid foundation for my project and going forward proved useful in the design chapter as a result. Another aspect I feel I did well was the implementation, After changing the project so many times I was running out of time by the time I got to my actual implementation. Despite this and my relatively limited experience in programming I feel that I worked very hard on the implementation and making sure it was done well. I made an entire folder full of scripts learning python and how to do web scraping, how to call APIs etc after learning this I worked on implementing the methods in a way that it could be measured. I learned a lot about programming while doing this project, more than I have in any other module of coursework assignment I truly feel like I've grown a great deal in software development and can see that from what I have produced, this aspect especially has made this project very rewarding. I also feel that I carried out the Results and Evaluation section well selecting interesting aspects to test which help draw meaningful conclusions, answering what dynamic challenge method had the most potential to be used for this task as well as carrying out a performance test on both of the Bing and Face APIs measuring both of their effectiveness use in generating random challenges. 
 
@@ -1091,14 +1109,989 @@ Overall there were aspects that I could definitely of done better in and lessons
 ...
 \end{subappendices}
 
-\section{Second Formal Review Output}
-Insert a copy of the project review form you were given at the end of the review by the second marker
+
 
 \section{Diary Sheets (or other project management evidence)}
 Insert diary sheets here together with any project management plan you have
 
-\section{Appendix 4 and following}
-insert content here and for each of the other appendices, the title may be just on a page by itself, the pages of the appendices are not numbered, unless an included document such as a user manual or design document is itself pager numbered.
+\section{Appendix 3: random\textunderscore selection.py code}
+\begin{lstlisting}
+import random
+
+caeser_questions = { 
+    'Which answer is crypto put through a caeser cipher  ': 'jyfwav', 
+    'Which answer is escape put through a caeser cipher  ': 'lzjhwl', 
+    'Which answer is hacker put through a caeser cipher  ': 'ohjrly',  
+    'Which answer is coding put through a caeser cipher  ': 'jvkpun'}  
+
+question = (random.choice(list(caeser_questions)))
+print(question)
+
+for key, value in caeser_questions.items(): 
+    print ("---" + value) 
+   
+answer = input("Enter answer here:") 
+
+def checkAnswer(caeser_questions, answer): 
+    correctAnswers = "" 
+    listOfItems = caeser_questions.items() 
+    for item  in listOfItems:
+        if item[1] == answer:
+            correctAnswers = item[0] 
+    return  correctAnswers 
+
+answerChecked = checkAnswer(caeser_questions, answer)  
+
+
+if (answerChecked == question): 
+    print ("correct")  
+else: 
+    print ("incorrect") 
+\end{lstlisting}    
+\section{Appendix 4: API.py code}  
+\begin{lstlisting}
+from flask import Flask, jsonify, request 
+
+app = Flask(__name__) 
+
+@app.route('/', methods=['GET', 'POST']) 
+def index(): 
+    if (request.method == 'POST'): 
+        some_json = request.get_json()  
+        return jsonify({'you sent':some_json}), 201 
+    else:
+        return jsonify({"about":"Hello World"}) 
+    
+@app.route('/multi/<int:num>', methods=['GET']) 
+def get_multiply10(num): 
+    return jsonify({"result":num * 10, "result2":num * 2, "result3":num * 100})   
+
+@app.route('/question/<string:question>', methods=['GET']) 
+def get_question(question):  
+    if (question == "fred"):
+        return jsonify({"question":" 'mylk'  is what word put through a caesar cipher ?", "answer": "fred"}) 
+    if (question == "bob"):
+        return jsonify({"question":" 'ivi'   is what word put through a caesar cipher ?", "answer": "bob"}) 
+    if (question == "alice"):
+        return jsonify({"question":" 'hspjl'   is what word put through a caesar cipher ?", "answer": "alice"}) 
+    if (question == "eve"):
+        return jsonify({"question":" 'lcl'   is what word put through a caesar cipher ?", "answer": "eve"})  
+
+if __name__ == '__main__': 
+    app.run(debug=True)
+\end{lstlisting}
+\section{Appendix 5: API\textunderscore request.py code}  
+\begin{lstlisting}
+import requests
+import json 
+import random  
+
+questions = ['fred', 'bob', 'alice', 'eve'] 
+question = (random.choice(questions)) 
+values = []
+
+resp = requests.get('http://127.0.0.1:5000/question/' + question) 
+json_data = json.loads(resp.text) 
+if resp.status_code != 200: 
+    print ("something went wrong") 
+for key, value in json_data.items(): 
+    values.append(value)  
+user_question = values[1] 
+user_answer = values[0]   
+txt = input(user_question)
+if (txt == user_answer): 
+    print ("correct !")  
+else:
+    print ("incorrect")
+\end{lstlisting}
+\section{Appendix 6: web\textunderscore scraper \textunderscore final.py code}  
+\begin{lstlisting}
+    
+from bs4 import BeautifulSoup 
+import requests   
+import random 
+import hashlib 
+import re 
+from selenium import webdriver
+
+source1 = requests.get('https://www.computersciencedegreehub.com/30-most-influential-computer-scientists-alive-today/').text
+soup1 = BeautifulSoup(source1, 'lxml')  
+ 
+people = [] 
+
+for person in soup1.find_all('h3'):  
+    computer_person = str(person).split('<h3>')  
+    computer_person_name = str(computer_person).split('</h3>') 
+    c = " ".join(re.findall("[a-zA-Z]+", str(computer_person_name)))   
+    people.append(c) 
+    
+people.pop(34)
+people.pop(33) 
+people.pop(32) 
+people.pop(31) 
+people.pop(30) 
+people.pop(0) 
+
+person = (random.choice(people)) 
+print (person + ' ' + hashlib.sha256(str(person).encode('utf-8')).hexdigest())
+    
+from selenium.webdriver.chrome.options import Options
+options = Options()
+options.binary_location = "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
+browser = webdriver.Chrome(options=options, executable_path=r"C:\Program Files (x86)\Google\Chrome\Application\chromedriver.exe", )
+browser.get("https://passwordsgenerator.net/md5-hash-generator/") 
+hashField = browser.find_element_by_id('txt1') 
+hashField.send_keys(person)  
+hashResult = browser.find_element_by_id('txt2').get_attribute("value")    
+print (person + ' ' + hashResult)
+\end{lstlisting}
+\section{Appendix 7: Face\textunderscore quiz \textunderscore final.py code}  
+\begin{lstlisting}
+import http.client, urllib, base64
+from pprint import pprint 
+import json
+import sys 
+from azure.cognitiveservices.search.imagesearch import ImageSearchAPI
+from msrest.authentication import CognitiveServicesCredentials  
+from PIL import Image 
+import urllib.request  
+import urllib.error
+import os  
+import random
+from cognitive_face import face
+from azure.cognitiveservices.search.imagesearch.models.image_search_api_enums import ImageContent
+
+
+
+topics = ['Famous Computer Scientists', 'Famous Cryptographers', 'Famous tech People', 'famous cryptologists', 
+          'famous computer programmers' , 'top cryptocurrency pioneers']
+
+
+
+subscription_key = "71ad32482bbb4d99a0882c34d8b08d9f"
+search_term = random.choice(topics)   
+
+headers = {
+    'Content-Type': 'application/json',
+    'Ocp-Apim-Subscription-Key': '9a899136784940ebadbe150dc9d28b39',
+}
+
+params = urllib.parse.urlencode({
+    'visualFeatures': 'Categories',
+    'details': 'Celebrities',
+    'language': 'en',
+})
+
+def findImages (subscription_key, search_term):
+
+    client = ImageSearchAPI(CognitiveServicesCredentials(subscription_key)) 
+    image_results = client.images.search(query=search_term,count=100,ImageContent=face) 
+
+    if image_results.value:
+        first_image_result = random.choice(image_results.value)  
+        return(first_image_result.content_url); 
+
+    else:
+        print("No image results returned!") 
+    
+    
+
+
+
+def findMatch (): 
+    try:    
+        search_term = random.choice(topics) 
+        text = findImages(subscription_key, search_term)  
+        body = "{'url':\'"+text+"\'}" 
+
+        h1 = http.client.HTTPConnection('www.cwi.nl')
+        conn = http.client.HTTPConnection('northeurope.api.cognitive.microsoft.com') 
+        conn.request("POST", "/vision/v1.0/analyze?%s" % params, body, headers) #
+        response = conn.getresponse() 
+        data = response.read() 
+        conn.close() 
+        d1=json.loads(data)     
+         
+        if (str(data).__contains__('"celebrities":[]') or str(data).__contains__('"categories":[]')):  
+            #print ("catching empties has worked")
+            return("no match");    
+        else:  
+            name = (d1['categories'][0]['detail']['celebrities'][0]['name']) 
+            score = (d1['categories'][0]['detail']['celebrities'][0]['confidence']) 
+            classification = (d1['categories'][0]['name'])       
+        try:
+            urllib.request.urlretrieve(text, r"C:\Users\MAXBO\Documents\Test_images\file1.jpg")  
+            os.chdir(r'C:\Users\MAXBO\Documents\Test_images') 
+        except urllib.error.HTTPError:  
+            #print("http error handling has worked")
+            return("no match")    
+        
+
+        if name == "":  
+            #print("name is empty so failed")
+            return("no match");  
+        elif score == "":  
+            #print("score is empty so failed")
+            return("no match");  
+        elif (classification == "people_" or classification == "people_portrait"):   
+            #print (classification + " has passed the classification test and is therefore equal to people_ or people_portrait")
+            return (text);  
+        else:  
+            #print (classification + " has failed the classification test and is therefore not equal to people_ or people_portrait")
+            return("no match");
+        
+    except KeyError:   
+        #print("Failed because of exeption")
+        return("no match");  
+    
+def getAnswer():
+    try:   
+        h1 = http.client.HTTPConnection('www.cwi.nl')
+        conn = http.client.HTTPConnection('northeurope.api.cognitive.microsoft.com') 
+        conn.request("POST", "/vision/v1.0/analyze?%s" % params, body, headers) #
+        response = conn.getresponse() 
+        data = response.read() 
+        conn.close() 
+        d1=json.loads(data)   
+        #if (str(data).__contains__('"celebrities":[]' or 'categories":[]')):     
+        score = (d1['categories'][0]['detail']['celebrities'][0]['confidence']) 
+        percentage = (score * 100) 
+        rounded_percentage = round(percentage,2)  
+        name = (d1['categories'][0]['detail']['celebrities'][0]['name']) 
+        urllib.request.urlretrieve(text, r"C:\Users\MAXBO\Documents\Test_images\file1.jpg")  
+        os.chdir(r'C:\Users\MAXBO\Documents\Test_images')
+        im = Image.open(r"C:\Users\MAXBO\Documents\Test_images\file1.jpg")  
+        im.show()
+        answer = input("Who is this ?") 
+        if (answer.lower() == name.lower()): 
+            return("Correct, I am " + str(rounded_percentage) + " the correct answer is " + name); 
+        else: 
+            return("Incorrect, I am " + str(rounded_percentage) + " the correct answer was " + name);
+
+    except KeyError:  
+        return("Error has occured. Try again.") 
+ 
+correct_answers = 0  
+        
+for i in range(0, 5):
+    while True:  
+        text = findMatch()
+        
+        if text != "no match": 
+            break   
+    
+    body = "{'url':\'"+text+"\'}"  
+
+    print("Person " + str(i+1) + ":" )
+    answer = getAnswer() 
+    if answer == "correct": 
+        correct_answers = correct_answers + 1  
+    print(answer)  
+        
+print("You scored " + str(correct_answers) + "/5")
+\end{lstlisting}
+\section{Appendix 8: docker\textunderscore face \textunderscore pop.py code}  
+\begin{lstlisting}
+import http.client, urllib, base64
+from pprint import pprint 
+import json
+import sys 
+from azure.cognitiveservices.search.imagesearch import ImageSearchAPI
+from msrest.authentication import CognitiveServicesCredentials  
+from PIL import Image 
+import urllib.request  
+import urllib.error  
+import random
+from cognitive_face import face
+from azure.cognitiveservices.search.imagesearch.models.image_search_api_enums import ImageContent
+import pymongo 
+
+
+
+topics = ['Famous Computer Scientists', 'Famous Cryptographers', 'Famous tech People', 'famous cryptologists', 'famous computer programmers' , 'top cryptocurrency pioneers']
+
+
+subscription_key = "71ad32482bbb4d99a0882c34d8b08d9f"
+search_term = random.choice(topics)   
+
+headers = {
+    'Content-Type': 'application/json',
+    'Ocp-Apim-Subscription-Key': '9a899136784940ebadbe150dc9d28b39',
+}
+
+params = urllib.parse.urlencode({
+    'visualFeatures': 'Categories',
+    'details': 'Celebrities',
+    'language': 'en',
+}) 
+
+
+
+myclient = pymongo.MongoClient(host='mongoDb', port=27017)  
+mydb = myclient["mydatabase"]
+mycol = mydb["challenges"]
+
+def findImages (subscription_key, search_term):
+
+    client = ImageSearchAPI(CognitiveServicesCredentials(subscription_key)) 
+    image_results = client.images.search(query=search_term,count=100,ImageContent=face) 
+
+    if image_results.value:
+        first_image_result = random.choice(image_results.value)  
+        return(first_image_result.content_url); 
+
+    else:
+        print("No image results returned!") 
+    
+    
+
+
+
+def findMatch (): 
+    try:    
+        search_term = random.choice(topics) 
+        text = findImages(subscription_key, search_term)  
+        body = "{'url':\'"+text+"\'}" 
+ 
+        h1 = http.client.HTTPConnection('www.cwi.nl')
+        conn = http.client.HTTPConnection('northeurope.api.cognitive.microsoft.com') 
+        conn.request("POST", "/vision/v1.0/analyze?%s" % params, body, headers) #
+        response = conn.getresponse() 
+        data = response.read() 
+        conn.close() 
+        d1=json.loads(data)  
+            
+        if (str(data).__contains__('"celebrities":[]') or str(data).__contains__('"categories":[]')):  
+            print ("catching empties has worked")
+            return("no match");    
+        else:  
+            name = (d1['categories'][0]['detail']['celebrities'][0]['name']) 
+            score = (d1['categories'][0]['detail']['celebrities'][0]['confidence']) 
+            classification = (d1['categories'][0]['name'])  
+                  
+        try:
+            urllib.request.urlretrieve(text) 
+        except urllib.error.HTTPError:  
+            print("http error handling has worked")
+            return("no match")    
+        
+        if name == "":  
+            print("name is empty so failed")
+            return("no match");  
+        elif score == "":  
+            print("score is empty so failed")
+            return("no match");  
+        elif (classification == "people_" or classification == "people_portrait"):   
+            print (classification + " has passed the classification test and is therefore equal to people_ or people_portrait") 
+            mydict = { "question": "Who is this ?", "image":text, "name":name} 
+            x = mycol.insert_one(mydict) 
+            print("Data has been inserted to database")
+            return (text);  
+        else:  
+            print (classification + " has failed the classification test and is therefore not equal to people_ or people_portrait")
+            return("no match");
+            
+    except KeyError:   
+        print("Failed because of exeption")
+        return("no match");  
+    
+
+
+while True:  
+    text = findMatch()
+        
+    if text != "no match": 
+        break   
+    
+\end{lstlisting}
+\section{Appendix 9: Dockerfile contents}   
+\begin{lstlisting}
+FROM python:3-onbuild
+RUN pip install --trusted-host pypi.python.org -r requirements.txt
+COPY docker_face_pop.py /docker_face_pop.py
+#RUN pip install . 
+EXPOSE 27017
+CMD ["python", "/docker_face_pop.py"]
+\end{lstlisting}
+\section{Appendix 10: requirements.txt contents}  
+\begin{lstlisting}
+Flask 
+azure-cognitiveservices-search-imagesearch  
+pillow 
+cognitive_face
+pymongo
+\end{lstlisting}
+\section{Appendix 11: docker-compose.yml contents}  
+\begin{lstlisting}
+version: '3.3'
+
+services:  
+  # Name our service will be known by
+  db:
+
+    # version of mongo we'll use
+    image: mongo
+
+    ports:
+      - 27017:27017
+
+    # using a named volume
+    volumes:
+      - devmongo:/data/db 
+      
+  client: 
+  
+    image: honours-project
+    links:
+        - db 
+    depends_on: 
+        - db
+    ports:
+        - 27017
+    environment:
+        - MONGO_URI=mongodb:27017/mydatabase
+
+volumes:  
+  devmongo:
+\end{lstlisting}
+\section{Appendix 12: random\textunderscore selection.py (test case) code used for Test 1}   
+\begin{lstlisting}
+import random 
+from numpy.lib.function_base import average
+
+caeser_questions = { 
+    'Which answer is crypto put through a caeser cipher  ': 'jyfwav', 
+    'Which answer is escape put through a caeser cipher  ': 'lzjhwl', 
+    'Which answer is hacker put through a caeser cipher  ': 'ohjrly',  
+    'Which answer is coding put through a caeser cipher  ': 'jvkpun'}   
+
+questions = []  
+unique_questions = []  
+occurence_count = []
+
+
+for i in range(0, 100):
+    question = (random.choice(list(caeser_questions))) 
+    if questions.__contains__(question): 
+        occurence_count.append(question)
+    else:   
+        unique_questions.append(question)  
+    questions.append(question)     
+        
+print (len(questions))  
+print (len(unique_questions))       
+        
+ocount = []     
+        
+for uquestion in unique_questions:  
+    count = questions.count(uquestion)  
+    print('This question ' + uquestion + ' appeared  ' + str(count) + ' times') 
+    ocount.append(count)
+print("There was a total of " + str(len(occurence_count)) + " Same occurences of a question") 
+print (str(average(ocount)))
+\end{lstlisting}
+\section{Appendix 13: API\textunderscore request.py (test case) code used for Test 1}   
+\begin{lstlisting}
+import requests
+import json 
+import random  
+from numpy.lib.function_base import average
+
+questions = ['fred', 'bob', 'alice', 'eve'] 
+
+
+
+
+
+questionst = []
+unique_questions = [] 
+occurence_count = [] 
+
+
+for i in range(0, 100):   
+    values = [] 
+    question = (random.choice(questions)) 
+    
+    resp = requests.get('http://127.0.0.1:5000/question/' + question) 
+    json_data = json.loads(resp.text)  
+    if resp.status_code != 200: 
+        print ("something went wrong") 
+    for key, value in json_data.items(): 
+        values.append(value)   
+    user_question = values[1] 
+    user_answer = values[0] 
+        
+    if questionst.__contains__(user_question): 
+        occurence_count.append(question) 
+    else:   
+        unique_questions.append(user_question)  
+    questionst.append(user_question) 
+    
+ocount = []     
+        
+print (len(questionst))  
+print (len(unique_questions))       
+        
+for uquestion in unique_questions:  
+    count = questionst.count(uquestion)  
+    print('This question ' + uquestion + 'appeared  ' + str(count) + ' times') 
+    ocount.append(count) 
+    
+print("There was a total of " + str(len(occurence_count)) + " Same occurences of a question")
+print (str(average(ocount)))
+\end{lstlisting}
+\section{Appendix 14: web\textunderscore scraper \textunderscore final.py (test case) code used for Test 1}  
+\begin{lstlisting}
+from bs4 import BeautifulSoup 
+import requests   
+import random 
+import hashlib 
+import re 
+from selenium import webdriver
+from numpy.lib.function_base import average
+
+source1 = requests.get('https://www.computersciencedegreehub.com/30-most-influential-computer-scientists-alive-today/').text
+soup1 = BeautifulSoup(source1, 'lxml')  
+ 
+people = [] 
+
+for person in soup1.find_all('h3'):  
+    computer_person = str(person).split('<h3>')  
+    computer_person_name = str(computer_person).split('</h3>') 
+    c = " ".join(re.findall("[a-zA-Z]+", str(computer_person_name)))   
+    people.append(c) 
+    
+people.pop(34)
+people.pop(33) 
+people.pop(32) 
+people.pop(31) 
+people.pop(30) 
+people.pop(0) 
+
+person = (random.choice(people))  
+
+
+questions = []  
+unique_questions = [] 
+occurence_count = []
+
+for i in range(0, 100):
+    question = (random.choice(people))
+    if questions.__contains__(question): 
+        occurence_count.append(question)  
+    else:   
+        unique_questions.append(question)  
+    questions.append(question)     
+        
+print (len(questions))  
+print (len(unique_questions))   
+
+ocount = []     
+        
+for uquestion in unique_questions:  
+    count = questions.count(uquestion)  
+    print('This question ' + uquestion + ' appeared  ' + str(count) + ' times') 
+    ocount.append(count)
+print("There was a total of " + str(len(occurence_count)) + " Same occurences of a question") 
+print (str(average(ocount)))
+\end{lstlisting}
+\section{Appendix 15: Face\textunderscore quiz \textunderscore final.py (test case) code used for Test 1} 
+\begin{lstlisting}
+import http.client, urllib, base64
+from pprint import pprint 
+import json
+import sys 
+from azure.cognitiveservices.search.imagesearch import ImageSearchAPI
+from msrest.authentication import CognitiveServicesCredentials  
+from PIL import Image 
+import urllib.request  
+import urllib.error
+import os  
+import random
+from cognitive_face import face
+from azure.cognitiveservices.search.imagesearch.models.image_search_api_enums import ImageContent
+from numpy.lib.function_base import average
+
+
+
+topics = ['Famous Computer Scientists', 'Famous Cryptographers', 'Famous tech People', 'famous cryptologists', 'famous computer programmers' , 'top cryptocurrency pioneers']
+#topics = ['Famous Computer Scientists']
+
+
+subscription_key = "71ad32482bbb4d99a0882c34d8b08d9f"
+search_term = random.choice(topics)   
+
+headers = {
+    # Request headers. Replace the key below with your subscription key.
+    'Content-Type': 'application/json',
+    'Ocp-Apim-Subscription-Key': '9a899136784940ebadbe150dc9d28b39',
+}
+
+params = urllib.parse.urlencode({
+    # Request parameters. All of them are optional.
+    'visualFeatures': 'Categories',
+    'details': 'Celebrities',
+    'language': 'en',
+})
+
+def findImages (subscription_key, search_term):
+
+    client = ImageSearchAPI(CognitiveServicesCredentials(subscription_key)) 
+    image_results = client.images.search(query=search_term,count=100,ImageContent=face) 
+
+    if image_results.value:
+        first_image_result = random.choice(image_results.value)  
+        return(first_image_result.content_url); 
+
+    else:
+        print("No image results returned!") 
+    
+    
+
+
+
+def findMatch (): 
+    try:    
+        search_term = random.choice(topics) 
+        text = findImages(subscription_key, search_term)  
+        body = "{'url':\'"+text+"\'}" 
+
+        h1 = http.client.HTTPConnection('www.cwi.nl')
+        conn = http.client.HTTPConnection('northeurope.api.cognitive.microsoft.com') 
+        conn.request("POST", "/vision/v1.0/analyze?%s" % params, body, headers) #
+        response = conn.getresponse() 
+        data = response.read() 
+        conn.close() 
+        d1=json.loads(data)     
+         
+        if (str(data).__contains__('"celebrities":[]') or str(data).__contains__('"categories":[]')):  
+            #print ("catching empties has worked")
+            return("no match");    
+        else:  
+            name = (d1['categories'][0]['detail']['celebrities'][0]['name']) 
+            score = (d1['categories'][0]['detail']['celebrities'][0]['confidence']) 
+            classification = (d1['categories'][0]['name'])         
+        
+
+        if name == "":  
+            #print("name is empty so failed")
+            return("no match");  
+        elif score == "":  
+            #print("score is empty so failed")
+            return("no match");  
+        elif (classification == "people_" or classification == "people_portrait"):   
+            #print (classification + " has passed the classification test and is therefore equal to people_ or people_portrait")
+            return (text);  
+        else:  
+            #print (classification + " has failed the classification test and is therefore not equal to people_ or people_portrait")
+            return("no match"); 
+  
+        
+    except KeyError:   
+        #print("Failed because of exeption")
+        return("no match");  
+    
+
+correct_answers = 0  
+
+questions = []  
+unique_questions = []  
+occurence_count = []
+        
+for i in range(0, 100):
+    while True:  
+        text = findMatch()
+        
+        if text != "no match": 
+            break    
+        
+ 
+
+    question = text 
+    if questions.__contains__(question): 
+        occurence_count.append(question)
+    else:   
+        unique_questions.append(question)  
+    questions.append(question)     
+        
+print (len(questions))  
+print (len(unique_questions))    
+
+ocount = []       
+        
+for uquestion in unique_questions:  
+    count = questions.count(uquestion)  
+    print('This question ' + uquestion + 'appeared  ' + str(count) + ' times')
+    ocount.append(count) 
+    
+    
+print("There was a total of " + str(len(occurence_count)) + " Same occurences of a question") 
+print (str(average(ocount))) 
+
+body = "{'url':\'"+text+"\'}"
+\end{lstlisting}
+\section{Appendix 16: bing\textunderscore eval.py code used for Test 2} 
+\begin{lstlisting}
+import http.client, urllib, base64
+from pprint import pprint 
+import json
+import sys 
+from azure.cognitiveservices.search.imagesearch import ImageSearchAPI
+from msrest.authentication import CognitiveServicesCredentials  
+from PIL import Image 
+import urllib.request  
+import urllib.error
+import os  
+import random
+from cognitive_face import face
+from azure.cognitiveservices.search.imagesearch.models.image_search_api_enums import ImageContent
+from numpy.lib.function_base import average 
+from bs4 import BeautifulSoup 
+import requests   
+import random 
+import hashlib 
+import re 
+from selenium import webdriver
+
+
+subscription_key = "71ad32482bbb4d99a0882c34d8b08d9f"
+search_term = "famous computer scientists" 
+
+
+client = ImageSearchAPI(CognitiveServicesCredentials(subscription_key)) 
+image_results = client.images.search(query=search_term,count=100,ImageContent=face)  
+   
+
+from selenium.webdriver.chrome.options import Options
+options = Options()
+options.binary_location = "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
+browser = webdriver.Chrome(options=options, executable_path=r"C:\Program Files (x86)\Google\Chrome\Application\chromedriver.exe", )
+
+if image_results.value: 
+    for i in range(0,100):
+        first_image_result = image_results.value[i]
+        browser.get(first_image_result.content_url)
+    else:
+        print("No image results returned!") 
+\end{lstlisting}
+\section{Appendix 17: Face\textunderscore eval.py code used for Test 3}  
+\begin{lstlisting}
+import http.client, urllib, base64
+from pprint import pprint 
+import json
+import sys 
+from azure.cognitiveservices.search.imagesearch import ImageSearchAPI
+from msrest.authentication import CognitiveServicesCredentials  
+from PIL import Image 
+import urllib.request  
+import urllib.error
+import os  
+import random
+from cognitive_face import face
+from azure.cognitiveservices.search.imagesearch.models.image_search_api_enums import ImageContent
+from numpy.lib.function_base import average
+
+
+
+
+#for the purposes of this appendices I have just included one computer scientist entry for each category dictionary as it was 100s of lines of code and would have taken up many pages
+
+Very_famous = { 
+'Bill Gates 1' : 'https://specials-images.forbesimg.com/imageserve/5c76b4b84bbe6f24ad99c370/416x416.jpg?background=000000&cropX1=0&cropX2=4000&cropY1=0&cropY2=4000',
+'Bill Gates 2' : 'https://fm.cnbc.com/applications/cnbc.com/resources/img/editorial/2018/07/11/105322791-1531301768595gettyimages-467620670.1910x1000.jpg',
+'Bill Gates 3' : 'https://bitcoinist.com/wp-content/uploads/2018/05/wiki-Bill_Gates_MSC_2017-e1525827667380.jpg',
+}  
+
+Medium_famous = { 
+'James Gosling  1' : 'https://images.computerhistory.org/fellows/jgosling.jpg',
+'James Gosling  2' : 'http://nighthacks.com/jag/bio/JamesInViennaEnjoyingBeer.jpg',
+'James Gosling  3' : 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/James_Gosling_2008.jpg/220px-James_Gosling_2008.jpg',
+}  
+
+Low_famous = { 
+'Howard Aiken 1' : 'https://upload.wikimedia.org/wikipedia/commons/c/c9/Aiken.jpeg',
+'Howard Aiken 2' : 'https://history-computer.com/ModernComputer/Relays/images/AikenPortrait3.jpg',
+'Howard Aiken 3' : 'https://ethw.org/w/images/8/8b/Aiken.jpg',
+}  
+
+subscription_key = "71ad32482bbb4d99a0882c34d8b08d9f"
+  
+
+headers = {
+    # Request headers. Replace the key below with your subscription key.
+    'Content-Type': 'application/json',
+    'Ocp-Apim-Subscription-Key': '9a899136784940ebadbe150dc9d28b39',
+}
+
+params = urllib.parse.urlencode({
+    # Request parameters. All of them are optional.
+    'visualFeatures': 'Categories',
+    'details': 'Celebrities',
+    'language': 'en',
+})
+
+
+def findMatch (link): 
+    try:      
+        body = "{'url':\'"+link+"\'}" 
+
+        h1 = http.client.HTTPConnection('www.cwi.nl')
+        conn = http.client.HTTPConnection('northeurope.api.cognitive.microsoft.com') 
+        conn.request("POST", "/vision/v1.0/analyze?%s" % params, body, headers) #
+        response = conn.getresponse() 
+        data = response.read() 
+        conn.close() 
+        d1=json.loads(data)     
+         
+        if (str(data).__contains__('"celebrities":[]') or str(data).__contains__('"categories":[]')):  
+            #print ("catching empties has worked")
+            return("This person could not be matches by the Face API");    
+        else:  
+            name = (d1['categories'][0]['detail']['celebrities'][0]['name']) 
+            score = (d1['categories'][0]['detail']['celebrities'][0]['confidence'])  
+            percentage = (score * 100) 
+            rounded_percentage = round(percentage,2) 
+            classification = (d1['categories'][0]['name'])       
+
+
+        if name == "":  
+            #print("name is empty so failed")
+            return("This person could not be matches by the Face API");  
+        elif score == "":  
+            #print("score is empty so failed")
+            return("This person could not be matches by the Face API");  
+        elif (classification == "people_" or classification == "people_portrait"):   
+            #print (classification + " has passed the classification test and is therefore equal to people_ or people_portrait")
+            return (str(rounded_percentage) + ": Certain that this is " + name);  
+        else:  
+            #print (classification + " has failed the classification test and is therefore not equal to people_ or people_portrait")
+            return("This person could not be matches by the Face API");
+        
+    except KeyError:   
+        #print("Failed because of exeption")
+        return("This person could not be matches by the Face API");  
+    
+def getScore (link): 
+    try:      
+        body = "{'url':\'"+link+"\'}" 
+
+        h1 = http.client.HTTPConnection('www.cwi.nl')
+        conn = http.client.HTTPConnection('northeurope.api.cognitive.microsoft.com') 
+        conn.request("POST", "/vision/v1.0/analyze?%s" % params, body, headers) #
+        response = conn.getresponse() 
+        data = response.read() 
+        conn.close() 
+        d1=json.loads(data)     
+           
+        score = (d1['categories'][0]['detail']['celebrities'][0]['confidence'])  
+        percentage = (score * 100)   
+        return percentage;      
+   
+    except KeyError:   
+        #print("Failed because of exeption")
+        return("This person could not be matches by the Face API");  
+    
+def mysplit(key):
+        head = key.rstrip('0123456789')
+        return head
+    
+
+
+
+vcorrect = 0 
+vscores = [] 
+vmatched = [] 
+
+for key,value in Very_famous.items():
+     
+    link = value  
+    text = findMatch(link) 
+    name = mysplit(key)     
+    if text != "This person could not be matches by the Face API":  
+        print(key + " was matched as " + text)  
+        vcorrect = vcorrect + 1  
+        score = getScore(link)
+        vscores.append(score) 
+        if vmatched.__contains__(name): 
+            print 
+        else: 
+            vmatched.append(name)
+    else: 
+        print(key + "was not matched my the face API")   
+        
+        
+        
+mcorrect = 0 
+mscores = [] 
+mmatched = [] 
+
+for key,value in Medium_famous.items():
+     
+    link = value  
+    text = findMatch(link) 
+    name = mysplit(key)     
+    if text != "This person could not be matches by the Face API":  
+        print(key + " was matched as " + text)  
+        mcorrect = mcorrect + 1  
+        score = getScore(link)
+        mscores.append(score) 
+        if mmatched.__contains__(name): 
+            print 
+        else: 
+            mmatched.append(name)
+    else: 
+        print(key + "was not matched my the face API")   
+        
+        
+lcorrect = 0 
+lscores = [] 
+lmatched = [] 
+
+for key,value in Low_famous.items():
+     
+    link = value  
+    text = findMatch(link) 
+    name = mysplit(key)     
+    if text != "This person could not be matches by the Face API":  
+        print(key + " was matched as " + text)  
+        lcorrect = lcorrect + 1  
+        score = getScore(link)
+        lscores.append(score) 
+        if lmatched.__contains__(name): 
+            print 
+        else: 
+            lmatched.append(name)
+    else: 
+        print(key + "was not matched my the face API")         
+        
+        
+        
+        
+        
+        
+
+        
+print("the very famous category matched " + str(vcorrect) + " out of " + str(len(Very_famous)) + 
+      " Pictures with an average confidence rating of " + str(average(vscores)))  
+
+print("a total of " + str(len(vmatched)) + " People were matched out of " + str(len(Very_famous)/3))  
+
+
+print("the medium famous category matched " + str(mcorrect) + " out of " + str(len(Medium_famous)) + 
+      " Pictures with an average confidence rating of " + str(average(mscores)))  
+
+print("a total of " + str(len(mmatched)) + " People were matched out of " + str(len(Medium_famous)/3))  
+
+
+print("the low famous category matched " + str(lcorrect) + " out of " + str(len(Low_famous)) + 
+      " Pictures with an average confidence rating of " + str(average(lscores)))   
+
+print("a total of " + str(len(lmatched)) + " People were matched out of " + str(len(Low_famous)/3))
+\end{lstlisting}
+\section{Appendix 18: Face\textunderscore eval.py output} 
+\section{Appendix 19: List of 100 computer scientists used for Test 3}
+
+
 \end{appendices}
 
 \end{document}

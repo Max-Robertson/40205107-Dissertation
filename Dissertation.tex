@@ -146,7 +146,23 @@ Insert acknowledgements here
 "if organisations don't have employees with the right skills needed to fight back at cyber-criminals, we will be fighting a losing battle. This will ultimately lead to fewer jobs all round as businesses suffer the repercussions of cybercrime". There is a cyber security skills crisis and with the workers in the industry claiming "there simply aren't enough trained people out there right now" \cite{caldwell2013plugging} a solution needs to be found.  
 
 \subsection{Background}  
-In recent years a shortage of IT skills has been seen, however a more severe shortage has been prevalent with Cyber security skills. With statistics like 45 percent of organisations claiming to be lacking in cyber security skills and (found by research done by the Information Systems Security Association) 70 percent of IT workers believe the lack of cyber security professionals is negatively impacting their existing work \cite{smith2018intelligent}. This has been a widely discussed issue in recent years and there has been a number of proposals for how to fix this 'cyber security skills gap' from developing the companies HR department so that an individual interested in gaining the relevant skills is given the appropriate training by the company to advancing security technology and crime deterrence so that less personnel are needed to close the gap \cite{cobb2016mind}. One proposed solution is that an emphasis should be put on cyber security at an earlier age and high school students should be introduced to cyber security elements. If students are introduced to these elements at an early age there is more of a chance of capturing an interest in the subject and for students to pursue a career in cyber security. Further more if research is done in how to cater this material to the students and how to peak their interests the effect could be greater. This could be done through the use of gamification which has been proposed as a solution for engaging people in individually and socially sustainable behaviours, such as education \cite{su2015mobile}. CTF (Capture The Flag) competitions are held in cyber security communities which are essentially a gamified environment where teams compete by completing different cyber security related challenges to ascertain 'flags' which will score them points. This project proposed to take the structure of a CTF competition and gamify it further for use in the education of cyber security.   
+In recent years a shortage of IT skills has been seen, however a more severe shortage has been prevalent with Cyber security skills. With statistics like 45 percent of organisations claiming to be lacking in cyber security skills and (found by research done by the Information Systems Security Association) 70 percent of IT workers believe the lack of cyber security professionals is negatively impacting their existing work \cite{smith2018intelligent}. This has been a widely discussed issue in recent years and there has been a number of proposals for how to fix this 'cyber security skills gap' from developing the companies HR department so that an individual interested in gaining the relevant skills is given the appropriate training by the company to advancing security technology and crime deterrence so that less personnel are needed to close the gap \cite{cobb2016mind}. Studies have shown \cite{pedley2018understanding} alarming numbers both in regards to how many cyber security professionals come from having trained in cyber security vs how many are trained from other roles (see Figure \ref{wherefrom}) and how little corporations feel "very confident" in their employees abilities to perform 8 simple cyber security tasks (see Figure \ref{veryconfident}). Especially so the last one as if the companies employing the staff can't trust them how are the consumers supposed to ?  
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.9\textwidth]{Figs/cyberskillswherefrom.PNG} 
+    \caption{Where Cyber security professionals are coming from (Pedley et al 2018)}
+    \label{wherefrom}
+\end{figure} 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.9\textwidth]{Figs/veryconfidentskillsgap.PNG} 
+    \caption{What percent feel "very confident" (Pedley et al 2018)}
+    \label{veryconfident}
+\end{figure}
+
+One proposed solution is that an emphasis should be put on cyber security at an earlier age and high school students should be introduced to cyber security elements. If students are introduced to these elements at an early age there is more of a chance of capturing an interest in the subject and for students to pursue a career in cyber security. Further more if research is done in how to cater this material to the students and how to peak their interests the effect could be greater. This could be done through the use of gamification which has been proposed as a solution for engaging people in individually and socially sustainable behaviours, such as education \cite{su2015mobile}. CTF (Capture The Flag) competitions are held in cyber security communities which are essentially a gamified environment where teams compete by completing different cyber security related challenges to ascertain 'flags' which will score them points. This project proposed to take the structure of a CTF competition and gamify it further for use in the education of cyber security.   
 
 \subsection{Gamification}
 
@@ -849,9 +865,9 @@ The Docker face population script is very similar to the Face Quiz script discus
 \end{figure} 
 
 \subsubsection{Docker}   
-These are the files used to create Docker images and spin up the containers with my script running inside them so the database can be populated. 
+These are the files used to create Docker images and spin up the containers with my script running inside them so the database can be populated.  
 \textbf{requirements.txt}   
-This file is essentially just a list of all the external libraries used in the script that the machine will be running. The Dockerfile uses this file to pip install everything to contained inside (see Figure \ref{req}) 
+This file is essentially just a list of all the external libraries used in the script that the machine will be running. The Dockerfile uses this file to pip install everything to contained inside (see Figure \ref{req}). 
 
 \begin{figure}[!ht]
     \centering
@@ -872,14 +888,24 @@ The Dockerfile its the instructions that are needed to build the docker image th
 
 \textbf{docker-compose.yml} 
 
-Docker compose is a tool for defining and running multi container applications which can be used to configure the application. After this has been done all services can be created and started with a single command. Docker compose was used to establish the services of "db" (this is the db reffered to in the docker face population script) which is a mongoDB image that was downloaded off of Docker Hub (where you can download from a library of images) and expose the correct ports and set the volume. Then the "client" is defined as using honours-project image (the image created using my requirements.txt and Dockerfile) and link it to the db service so data from the client service can be inserted into the database from the db service. The port is opened and then the environment that will be worked with (which database is going to be used etc) is established (see Figure \ref{Dockercompose}). 
+Docker compose is a tool for defining and running multi container applications which can be used to configure the application. After this has been done all services can be created and started with a single command. Docker compose was used to establish the services of "db" (this is the db reffered to in the docker face population script) which is a mongoDB image that was downloaded off of Docker Hub (where you can download from a library of images) and expose the correct ports and set the volume. Then the "client" is defined as using honours-project image (the image created using my requirements.txt and Dockerfile) and link it to the db service so data from the client service can be inserted into the database from the db service. The port is opened and then the environment that will be worked with (which database is going to be used etc) is established (see Figure \ref{Dockercompose}).  
 
 \begin{figure}[!ht]
     \centering
     \includegraphics[width=0.4\textwidth]{Figs/dockercomposecode.PNG} 
     \caption{docker-compose.yml contents} 
     \label{Dockercompose}
-\end{figure} 
+\end{figure}  
+
+\textbf{Docker implementation} 
+With all of the previously discussed files implemented, Docker can be set up and containers can be spin up each executing the population script and inserting data into the database (see Figure \ref{Dockeroutput}).  
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.5\textwidth]{Figs/dockeroutput.PNG} 
+    \caption{Sample Docker output with 5 containers} 
+    \label{Dockeroutput}
+\end{figure}
 
 \subsection{Conclusions}
 This chapter of the dissertation has shown how the four methods of dynamic challenge generation methods were implemented using python scripts as well as the implementation of a database population technique using Docker. The methods were implemented with a varying degree of complexity (with the random selection method being implemented with a limited selection of challenges, where as the web scraping with API was implemented selecting a random image from 100 returned using a search term which itself was randomly chosen from a list of search terms) with the ultimate goal to measure the potential of the method rather than the performance of the individual script. The web scraping with API method used both the Bing image search API and Vision API which were authenticated using a Microsoft azure account created for this project, this gives the potential for this project to not only measure the performance of the implemented challenge generation methods but to measure the performance of the utilised APIs and their potential use for this purpose also.
@@ -1032,13 +1058,23 @@ For the next part of this test the average picture recognition was measured, mea
     \label{fer2}
 \end{figure}
 
-The third and final metric gathered was the average confidence rate of the matches made, the Face API gives a confidence rating along with the match stating how sure it is that it is that person. The average confidence rating for the very famous category was 99.43 percent, the average confidence rating for the well known category was 98.54 percent and the average confidence rating for the industry recognised category was 98.71 percent (see Figure \ref{fer3}). 
+The third and metric gathered was the average confidence rate of the matches made, the Face API gives a confidence rating along with the match stating how sure it is that it is that person. The average confidence rating for the very famous category was 99.43 percent, the average confidence rating for the well known category was 98.54 percent and the average confidence rating for the industry recognised category was 98.71 percent (see Figure \ref{fer3}).  
+
 
 \begin{figure}[!ht]
     \centering
     \includegraphics[width=1.0\textwidth]{Figs/faceevalr3.PNG} 
     \caption{Face API average confidence ratings} 
     \label{fer3}
+\end{figure}  
+
+As an extra final performance test for the Face API it was decided to try  and feed it some "dud" images.  By sending the API images of lookalikes such a Bill Gates impersonator and an actor playing the part of Steve Jobs, it could be seen determined how accurate the API is, can it be tricked. After sending the image of Ashton Kutcher in the role of Steve Jobs (see Figure \ref{ash}) the Face API recognised the picture as Ashton Kutcher. 
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.5\textwidth]{Figs/ashton_kutcher_jobs_h_2013.jpg} 
+    \caption{"Dud" image sent to API} 
+    \label{ash}
 \end{figure} 
 
 All of these results were then taken and mapped on a graph to show a correlation (see Figure \ref{fer4}) 
@@ -1048,7 +1084,9 @@ All of these results were then taken and mapped on a graph to show a correlation
     \includegraphics[width=1.0\textwidth]{Figs/faceevalr4.PNG} 
     \caption{Face API performance} 
     \label{fer4}
-\end{figure} 
+\end{figure}  
+
+
 
 \subsubsection{Evaluation of Results} 
 Test 3 was evaluating the performance of the Face API used in the implementation of my web scraping with API dynamic challenge generation method. 
@@ -1056,9 +1094,9 @@ As previously mentioned for this test a list of 100 computer scientists was made
 
 The next set of data collected was how many of the actual images were recognised. Here this dissertation was investigating although the Face API may have recognised one of the images of the computer scientist, How consistent was it across the 3 images provided. The scores came back as follows: 27 out of 30 images recognised for the very famous category, 36 out of 45 for well known and 120.6 out 225 for industry recognised. This equates also to 2.7 out of the 3 images provided on average for very famous, 2.4 out of 3 for well known and 1.6 out of 3 for industry recognised. Here we see a more drastic drop in performance when it comes to the lesser known people, although the Face API was able to recognise over 77 percent of the people included in the industry recognised category it only recognised 53.6 percent of the total images in the same category. this is quite a drastic drop and should be taken into account for this considered purpose. This would suggest maybe it best to gather multiple images of people if intending to use them, if they are lesser known as this could be down to the API learning who certain pictures are but struggling to match them when a face is at a different angle.  
 
-The final set of data collected was the average certainty rating given when a match was made. The results were fairly consistent through out all of the categories with very famous having 99.43 percent, well known having 98.54 percent and industry recognised having 98.71 percent. While it can be seen that technically the industry recognised category has a marginally higher average confidence rating but this is likely insignificant and the point to take from these results is that the confidence ratings returned from the Face API are very high, and consistently very high which is essential if its to be used for this intended purpose. 
+The third set of data collected was the average certainty rating given when a match was made. The results were fairly consistent through out all of the categories with very famous having 99.43 percent, well known having 98.54 percent and industry recognised having 98.71 percent. While it can be seen that technically the industry recognised category has a marginally higher average confidence rating but this is likely insignificant and the point to take from these results is that the confidence ratings returned from the Face API are very high, and consistently very high which is essential if its to be used for this intended purpose. 
 
-Overall the Results show that the Face API is very effective with it recognising 83 out of 100 computer and the average confidence rating being over 98 percent in all three categories, the only area of concern is the rate at which it recognises images in the lesser known category with almost half of the images not being matched. This is not as much of a problem as this can be balances out by feeding multiple images of the same person to find a match. Analysing the performance of this API it can definitely be deemed effective and suitable for the intended use.  
+Overall the Results show that the Face API is very effective with it recognising 83 out of 100 computer and the average confidence rating being over 98 percent in all three categories, the only area of concern is the rate at which it recognises images in the lesser known category with almost half of the images not being matched. This is not as much of a problem as this can be balances out by feeding multiple images of the same person to find a match. Finally the fact that in can determine a face made to look like another correctly increases the reliability of the API as a service.  Analysing the performance of this API it can definitely be deemed effective and suitable for the intended use.  
 
 \subsection{Conclusions} 
 
@@ -2092,10 +2130,422 @@ print("the low famous category matched " + str(lcorrect) + " out of " + str(len(
 
 print("a total of " + str(len(lmatched)) + " People were matched out of " + str(len(Low_famous)/3))
 \end{lstlisting}
-\section{Appendix 18: Face\textunderscore eval.py output} 
+\section{Appendix 18: Face\textunderscore eval.py output}  
+Bill Gates 1 was matched as 99.97: Certain that this is Bill Gates
+Bill Gates 2 was matched as 100.0: Certain that this is Bill Gates
+Bill Gates 3 was matched as 100.0: Certain that this is Bill Gates
+Steve Jobs  1 was matched as 100.0: Certain that this is Steve Jobs
+Steve Jobs  2 was matched as 100.0: Certain that this is Steve Jobs
+Steve Jobs  3 was matched as 100.0: Certain that this is Steve Jobs
+Elon Musk  1was not matched my the face API
+Elon Musk  2 was matched as 100.0: Certain that this is Elon Musk
+Elon Musk  3 was matched as 99.96: Certain that this is Elon Musk
+Mark Zuckerberg  1 was matched as 97.59: Certain that this is Mark Zuckerberg
+Mark Zuckerberg  2 was matched as 98.87: Certain that this is Mark Zuckerberg
+Mark Zuckerberg  3 was matched as 89.13: Certain that this is Mark Zuckerberg
+Larry Page  1 was matched as 100.0: Certain that this is Larry Page
+Larry Page  2 was matched as 100.0: Certain that this is Larry Page
+Larry Page  3 was matched as 100.0: Certain that this is Larry Page
+Sergey Brin  1 was matched as 99.98: Certain that this is Sergey Brin
+Sergey Brin  2 was matched as 99.99: Certain that this is Sergey Brin
+Sergey Brin  3 was matched as 99.67: Certain that this is Sergey Brin
+Tim Berners Lee  1 was matched as 99.98: Certain that this is Tim Berners-Lee
+Tim Berners Lee  2 was matched as 99.97: Certain that this is Tim Berners-Lee
+Tim Berners Lee  3 was matched as 100.0: Certain that this is Tim Berners-Lee
+Alan Turing  1was not matched my the face API
+Alan Turing  2was not matched my the face API
+Alan Turing  3 was matched as 100.0: Certain that this is Alan Turing
+Steve Wozniak  1 was matched as 99.92: Certain that this is Steve Wozniak
+Steve Wozniak  2 was matched as 99.98: Certain that this is Steve Wozniak
+Steve Wozniak  3 was matched as 99.86: Certain that this is Steve Wozniak
+Linus Torvalds 1 was matched as 99.99: Certain that this is Linus Torvalds
+Linus Torvalds 2 was matched as 100.0: Certain that this is Linus Torvalds
+Linus Torvalds 3 was matched as 99.84: Certain that this is Linus Torvalds
+James Gosling  1 was matched as 99.98: Certain that this is James Gosling
+James Gosling  2 was matched as 99.98: Certain that this is James Gosling
+James Gosling  3was not matched my the face API
+Grace Hopper  1 was matched as 99.99: Certain that this is Grace Hopper
+Grace Hopper  2 was matched as 99.92: Certain that this is Grace Hopper
+Grace Hopper  3was not matched my the face API
+Martin Hellman  1 was matched as 97.34: Certain that this is Martin Hellman
+Martin Hellman  2 was matched as 99.98: Certain that this is Martin Hellman
+Martin Hellman  3 was matched as 99.99: Certain that this is Martin Hellman
+Michael Widenius  1was not matched my the face API
+Michael Widenius  2was not matched my the face API
+Michael Widenius  3 was matched as 99.6: Certain that this is Michael Widenius
+Yukihiro Matsumoto  1 was matched as 100.0: Certain that this is Yukihiro Matsumoto
+Yukihiro Matsumoto  2 was matched as 99.97: Certain that this is Yukihiro Matsumoto
+Yukihiro Matsumoto  3 was matched as 100.0: Certain that this is Yukihiro Matsumoto
+John Resig  1 was matched as 78.35: Certain that this is John Resig
+John Resig  2 was matched as 99.71: Certain that this is John Resig
+John Resig  3was not matched my the face API
+Brian Kernighan  1was not matched my the face API
+Brian Kernighan  2 was matched as 99.99: Certain that this is Brian Kernighan
+Brian Kernighan  3 was matched as 99.99: Certain that this is Brian Kernighan
+Ken Thompson  1was not matched my the face API
+Ken Thompson  2 was matched as 76.03: Certain that this is Ken Thompson
+Ken Thompson  3was not matched my the face API
+David Axmark  1 was matched as 99.97: Certain that this is David Axmark
+David Axmark  2 was matched as 99.98: Certain that this is David Axmark
+David Axmark  3 was matched as 98.15: Certain that this is David Axmark
+Ben Goodger  1 was matched as 99.82: Certain that this is Ben Goodger
+Ben Goodger  2 was matched as 99.54: Certain that this is Ben Goodger
+Ben Goodger  3 was matched as 100.0: Certain that this is Ben Goodger
+Larry Wall  1 was matched as 100.0: Certain that this is Larry Wall
+Larry Wall  2 was matched as 100.0: Certain that this is Larry Wall
+Larry Wall  3was not matched my the face API
+Bjarne Stroustrup  1 was matched as 99.74: Certain that this is Bjarne Stroustrup
+Bjarne Stroustrup  2 was matched as 99.9: Certain that this is Bjarne Stroustrup
+Bjarne Stroustrup  3 was matched as 100.0: Certain that this is Bjarne Stroustrup
+Rasmus Lerdorf  1 was matched as 99.99: Certain that this is Rasmus Lerdorf
+Rasmus Lerdorf  2 was matched as 100.0: Certain that this is Rasmus Lerdorf
+Rasmus Lerdorf  3 was matched as 100.0: Certain that this is Rasmus Lerdorf
+Niklaus Wirth  1 was matched as 99.98: Certain that this is Niklaus Wirth
+Niklaus Wirth  2 was matched as 99.99: Certain that this is Niklaus Wirth
+Niklaus Wirth  3 was matched as 100.0: Certain that this is Niklaus Wirth
+shigeru miyamoto 1 was matched as 99.99: Certain that this is Shigeru Miyamoto
+shigeru miyamoto 2 was matched as 99.87: Certain that this is Shigeru Miyamoto
+shigeru miyamoto 3 was matched as 99.99: Certain that this is Shigeru Miyamoto
+Howard Aiken 1 was matched as 99.97: Certain that this is Howard H. Aiken
+Howard Aiken 2 was matched as 91.14: Certain that this is Howard H. Aiken
+Howard Aiken 3was not matched my the face API
+Frances E Allen 1 was matched as 99.94: Certain that this is Frances E. Allen
+Frances E Allen 2 was matched as 99.39: Certain that this is Frances E. Allen
+Frances E Allen 3 was matched as 99.97: Certain that this is Frances E. Allen
+John Atanasoff 1was not matched my the face API
+John Atanasoff 2 was matched as 93.75: Certain that this is John Vincent Atanasoff
+John Atanasoff 3 was matched as 99.99: Certain that this is John Vincent Atanasoff
+Charles Babbage1was not matched my the face API
+Charles Babbage2was not matched my the face API
+Charles Babbage3was not matched my the face API
+John Backus1 was matched as 99.97: Certain that this is John Backus
+John Backus2 was matched as 100.0: Certain that this is John Backus
+John Backus3 was matched as 99.19: Certain that this is John Backus
+Corrado bohm1was not matched my the face API
+Corrado bohm2was not matched my the face API
+Corrado bohm3was not matched my the face API
+Fred Brooks1 was matched as 100.0: Certain that this is Fred Brooks
+Fred Brooks2 was matched as 99.87: Certain that this is Fred Brooks
+Fred Brooks3 was matched as 100.0: Certain that this is Fred Brooks
+Vannevar Bush1was not matched my the face API
+Vannevar Bush2 was matched as 100.0: Certain that this is Vannevar Bush
+Vannevar Bush3 was matched as 99.85: Certain that this is Vannevar Bush
+Vint Cerf1was not matched my the face API
+Vint Cerf2was not matched my the face API
+Vint Cerf3 was matched as 98.82: Certain that this is Vint Cerf
+Noam Chomsky1was not matched my the face API
+Noam Chomsky2 was matched as 99.1: Certain that this is Noam Chomsky
+Noam Chomsky3 was matched as 99.84: Certain that this is Noam Chomsky
+Edmund Clarke1 was matched as 98.02: Certain that this is Edmund M. Clarke
+Edmund Clarke2 was matched as 100.0: Certain that this is Edmund M. Clarke
+Edmund Clarke3 was matched as 99.99: Certain that this is Edmund M. Clarke
+Lynn Conway 1 was matched as 95.18: Certain that this is Lynn Conway
+Lynn Conway 2was not matched my the face API
+Lynn Conway 3was not matched my the face API
+Stephen Cook1 was matched as 98.14: Certain that this is Stephen Cook
+Stephen Cook2was not matched my the face API
+Stephen Cook3was not matched my the face API
+Edsger Dijkstra 1was not matched my the face API
+Edsger Dijkstra 2 was matched as 99.95: Certain that this is Edsger W. Dijkstra
+Edsger Dijkstra 3 was matched as 99.97: Certain that this is Edsger W. Dijkstra
+Ernest Allen Emerson 1 was matched as 99.99: Certain that this is E. Allen Emerson
+Ernest Allen Emerson 2 was matched as 97.98: Certain that this is E. Allen Emerson
+Ernest Allen Emerson 3was not matched my the face API
+Douglas Engelbart1 was matched as 99.97: Certain that this is Douglas Engelbart
+Douglas Engelbart2 was matched as 100.0: Certain that this is Douglas Engelbart
+Douglas Engelbart3 was matched as 99.97: Certain that this is Douglas Engelbart
+Federico Faggin1was not matched my the face API
+Federico Faggin2 was matched as 99.99: Certain that this is Federico Faggin
+Federico Faggin3was not matched my the face API
+Elizabeth Feinler1 was matched as 99.9: Certain that this is Elizabeth J. Feinler
+Elizabeth Feinler2was not matched my the face API
+Elizabeth Feinler3was not matched my the face API
+Tommy Flowers1 was matched as 91.92: Certain that this is Tommy Flowers
+Tommy Flowers2 was matched as 99.67: Certain that this is Tommy Flowers
+Tommy Flowers3was not matched my the face API
+Sally Floyd1was not matched my the face API
+Sally Floyd2was not matched my the face API
+Sally Floyd3was not matched my the face API
+Charles Sanders Pierce1 was matched as 88.08: Certain that this is Charles Sanders Peirce
+Charles Sanders Pierce2was not matched my the face API
+Charles Sanders Pierce3was not matched my the face API
+Stephen Furber1 was matched as 99.92: Certain that this is Steve Furber
+Stephen Furber2was not matched my the face API
+Stephen Furber3was not matched my the face API
+Sophie Wilson1was not matched my the face API
+Sophie Wilson2was not matched my the face API
+Sophie Wilson3 was matched as 100.0: Certain that this is Sophie Wilson
+Seymour Ginsburg1was not matched my the face API
+Seymour Ginsburg2 was matched as 99.98: Certain that this is George Gurdjieff
+Seymour Ginsburg3 was matched as 99.97: Certain that this is George Gurdjieff
+Susan L graham1 was matched as 100.0: Certain that this is Susan L. Graham
+Susan L graham2 was matched as 100.0: Certain that this is Susan L. Graham
+Susan L graham3 was matched as 99.97: Certain that this is Susan L. Graham
+Jim Gray1 was matched as 99.96: Certain that this is Jim Gray
+Jim Gray2was not matched my the face API
+Jim Gray3 was matched as 99.18: Certain that this is Jim Gray
+Barbara Grosz1was not matched my the face API
+Barbara Grosz2was not matched my the face API
+Barbara Grosz3was not matched my the face API
+Margaret Hamilton1 was matched as 99.99: Certain that this is Margaret Hamilton
+Margaret Hamilton2 was matched as 99.99: Certain that this is Margaret Hamilton
+Margaret Hamilton3 was matched as 99.08: Certain that this is Margaret Hamilton
+Geoffrey Hinton1 was matched as 99.99: Certain that this is Geoffrey Hinton
+Geoffrey Hinton2 was matched as 100.0: Certain that this is Geoffrey Hinton
+Geoffrey Hinton3 was matched as 100.0: Certain that this is Geoffrey Hinton
+Charles Anthony Richard Hoare 1 was matched as 99.99: Certain that this is Tony Hoare
+Charles Anthony Richard Hoare 2 was matched as 99.81: Certain that this is Tony Hoare
+Charles Anthony Richard Hoare 3was not matched my the face API
+Betty Holberton1was not matched my the face API
+Betty Holberton2was not matched my the face API
+Betty Holberton3was not matched my the face API
+Harry Huskey1was not matched my the face API
+Harry Huskey2 was matched as 86.47: Certain that this is Harry Huskey
+Harry Huskey3was not matched my the face API
+Kenneth Iverson1was not matched my the face API
+Kenneth Iverson2was not matched my the face API
+Kenneth Iverson3was not matched my the face API
+Karen Sparck Jones1 was matched as 99.96: Certain that this is Karen Spärck Jones
+Karen Sparck Jones2was not matched my the face API
+Karen Sparck Jones3was not matched my the face API
+Jacek Karpinski 1was not matched my the face API
+Jacek Karpinski 2was not matched my the face API
+Jacek Karpinski 3was not matched my the face API
+Alan Kay1 was matched as 100.0: Certain that this is Alan Kay
+Alan Kay2 was matched as 99.94: Certain that this is Alan Kay
+Alan Kay3 was matched as 96.82: Certain that this is Alan Kay
+Stephen Cole Kleene1was not matched my the face API
+Stephen Cole Kleene2was not matched my the face API
+Stephen Cole Kleene3was not matched my the face API
+Donald Knuth1was not matched my the face API
+Donald Knuth2was not matched my the face API
+Donald Knuth3 was matched as 99.99: Certain that this is Donald Knuth
+Leslie Lamport1 was matched as 99.88: Certain that this is Leslie Lamport
+Leslie Lamport2 was matched as 99.93: Certain that this is Leslie Lamport
+Leslie Lamport3 was matched as 99.56: Certain that this is Leslie Lamport
+Barbara Liskov1 was matched as 99.99: Certain that this is Barbara Liskov
+Barbara Liskov2 was matched as 100.0: Certain that this is Barbara Liskov
+Barbara Liskov3 was matched as 99.93: Certain that this is Barbara Liskov
+Ada Lovelace1was not matched my the face API
+Ada Lovelace2was not matched my the face API
+Ada Lovelace3was not matched my the face API
+John McCarthy1was not matched my the face API
+John McCarthy2 was matched as 100.0: Certain that this is John McCarthy
+John McCarthy3 was matched as 99.88: Certain that this is John McCarthy
+Marvin Minsky1was not matched my the face API
+Marvin Minsky2 was matched as 100.0: Certain that this is Marvin Minsky
+Marvin Minsky3was not matched my the face API
+Yoshiro Nakamatsu1 was matched as 93.03: Certain that this is Yoshiro Nakamatsu
+Yoshiro Nakamatsu2 was matched as 96.58: Certain that this is Yoshiro Nakamatsu
+Yoshiro Nakamatsu3was not matched my the face API
+Gottfried Leibniz 1was not matched my the face API
+Gottfried Leibniz 2was not matched my the face API
+Gottfried Leibniz 3was not matched my the face API
+Peter Naur1 was matched as 84.51: Certain that this is Peter Naur
+Peter Naur2was not matched my the face API
+Peter Naur3was not matched my the face API
+John Von Neumann1was not matched my the face API
+John Von Neumann2 was matched as 100.0: Certain that this is John von Neumann
+John Von Neumann3 was matched as 99.98: Certain that this is John von Neumann
+Kristen Nygaard1 was matched as 99.99: Certain that this is Kristen Nygaard
+Kristen Nygaard2was not matched my the face API
+Kristen Nygaard3was not matched my the face API
+Radia Perlman1 was matched as 100.0: Certain that this is Radia Perlman
+Radia Perlman2 was matched as 99.98: Certain that this is Radia Perlman
+Radia Perlman3 was matched as 99.83: Certain that this is Radia Perlman
+Pier Giorgio Perotto1was not matched my the face API
+Pier Giorgio Perotto2was not matched my the face API
+Pier Giorgio Perotto3was not matched my the face API
+Rosalind Picard1 was matched as 100.0: Certain that this is Rosalind Picard
+Rosalind Picard2 was matched as 99.88: Certain that this is Rosalind Picard
+Rosalind Picard3 was matched as 99.74: Certain that this is Rosalind Picard
+Dennis Ritchie1 was matched as 99.84: Certain that this is Dennis Ritchie
+Dennis Ritchie2was not matched my the face API
+Dennis Ritchie3 was matched as 99.28: Certain that this is Dennis Ritchie
+Bertrand Russel1was not matched my the face API
+Bertrand Russel2was not matched my the face API
+Bertrand Russel3was not matched my the face API
+Claude Shannon 1was not matched my the face API
+Claude Shannon 2was not matched my the face API
+Claude Shannon 3 was matched as 99.99: Certain that this is Claude Shannon
+Masatoshi Shima1was not matched my the face API
+Masatoshi Shima2was not matched my the face API
+Masatoshi Shima3was not matched my the face API
+Herbert A simon1 was matched as 99.94: Certain that this is Herbert A. Simon
+Herbert A simon2 was matched as 100.0: Certain that this is Herbert A. Simon
+Herbert A simon3 was matched as 99.98: Certain that this is Herbert A. Simon
+Richard Stallman1 was matched as 99.99: Certain that this is Richard Stallman
+Richard Stallman2 was matched as 100.0: Certain that this is Richard Stallman
+Richard Stallman3 was matched as 99.97: Certain that this is Richard Stallman
+Michael Stonebreaker1 was matched as 99.99: Certain that this is Michael Stonebraker
+Michael Stonebreaker2 was matched as 99.99: Certain that this is Michael Stonebraker
+Michael Stonebreaker3 was matched as 99.36: Certain that this is Michael Stonebraker
+Ivan Sutherland 1 was matched as 98.97: Certain that this is Ivan Sutherland
+Ivan Sutherland 2 was matched as 92.28: Certain that this is Ivan Sutherland
+Ivan Sutherland 3 was matched as 99.87: Certain that this is Ivan Sutherland
+Chai Keong Toh1was not matched my the face API
+Chai Keong Toh2was not matched my the face API
+Chai Keong Toh3was not matched my the face API
+An Wang1 was matched as 100.0: Certain that this is An Wang
+An Wang2 was matched as 100.0: Certain that this is An Wang
+An Wang3 was matched as 100.0: Certain that this is An Wang
+Willis Howard Ware1was not matched my the face API
+Willis Howard Ware2was not matched my the face API
+Willis Howard Ware3was not matched my the face API
+Maurice Wilkes 1was not matched my the face API
+Maurice Wilkes 2was not matched my the face API
+Maurice Wilkes 3 was matched as 99.66: Certain that this is Maurice Wilkes
+Konrad Zuse1 was matched as 99.25: Certain that this is Konrad Zuse
+Konrad Zuse2 was matched as 100.0: Certain that this is Konrad Zuse
+Konrad Zuse3was not matched my the face API
+Judea Pearl1 was matched as 100.0: Certain that this is Judea Pearl
+Judea Pearl2was not matched my the face API
+Judea Pearl3 was matched as 100.0: Certain that this is Judea Pearl
+Michael Dell1 was matched as 99.62: Certain that this is Michael Dell
+Michael Dell2 was matched as 100.0: Certain that this is Michael Dell
+Michael Dell3 was matched as 100.0: Certain that this is Michael Dell
+Lawrence Lessig1 was matched as 98.88: Certain that this is Lawrence Lessig
+Lawrence Lessig2 was matched as 99.97: Certain that this is Lawrence Lessig
+Lawrence Lessig3 was matched as 99.88: Certain that this is Lawrence Lessig
+Andrew Ng1was not matched my the face API
+Andrew Ng2 was matched as 92.47: Certain that this is Andrew Ng
+Andrew Ng3was not matched my the face API
+John Carmack1 was matched as 99.69: Certain that this is John Carmack
+John Carmack2 was matched as 99.78: Certain that this is John Carmack
+John Carmack3 was matched as 99.98: Certain that this is John Carmack
+Ken Jennings1 was matched as 100.0: Certain that this is Ken Jennings
+Ken Jennings2 was matched as 99.91: Certain that this is Ken Jennings
+Ken Jennings3was not matched my the face API
+Guido Van Rossum1 was matched as 83.5: Certain that this is Guido van Rossum
+Guido Van Rossum2 was matched as 79.94: Certain that this is Guido van Rossum
+Guido Van Rossum3 was matched as 99.69: Certain that this is Guido van Rossum
+joseph carl robnett licklider 1 was matched as 99.86: Certain that this is J. C. R. Licklider
+joseph carl robnett licklider 2 was matched as 100.0: Certain that this is J. C. R. Licklider
+joseph carl robnett licklider 3 was matched as 100.0: Certain that this is J. C. R. Licklider
+Richard Hamming1 was matched as 99.99: Certain that this is Richard Hamming
+Richard Hamming2was not matched my the face API
+Richard Hamming3was not matched my the face API
+Cuthbert Hurd1was not matched my the face API
+Cuthbert Hurd2was not matched my the face API
+Cuthbert Hurd3was not matched my the face API
+ramon llull 1was not matched my the face API
+ramon llull 2was not matched my the face API
+ramon llull 3was not matched my the face API
+the very famous category matched 27 out of 30 Pictures with an average confidence rating of 99.43220769917524
+a total of 10 People were matched out of 10.0
+the medium famous category matched 36 out of 45 Pictures with an average confidence rating of 98.54813764492671
+a total of 15 People were matched out of 15.0
+the low famous category matched 121 out of 225 Pictures with an average confidence rating of 98.71676529734587
+a total of 58 People were matched out of 75.0
 \section{Appendix 19: List of 100 computer scientists used for Test 3}
+--Very Famous--
 
+  Bill Gates 
+  Steve Jobs 
+  Elon Musk 
+  Mark Zuckerberg 
+  Larry Page  
+  Sergey Brin 
+  Tim Berners Lee 
+  Alan Turing 
+  Steve Wozniak 
+  Linus Torvalds
 
+  --Well Known--
+
+  James Gosling 
+  Grace Hopper 
+  Martin Hellman 
+  Michael Widenius 
+  Yukihiro Matsumoto 
+  John Resig 
+  Brian Kernighan 
+  Ken Thompson 
+  David Axmark 
+  Ben Goodger 
+  Larry Wall 
+  Bjarne Stroustrup 
+  Rasmus Lerdorf 
+  Niklaus Wirth 
+  shigeru miyamoto 
+
+ 
+ ---Industry Recognised---
+ Howard Aiken  
+ Frances E Allen 
+ John Atanasoff 
+ Charles Babbage
+ John Backus
+ Corrado bohm
+ Fred Brooks
+ Vannevar Bush
+ Vint Cerf
+ Noam Chomsky
+ Edmund Clarke
+ Lynn Conway 
+ Stephen Cook
+ Edsger Dijkstra 
+ Ermest Allen Emerson 
+ Douglas Engelbart
+ Federico Faggin
+ Elizabeth Feinler
+ Tommy Flowers
+ Sally Floyd
+ Charles Sanders Pierce
+ Stephen Furber
+ Sophie Wilson
+ Seymour Ginsburg
+ Susan L graham
+ Jim Gray
+ Barbara Grosz
+ Margaret Hamilton
+ Geoffrey Hinton
+ Charles Anthony Richard Hoare 
+ Betty Holberton
+ Harry Huskey
+ Kenneth Iverson
+ Karen Sparck Jones
+ Jacek Karpinski 
+ Alan Kay
+ Stephen Cole Kleene
+ Donald Knuth
+ Leslie Lamport
+ Barbara Liskov
+ Ada Lovelace
+ John McCarthy
+ Marvin Minsky
+ Yoshiro Nakamatsu
+ Akira Nakashima
+ Peter Naur
+ John Von Neumann
+ Kristen Nygaard
+ Radia Perlman
+ Pier Giorgio Perotto
+ Rosalind Picard
+ Dennis Ritchie
+ Bertrand Russel
+ Claude Shannon 
+ Masatoshi Shima
+ Herbert A simon
+ Richard Stallman
+ Michael Stonebreaker
+ Ivan Sutherland 
+ Chai Keong Toh
+ An Wang
+ Willis Howard Ware
+ Maurice Wilkes 
+ Konrad Zuse
+ Judea Pearl
+ Michael Dell
+ Lawrence Lessig
+ Andrew Ng
+ John Carmack
+ Ken Jennings
+ Guido Van Rossum
+ Seymour Ginsburg 
+ Richard Hamming
+ Cuthbert Hurd
+ JCR licklider
 \end{appendices}
 
 \end{document}
